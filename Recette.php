@@ -11,18 +11,19 @@ class Recette extends Base
     private string $description;
     private int $num_rec;
     private $ing = array();
-    private $tag= array();
+    private $tag = array();
+    private $rec = array();
 
-    public function __construct()
+    public function __construct(string $nom_rec, string $img, string $desc, int $num)
     {
         parent::__construct();
-        $tab = $this->getAllRecette();
-        $this->name = $tab->nom_rec;
-        $this->image = $tab->image_rec;
-        $this->description = $tab->description;
-        $this->num_rec = $tab->pk_num_rec;
+        $this->name = $nom_rec;
+        $this->image = $img;
+        $this->description = $desc;
+        $this->num_rec = $num;
         $this->init_ing();
         $this->init_tag();
+        $this->init_rec();
     }
 
     //return tout les elements de la table recette
@@ -34,9 +35,21 @@ class Recette extends Base
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer");
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
+    }
+
+    public function init_rec():void
+    {
+        $tab_rec = $this->getAllRecette();
+        $i = 0;
+        foreach($tab_rec as $R){
+            $this->rec[$i] = new Recette();
+            $this->rec[$i]->name = $tab_rec->nom_rec;
+            $this->rec[$i]->num_rec = $tab_rec->pk_num_rec;
+            $this->rec[$i]->image = $tab_rec->image_rec;
+            $this->rec[$i]->description = $tab_rec->description;
+        }
     }
 
     //return tout les elements de la table ing_recette
@@ -48,8 +61,7 @@ class Recette extends Base
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer");
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
     }
 
@@ -73,13 +85,13 @@ class Recette extends Base
         $i = 0;
         foreach($tab_ingRec as $ingRec){
             if($this->num_rec == $ingRec->fk_num_rec){
-                $this->ing[i] = new Ingredient();
-                $this->ing[i]->num_ing = $ingRec->fk_num_ing;
+                $this->ing[$i] = new Ingredient();
+                $this->ing[$i]->num_ing = $ingRec->fk_num_ing;
                 $name = 'SELECT nom_ing FROM ingrédient WHERE pk_num_ing =:num ';
                 $img = 'SELECT image_ing FROM ingrédient WHERE pk_num_ing = :num';
                 $params=['num' => $ingRec->fk_num_ing];
-                $this->ing[i]->name = $this->exec($name, $params);
-                $this->ing[i]->image = $this->exec($img, $params);
+                $this->ing[$i]->name = $this->exec($name, $params);
+                $this->ing[$i]->image = $this->exec($img, $params);
                 $i = $i + 1;
             }
         }
@@ -92,11 +104,11 @@ class Recette extends Base
         $i = 0;
         foreach($tab_tagRec as $tagRec){
             if($this->num_rec == $tagRec->fk_num_rec){
-                $this->tag[i] = new Tag();
-                $this->tag[i]->num_tag = $tagRec->fk_num_tag;
+                $this->tag[$i] = new Tag();
+                $this->tag[$i]->num_tag = $tagRec->fk_num_tag;
                 $name = 'SELECT nom_tag FROM Tag WHERE pk_num_tag =:num ';
                 $params=['num' => $tagRec->fk_num_tag];
-                $this->ing[i]->nom_ing = $this->exec($name, $params);
+                $this->tag[$i]->name = $this->exec($name, $params);
                 $i = $i + 1;
             }
         }
