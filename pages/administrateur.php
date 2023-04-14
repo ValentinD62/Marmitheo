@@ -4,8 +4,10 @@ Autoloader::register();
 
 use Template\Template;
 use form\Creation_form;
+use form\Destruction_form;
 use recette\RecetteBD;
 use recette\RecetteRenderer;
+
 
 ?>
 
@@ -17,6 +19,8 @@ use recette\RecetteRenderer;
 
 $n_recette = new RecetteBD();
 $logger = new Creation_form();
+$des = new Destruction_form();
+
 if (empty($_POST['name'])){
     $logger->generateCreationForm();
 }
@@ -25,7 +29,17 @@ else{
     $n_recette->createRecette($_POST['name'], $_POST['description'], $imgFile);
     $logger->generateCreationForm();
 }
+
+if(empty($_POST['nom_rec'])) {
+    $des->generateDeleteRecetteForm();
+}
+
+if(empty($_POST['nom_tag'])){
+    $des->generateDeleteTagForm();
+}
 ?>
+
+
 <!-- Récupère le contenu du buffer (et le vide) -->
 <?php $content=ob_get_clean() ?>
 

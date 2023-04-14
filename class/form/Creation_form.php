@@ -70,4 +70,12 @@ class Creation_form{
         </div>
         <?php
     }
+
+
+
+
+
+
+
+
 }
