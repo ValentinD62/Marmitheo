@@ -4,7 +4,7 @@ namespace recette;
 
 
 use PDO;
-
+use recette\Tag;
 class Recette extends RecetteBD
 {
 
@@ -101,7 +101,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null):void
+    public function createRecette($name, $description = null, $img = null, $alltag = null):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -122,6 +122,34 @@ class Recette extends RecetteBD
             'description' => htmlspecialchars($description)
         ];
         $this->exec($query, $params);
+        if($alltag != null){
+            $T = new Tag();
+            $tag_base = $T->getAllTag();
+            foreach ($tag_base as $tb){
+                foreach ($alltag as $tag){
+                    if($tb->nom_tag == $tag){
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                        $params = [
+                            'num_tag' =>$tb->pk_num_tag,
+                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
+                            'name' => $name
+                        ];
+                        this->exec($ajouter_tag_rec, $params);
+                    }
+                    else{
+                        $T->createTag($tag);
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                        $params = [
+                            'num_tag' => 'SELECT pk_num_tag FROM tag WHERE nom_tag = :name_tag',
+                            'name_tag' => $tag,
+                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
+                            'name_rec' => $name
+                        ];
+                        this->exec($ajouter_tag_rec, $params);
+                    }
+                }
+            }
+        }
     }
 
     //supprimer la recette name dans la table recette
@@ -155,6 +183,11 @@ class Recette extends RecetteBD
             'name' => htmlspecialchars($name)
         ];
         $this->exec($del_tag_rec, $params);
+    }
+
+    public function editionRecette():void
+    {
+        
     }
 
 }
