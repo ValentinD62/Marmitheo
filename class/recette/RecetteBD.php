@@ -37,7 +37,8 @@ class RecetteBD
         }
     }
 
-    public function getAllRecette():void
+    //return tout les elements de la table recette
+    public function getAllRecette():array
     {
         // Préparation d'une requête simple
         $sql = "SELECT* FROM recette" ;
@@ -46,35 +47,10 @@ class RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo())) ;
 
         // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer") ;?>
-        <ul>
-            <?php foreach ($results as $recette): ?>
-                <li><?= $recette->getHTML() ?></li>
-            <?php endforeach;?>
-        </ul>
-        <?php
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer") ;
+        return results;
     }
 
-    public function createRecette($name, $description=null, $img=null){
-        $name = htmlspecialchars($name);
-        $description = htmlspecialchars($description);
-        $imgName = null;
-        if($img != null){
-            $tmpName = $img['tmp_name'] ;
-            $imgName = $img['name'] ;
-            $imgName = urlencode(htmlspecialchars($imgName)) ;
-        }
-        else{
-            echo "NO IMAGE !!!!" ;
-        }
-        $query = 'INSERT INTO recette(nom_rec, image_rec, description) VALUES (:name, :img, :description)';
-        $params=[
-            'name' => htmlspecialchars($name),
-            'img' => $imgName,
-            'description' => htmlspecialchars($description)
-        ];
-        return $this->exec($query, $params);
-    }
 
     public function exec($statement, $params, $classname=null){
         $res = $this->pdo->prepare($statement) ;
