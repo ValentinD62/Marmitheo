@@ -33,7 +33,7 @@ class Ingredient extends RecetteBD
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
         // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer");
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
 
     }
