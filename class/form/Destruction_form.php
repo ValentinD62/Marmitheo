@@ -9,8 +9,8 @@ class Destruction_form{
         <div id="Creation">Supprimer une recette :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
-                <label for="nom_rec" class="form-label">Nom recette</label>
-                <input type="text" class="form-control" id="name" color="black" name="nom_rec" aria-describedby="name">
+                <label for="nom_rec" class="form-label"> Nom recette </label>
+                <input type="text" color = "black" id="delete_name" name="delete_name" aria-describedby="delete_name">
             </div>
             <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>
@@ -27,8 +27,8 @@ class Destruction_form{
         <div id="Creation">Supprimer un Tag :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
-                <label for="nom_tag class=" form-label">Nom Tag</label>
-                <input type="text" class="form-control" id="name" color="black" name="nom_tag" aria-describedby="name">
+                <label for="nom_tag class= "form-label">Nom Tag</label>
+                <input type="text" color = "black" id="delete_tag" name="delete_tag" aria-describedby="delete_tag">
             </div>
             <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>

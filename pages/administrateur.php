@@ -23,6 +23,13 @@ $rec = new Recette();
 $logger = new Creation_form();
 $des = new Destruction_form();
 
+$i = 0;
+while (!empty($_POST["tag_" . $i])){
+    echo "tag_". $i;
+    $i ++;
+}
+
+echo $i;
 if (empty($_POST['name'])){
     $logger->generateCreationForm();
 }
