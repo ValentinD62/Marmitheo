@@ -61,6 +61,7 @@ class Creation_form{
                 <label for="ingredient" class="CENTER">Ingrédient</label>
                 <div id="form_ingredient">
                     <input type="text" class="form-ingredient-input" id="ingredient_1" name="ingredient_1">
+                    <input type="file" class="img_ing_add"  name="image_ing_1" accept="image/png, image/gif, image/jpeg">
                 </div>
                     </div>
                 </div>
