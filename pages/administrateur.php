@@ -31,7 +31,11 @@ else{
     $rec->createRecette($_POST['name'], $_POST['description'], $imgFile);
     $logger->generateCreationForm();
 }
+?>
 
+<img id="separateur" src="../img/separator.png">
+
+<?php
 if(empty($_POST['nom_rec'])) {
     $des->generateDeleteRecetteForm();
 }
