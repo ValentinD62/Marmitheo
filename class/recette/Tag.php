@@ -52,19 +52,19 @@ class Tag extends RecetteBD
     }
 
     //permet d'ajouter des tags
-    public function createTag($name)
+    public function createTag($name):void
     {
         $name = htmlspecialchars($name);
         $query = 'INSERT INTO tag(nom_tag) VALUES (:name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($query, $params);
+        $this->exec($query, $params);
     }
 
 
     //permet de modifier le tag
-    public function editionTag($ancien_nom, $nouveau_nom)
+    public function editionTag($ancien_nom, $nouveau_nom):void
     {
         $ancien_nom = htmlspecialchars($ancien_nom);
         $nouveau_nom = htmlspecialchars($nouveau_nom);
@@ -73,30 +73,30 @@ class Tag extends RecetteBD
             'n_nom' => htmlspecialchars($nouveau_nom),
             'a_nom' => htmlspecialchars($ancien_nom)
             ];
-        return $this->exec($edition_tag, $params);
+        $this->exec($edition_tag, $params);
     }
 
     //supprimer le Tag name dans la table Tag
-    public function deleteTag($name)
+    public function deleteTag($name):void
     {
         $name = htmlspecialchars($name);
         $del_tag = 'DELETE FROM tag WHERE pk_num_tag = (SELECT pk_num_tag FROM recette WHERE nom_tag = :name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_tag, $params);
+        $this->exec($del_tag, $params);
 
     }
 
     //permet de supprimer toute les elements de tag_recette qui on pour tag name
-    public function deleteRecTag($name)
+    public function deleteRecTag($name):void
     {
         $name = htmlspecialchars($name);
         $del_rec_tag = 'DELETE FROM tag_recette WHERE fk_num_tag = (SELECT pk_num_tag FROM tag WHERE nom_rec = :name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_rec_tag, $params);
+        $this->exec($del_rec_tag, $params);
     }
 
 
