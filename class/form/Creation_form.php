@@ -2,6 +2,8 @@
 
 namespace form;
 
+use recette\Tag;
+
 class Creation_form{
 
     public function generateCreationForm(){?>
@@ -50,6 +52,7 @@ class Creation_form{
                         <div id="form_tag">
                             <input type="text" class="form-tag-input" id="tag_1" name="tag_1">
                         </div>
+
                     </div>
                     <div id="alling">
                 <label for="ingredient" class="CENTER">Ingrédient</label>
