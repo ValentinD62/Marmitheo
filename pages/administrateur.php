@@ -25,6 +25,13 @@ $logger = new Creation_form();
 $des = new Destruction_form();
 $edition = new Edition_Form();
 
+$i = 0;
+while (!empty($_POST["tag_" . $i])){
+    echo "tag_". $i;
+    $i ++;
+}
+
+echo $i;
 if (empty($_POST['name'])){
     $logger->generateCreationForm();
 }
