@@ -44,11 +44,7 @@ class Recette extends Base
         $tab_rec = $this->getAllRecette();
         $i = 0;
         foreach($tab_rec as $R){
-            $this->rec[$i] = new Recette();
-            $this->rec[$i]->name = $tab_rec->nom_rec;
-            $this->rec[$i]->num_rec = $tab_rec->pk_num_rec;
-            $this->rec[$i]->image = $tab_rec->image_rec;
-            $this->rec[$i]->description = $tab_rec->description;
+            $this->rec[$i] = new Recette($R->nom_rec,$R->image_rec, $R->description, $R->pk_num_rec );
         }
     }
 
