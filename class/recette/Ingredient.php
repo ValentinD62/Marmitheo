@@ -12,15 +12,25 @@ class Ingredient extends RecetteBD
 
     public $alling = array();
 
-    public function __construct(string $nom_ing, string $img, int $num_ing)
+    public function __construct()
     {
         parent::__construct();
-        $this->name = $nom_ing;
-        $this->num_ing = $num_ing;
-        $this->image = $img;
         $this->init_alling();
+    }
 
+    public function setName($name):void
+    {
+        $this->name = $name;
+    }
 
+    public function setNum_ing($num_ing):void
+    {
+        $this->num_ing = $num_ing;
+    }
+
+    public function setImage($img):void
+    {
+        $this->image = $img;
     }
 
     //return tout les elements de la table Ingredient
@@ -43,7 +53,10 @@ class Ingredient extends RecetteBD
         $tab_ing = $this->getAllIngredient();
         $i = 0;
         foreach($tab_ing as $I){
-            $this->alling[$i] = new Ingredient($I->nom_ing, $I->image_ing, $I->pk_num_ing );
+            $this->alling[$i] = new Ingredient();
+            $this->alling[$i]->name = $I->nom_ing;
+            $this->alling[$i]->num_ing = $I->pk_num_ing;
+            $this->alling[$i]->image = $I->image;
         }
     }
 

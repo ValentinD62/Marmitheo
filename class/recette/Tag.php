@@ -10,12 +10,20 @@ class Tag extends RecetteBD
     public int $num_tag;
     public $alltag = array();
 
-    public function __construct(string $nom_tag, int $num_tag)
+    public function __construct()
     {
         parent::__construct();
-        $this->name = $nom_tag;
-        $this->num_tag = $num_tag;
         $this->init_alltag();
+    }
+
+    public function setName($name):void
+    {
+        $this->name = $name;
+    }
+
+    public function setNum_tag($num_tag):void
+    {
+        $this->num_tag = $num_tag;
     }
 
     public function getAllTag(): array
@@ -33,10 +41,13 @@ class Tag extends RecetteBD
 
     public function init_alltag():void
     {
+        $this->alltag = array();
         $tab_tag = $this->getAllTag();
         $i = 0;
         foreach($tab_tag as $T){
-            $this->alltag[$i] = new Tag($T->nom_rec, $T->pk_num_rec );
+            $this->alltag[$i] = new Tag();
+            $this->alltag[$i]->name = $T->nom_tag;
+            $this->alltag[$i]->num_tag = $T->pk_num_tag;
         }
     }
 
@@ -51,15 +62,29 @@ class Tag extends RecetteBD
         return $this->exec($query, $params);
     }
 
+
+    //permet de modifier le tag
+    public function editionTag($ancien_nom, $nouveau_nom)
+    {
+        $ancien_nom = htmlspecialchars($ancien_nom);
+        $nouveau_nom = htmlspecialchars($nouveau_nom);
+        $edition_tag = 'UPDATE tag SET nom_tag = :n_nom WHERE nom_tag = :a_nom ';
+        $params = [
+            'n_nom' => htmlspecialchars($nouveau_nom),
+            'a_nom' => htmlspecialchars($ancien_nom)
+            ];
+        return $this->exec($edition_tag, $params);
+    }
+
     //supprimer le Tag name dans la table Tag
     public function deleteTag($name)
     {
         $name = htmlspecialchars($name);
-        $del_tag_rec = 'DELETE FROM tag WHERE pk_num_tag = (SELECT pk_num_tag FROM recette WHERE nom_tag = :name)';
+        $del_tag = 'DELETE FROM tag WHERE pk_num_tag = (SELECT pk_num_tag FROM recette WHERE nom_tag = :name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_tag_rec, $params);
+        return $this->exec($del_tag, $params);
 
     }
 
