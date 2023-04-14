@@ -8,13 +8,15 @@ class Ingredient
     public string $image;
     public int $num_ing;
 
-    public function __construct()
+    public $alling = array();
+
+    public function __construct(string $nom_ing, string $img, int $num_ing)
     {
         parent::__construct();
-        $tab_ing = $this->getAllIngredient();
-        $this->name = $tab_ing->nom_ing;
-        $this->num_ing = $tab_ing->pk_num_ing;
-        $this->image = $tab_ing->image_ing;
+        $this->name = $nom_ing;
+        $this->num_ing = $num_ing;
+        $this->image = $img;
+        $this->init_alling();
 
 
     }
@@ -33,5 +35,16 @@ class Ingredient
         return $results;
 
     }
+
+    public function init_alling():void
+    {
+        $tab_ing = $this->getAllIngredient();
+        $i = 0;
+        foreach($tab_ing as $I){
+            $this->alling[$i] = new Ingredient($I->nom_ing, $I->image_ing, $I->pk_num_ing );
+        }
+    }
+
+
 
 }
