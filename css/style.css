@@ -38,6 +38,12 @@ header{
     position: sticky;
     top: 1px;
 }
+
+#header-a-log{
+    margin-top: 0.5%;
+    margin-left: 18%;
+}
+
 #main-content{
     width: 100%;
     height: 70% ;
@@ -261,7 +267,7 @@ footer{
 
 #rech{
     height: 30%;
-    width: 40%;
+    width: 100%;
     margin-top: 50px;
     margin-right: 15%;
     border-top-style: hidden;
@@ -575,4 +581,8 @@ textarea{
 
 #sub-reset{
     margin-top: 10%;
+}
+
+#form-rech{
+    width: 40%;
 }

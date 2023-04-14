@@ -30,19 +30,19 @@
     <img src="../img/hand21.png">
   </div>
     
-  <form method='post' action = 'recherche.php' id="rech">
-        <input type="text" name="recherche" placeholder="Cherchez une recette, un tag...">
+  <form method='post' action = 'recherche.php' id="form-rech" >
+        <input type="text" id="rech" name="recherche" placeholder="Cherchez une recette, un tag...">
   </form>
 
     <?php
     if (isset($_SESSION['name'])) :?>
-        <a href = "logout.php">
+        <a href = "logout.php" id="header-a-log">
             <button id="Login">
                 Logout
             </button>
         </a>
     <?php else :?>
-        <a href = "login.php">
+        <a href = "login.php" id="header-a-log">
             <button id="Login">
                 Login
             </button>
