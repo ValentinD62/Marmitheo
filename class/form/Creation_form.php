@@ -70,4 +70,35 @@ class Creation_form{
         </div>
         <?php
     }
+
+    public function generateDeleteForm()
+    {
+        ?>
+        <div id="Creation">Supprimer une recette :</div>
+        <form id="game-form" method="POST" enctype="multipart/form-data">
+            <div class="mb-3 neon">
+                <label for="nom_rec" class="form-label">Nom recette</label>
+                <input type="text" class="form-control" id="name" color="black" name="nom_rec" aria-describedby="name">
+            </div>
+            <div style="display: flex">
+                <button type="submit" class="btn neon">Submit</button>
+                <div style="width: 30px"></div>
+                <button type="reset" class="btn neon">Reset</button>
+            </div>
+        </form>
+        <div id="Creation">Supprimer un Tag :</div>
+        <form id="game-form" method="POST" enctype="multipart/form-data">
+            <div class="mb-3 neon">
+                <label for="nom_tag class=" form-label">Nom Tag</label>
+                <input type="text" class="form-control" id="name" color="black" name="nom_tag" aria-describedby="name">
+            </div>
+            <div style="display: flex">
+                <button type="submit" class="btn neon">Submit</button>
+                <div style="width: 30px"></div>
+                <button type="reset" class="btn neon">Reset</button>
+            </div>
+        </form>
+        <?php
+    }
+
 }

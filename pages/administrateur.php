@@ -26,6 +26,14 @@ else{
     $logger->generateCreationForm();
 }
 ?>
+
+<?php
+if(empty($_POST['nom_rec']) or empty($_POST('nom_tag'))) {
+    $logger->generateDeleteForm();
+}
+?>
+
+
 <!-- Récupère le contenu du buffer (et le vide) -->
 <?php $content=ob_get_clean() ?>
 
