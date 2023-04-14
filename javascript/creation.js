@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 inp.classList.add("form-tag-input");
                 inp.id = "tag_" + i;
                 inp.color = "black";
-                inp.name = "tag";
+                inp.name = "tag_" + i;
                 form_tag.appendChild(inp);
             }
             if (i >= 2) {
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function (){
                 let inp = document.createElement("input");
                 inp.type = "text";
                 inp.classList.add("form-ingredient-input");
-                inp.id = "tag_" + i;
+                inp.id = "ing_" + i;
                 inp.color = "black";
-                inp.name = "tag";
+                inp.name = "ing_" + i;
                 form_ingredient.appendChild(inp);
             }
             if (i >= 2) {
