@@ -14,7 +14,6 @@ class Template {
             <link rel="stylesheet" href="../css/style.css">
             <script defer src="../javascript/script.js"></script>
             <script defer src="../javascript/creation.js"></script>
-            <script defer src="../javascript/Logging.js"></script>
             <meta charset="UTF-8">
             <title>PROJET TROP BIEN</title>
 
