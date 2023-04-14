@@ -5,7 +5,6 @@ Autoloader::register();
 use recherche\Recherche;
 
 use Template\Template;
-use log\Logger_admin;
 
 ?>
 

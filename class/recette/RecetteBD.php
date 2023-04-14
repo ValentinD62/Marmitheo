@@ -4,7 +4,7 @@ use PDO;
 
 class RecetteBD
 {
-    public $pdo;
+    public PDO $pdo;
     public const UPLOAD_DIR = "../img/";
     public function __construct()
     {
@@ -37,21 +37,6 @@ class RecetteBD
         }
     }
 
-    //return tout les elements de la table recette
-    public function getAllRecette():array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM recette" ;
-        $statement = $this->pdo->prepare($sql) ;
-        // Exécution de la requête
-        $statement->execute() or die(var_dump($statement->errorInfo())) ;
-
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, "BaseRenderer") ;
-        return results;
-    }
-
-
     public function exec($statement, $params, $classname=null){
         $res = $this->pdo->prepare($statement) ;
         $res->execute($params) or die(print_r($res->errorInfo()));
@@ -63,5 +48,18 @@ class RecetteBD
         }
 
         return $data ;
+    }
+
+    public function getAllRecette(): array
+    {
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        return $results;
     }
 }
