@@ -7,6 +7,7 @@ use form\Creation_form;
 use form\Destruction_form;
 use recette\RecetteBD;
 use recette\Recette;
+use form\Edition_Form;
 use recette\RecetteRenderer;
 
 
@@ -22,6 +23,7 @@ $n_recette = new RecetteBD();
 $rec = new Recette();
 $logger = new Creation_form();
 $des = new Destruction_form();
+$edition = new Edition_Form();
 
 if (empty($_POST['name'])){
     $logger->generateCreationForm();
