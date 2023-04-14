@@ -60,6 +60,59 @@ class Ingredient extends RecetteBD
         }
     }
 
+    public function createIng($name, $img = null):void
+    {
+        $name = htmlspecialchars($name);
+        $imgName = null;
+        if ($img != null) {
+            $tmpName = $img['tmp_name'];
+            $imgName = $img['name'];
+            $imgName = urlencode(htmlspecialchars($imgName));
+            $dirname = self::UPLOAD_DIR;
+            if (!is_dir($dirname)) mkdir($dirname);
+            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
+            if (!$uploaded) die("FILE NOT UPLOADED");
+        } else echo "NO IMAGE !!!!";
+        $query = 'INSERT INTO ingrédient(nom_ing, image) VALUES (:name, :img)';
+        $params = [
+            'name' => htmlspecialchars($name),
+            'img' => $imgName,
+        ];
+        $this->exec($query, $params);
+
+    }
+
+    public function editionIng($ancien_nom, $nouv_nom = null, $img = null):void
+    {
+        if($nouv_nom != null){
+            $nouv_nom = htmlspecialchars($nouv_nom);
+            $ancien_nom = htmlspecialchars($ancien_nom);
+            $edition_ing_nom = 'UPDATE ingrédient SET nom_ing = :n_nom WHERE nom_tag = :a_nom ';
+            $params = [
+                'n_nom' => htmlspecialchars($nouv_nom),
+                'a_nom' => htmlspecialchars($ancien_nom)
+            ];
+            $this->exec($edition_ing_nom, $params);
+        }
+        if($img != null){
+            $ancien_nom = htmlspecialchars($ancien_nom);
+            $tmpName = $img['tmp_name'];
+            $imgName = $img['name'];
+            $imgName = urlencode(htmlspecialchars($imgName));
+            $dirname = self::UPLOAD_DIR;
+            if (!is_dir($dirname)) mkdir($dirname);
+            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
+            if (!$uploaded) die("FILE NOT UPLOADED");
+            $edition_ing_img = 'UPDATE ingrédient SET image = :img WHERE nom_ing = : a_nom';
+            $params = [
+                'img' => imgName,
+                'a_nom' => htmlspecialchars($ancien_nom)
+            ];
+            $this->exec($edition_ing_img, $params);
+        }
+
+    }
+
 
 
 }
