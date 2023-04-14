@@ -3,7 +3,7 @@
 namespace recette;
 
 
-use classe\PDO;
+use PDO;
 
 class Recette extends RecetteBD
 {
