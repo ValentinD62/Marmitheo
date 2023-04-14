@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function (){
                 inp.name = "tag";
                 form_tag.appendChild(inp);
             }
+            if (i >= 2) {
+                if (inputs[i-2].value.length === 0){
+                    console.log(i);
+                    form_tag.removeChild(inputs[i-1])
+                }
+            }
         })
     }
 
@@ -38,6 +44,12 @@ document.addEventListener('DOMContentLoaded', function (){
                 inp.color = "black";
                 inp.name = "tag";
                 form_ingredient.appendChild(inp);
+            }
+            if (i >= 2) {
+                if (inputs[i-2].value.length === 0){
+                    console.log(i);
+                    form_ingredient.removeChild(inputs[i-1])
+                }
             }
         })
     }
