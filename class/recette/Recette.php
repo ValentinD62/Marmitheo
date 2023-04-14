@@ -101,8 +101,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null)
-    {
+    public function createRecette($name, $description = null, $img = null, $tag = null){
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
         $imgName = null;
