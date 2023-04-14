@@ -29,8 +29,10 @@
   <div id="hand">
     <img src="../img/hand21.png">
   </div>
-
-  <input type="text" name="recherche" id="rech" placeholder="Cherchez une recette, un tag...">
+    
+  <form method='post' action = 'recherche.php' id="rech">
+        <input type="text" name="recherche" placeholder="Cherchez une recette, un tag...">
+  </form>
 
     <?php
     if (isset($_SESSION['name'])) :?>
