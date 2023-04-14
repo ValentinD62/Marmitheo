@@ -7,21 +7,17 @@ class Logger_admin{
     //Classe venant du tp2.
 
     public function generateLoginForm(string $action, string $erreur): void{ // $action est le nom de la page sur lequel la fonction doit agir.
-        echo "
-            <script defer src='../javascript/Logging.js'></script>
-
-<div id = 'login-form'>
+        echo "<div id = 'login-form'>
         <div id = 'text-login'>Connexion pour mode admin </div></br>
-         <div class ='error' id='erreur'> $erreur </div>
+         <div class ='error'> $erreur </div>
         <form method='post'
               action = $action
-              id='formLog'
               css= 'width: 30%; margin: 10px'>
             <input type='text' class='form-control' id='username' placeholder='username'
                    name='name'></br>
             <input type='password' class='form-control' id='password' placeholder='password'
                    name='pwd'></br>
-            <button type='submit' id='submit' class='btn' css='margin-top: 10px ; width: 100%'>
+            <button type='submit' class='btn' css='margin-top: 10px ; width: 100%'>
             Login
             </button>
         </form>
