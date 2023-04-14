@@ -50,10 +50,21 @@ class RecetteBD
         return $data ;
     }
 
-    public function getAllRecette(): array
-    {
+    public function getAllRecette(): array{
         // Préparation d'une requête simple
         $sql = "SELECT* FROM recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        return $results;
+    }
+
+    public function getRecetteByName($name): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT * FROM recette WHERE nom_rec like '%" . $name . "%'";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump($statement->errorInfo()));
