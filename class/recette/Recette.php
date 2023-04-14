@@ -4,7 +4,7 @@ namespace recette;
 
 
 use PDO;
-
+use recette\Tag;
 class Recette extends RecetteBD
 {
 
@@ -101,7 +101,8 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null, $tag = null){
+    public function createRecette($name, $description = null, $img = null, $alltag = null):void
+    {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
         $imgName = null;
@@ -120,40 +121,74 @@ class Recette extends RecetteBD
             'img' => $imgName,
             'description' => htmlspecialchars($description)
         ];
-        return $this->exec($query, $params);
+        $this->exec($query, $params);
+        if($alltag != null){
+            $T = new Tag();
+            $tag_base = $T->getAllTag();
+            foreach ($tag_base as $tb){
+                foreach ($alltag as $tag){
+                    echo "tag";
+                    if($tb->nom_tag == $tag){
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                        $params = [
+                            'num_tag' =>$tb->pk_num_tag,
+                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
+                            'name' => $name
+                        ];
+                        this->exec($ajouter_tag_rec, $params);
+                    }
+                    else{
+                        $T->createTag($tag);
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                        $params = [
+                            'num_tag' => 'SELECT pk_num_tag FROM tag WHERE nom_tag = :name_tag',
+                            'name_tag' => $tag,
+                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
+                            'name_rec' => $name
+                        ];
+                        this->exec($ajouter_tag_rec, $params);
+                    }
+                }
+            }
+        }
     }
 
     //supprimer la recette name dans la table recette
-    public function deleteRecette($name)
+    public function deleteRecette($name):void
     {
         $name = htmlspecialchars($name);
         $del_rec = 'DELETE FROM recette WHERE pk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = :name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_rec, $params);
+        $this->exec($del_rec, $params);
     }
 
     //supprimer les lignes dans Ing_recette en lien avec la recette name
-    public function deleteIngRec($name)
+    public function deleteIngRec($name):void
     {
         $name = htmlspecialchars($name);
         $del_ing_rec = 'DELETE FROM ing_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_ing_rec, $params);
+        $this->exec($del_ing_rec, $params);
     }
 
     //supprimer les lignes dans Tag_recette en lien avec la recette name
-    public function deleteTagRec($name)
+    public function deleteTagRec($name):void
     {
         $name = htmlspecialchars($name);
         $del_tag_rec = 'DELETE FROM tag_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_tag_rec, $params);
+        $this->exec($del_tag_rec, $params);
+    }
+
+    public function editionRecette():void
+    {
+        
     }
 
 }
