@@ -11,12 +11,13 @@ document.addEventListener('DOMContentLoaded', function (){
                 i = i+1;
             }
             if (inputs[i-1].value.length >= 1 && inputs[i] !== null){
+                let vrai_i = i+1;
                 let inp = document.createElement("input");
                 inp.type = "text";
                 inp.classList.add("form-tag-input");
-                inp.id = "tag_" + i;
+                inp.id = "tag_" + vrai_i;
                 inp.color = "black";
-                inp.name = "tag_" + i;
+                inp.name = "tag_" + vrai_i;
                 form_tag.appendChild(inp);
             }
             if (i >= 2) {
@@ -37,12 +38,13 @@ document.addEventListener('DOMContentLoaded', function (){
                 i = i+1;
             }
             if (inputs[i-1].value.length >= 1 && inputs[i] !== null){
+                let vrai_i = i+1;
                 let inp = document.createElement("input");
                 inp.type = "text";
                 inp.classList.add("form-ingredient-input");
-                inp.id = "ing_" + i;
+                inp.id = "ingredient_" + vrai_i;
                 inp.color = "black";
-                inp.name = "ing_" + i;
+                inp.name = "ingredient_" + vrai_i;
                 form_ingredient.appendChild(inp);
             }
             if (i >= 2) {
