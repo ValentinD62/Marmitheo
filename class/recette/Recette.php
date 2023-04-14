@@ -127,6 +127,7 @@ class Recette extends RecetteBD
             $tag_base = $T->getAllTag();
             foreach ($tag_base as $tb){
                 foreach ($alltag as $tag){
+                    echo "tag";
                     if($tb->nom_tag == $tag){
                         $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
                         $params = [
