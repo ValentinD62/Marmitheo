@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function (){
             }
             else{
                 console.log("else");
-                if (inputs[i-2].value.length >= 1 && inputs[i-1] !== null){
+                if (inputs[i-2].value.length >= 1 && inputs[i] !== null){
                     console.log("Dans le else : " + inputs[i-2].id);
                     let vrai_i = i+1;
                     let inp = document.createElement("input");
@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function (){
                     img_add.name = "image_ing_" + vrai_i;
                     img_add.accept = "image/png, image/gif, image/jpeg";
                     form_ingredient.appendChild(img_add);
-
                 }
             }
             if (i >= 3) {
