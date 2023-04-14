@@ -101,7 +101,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null)
+    public function createRecette($name, $description = null, $img = null):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -121,40 +121,40 @@ class Recette extends RecetteBD
             'img' => $imgName,
             'description' => htmlspecialchars($description)
         ];
-        return $this->exec($query, $params);
+        $this->exec($query, $params);
     }
 
     //supprimer la recette name dans la table recette
-    public function deleteRecette($name)
+    public function deleteRecette($name):void
     {
         $name = htmlspecialchars($name);
         $del_rec = 'DELETE FROM recette WHERE pk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = :name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_rec, $params);
+        $this->exec($del_rec, $params);
     }
 
     //supprimer les lignes dans Ing_recette en lien avec la recette name
-    public function deleteIngRec($name)
+    public function deleteIngRec($name):void
     {
         $name = htmlspecialchars($name);
         $del_ing_rec = 'DELETE FROM ing_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_ing_rec, $params);
+        $this->exec($del_ing_rec, $params);
     }
 
     //supprimer les lignes dans Tag_recette en lien avec la recette name
-    public function deleteTagRec($name)
+    public function deleteTagRec($name):void
     {
         $name = htmlspecialchars($name);
         $del_tag_rec = 'DELETE FROM tag_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
         $params = [
             'name' => htmlspecialchars($name)
         ];
-        return $this->exec($del_tag_rec, $params);
+        $this->exec($del_tag_rec, $params);
     }
 
 }
