@@ -10,7 +10,7 @@ class Destruction_form{
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
                 <label for="nom_rec" class="form-label">Nom recette</label>
-                <input type="text" class="form-control" id="name" color="black" name="nom_rec" aria-describedby="name">
+                <input type="text" class="form-control" id="name" color="black" name="nom_rec" aria-describedby="nom_rec">
             </div>
             <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>
@@ -28,7 +28,7 @@ class Destruction_form{
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
                 <label for="nom_tag class=" form-label">Nom Tag</label>
-                <input type="text" class="form-control" id="name" color="black" name="nom_tag" aria-describedby="name">
+                <input type="text" class="form-control" id="name" color="black" name="nom_tag" aria-describedby="nom_tag">
             </div>
             <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>
