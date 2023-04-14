@@ -14,30 +14,28 @@ class Recette extends RecetteBD
     private int $num_rec;
     private $ing = array();
     private $tag = array();
-    private $rec = array();
 
-    public function __construct(string $nom_rec, string $img, string $desc, int $num)
+
+    public function __construct()
     {
         parent::__construct();
-        $this->name = $nom_rec;
-        $this->image = $img;
-        $this->description = $desc;
-        $this->num_rec = $num;
-        $this->init_ing();
-        $this->init_tag();
-        $this->init_rec();
     }
 
-
-
-
-    public function init_rec():void
+    public function setName(string $name):void
     {
-        $tab_rec = $this->getAllRecette();
-        $i = 0;
-        foreach($tab_rec as $R){
-            $this->rec[$i] = new Recette($R->nom_rec,$R->image_rec, $R->description, $R->pk_num_rec );
-        }
+        $this->name = $name;
+    }
+    public function setImage(string $img):void
+    {
+        $this->image = $img;
+    }
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+    public function setNum_rec(int $num_rec):void
+    {
+        $this->num_rec = $num_rec;
     }
 
     //return tout les elements de la table ing_recette
@@ -112,8 +110,7 @@ class Recette extends RecetteBD
             $tmpName = $img['tmp_name'];
             $imgName = $img['name'];
             $imgName = urlencode(htmlspecialchars($imgName));
-
-            $dirname = $GLOBALS['PHP_DIR'] . self::UPLOAD_DIR;
+            $dirname = self::UPLOAD_DIR;
             if (!is_dir($dirname)) mkdir($dirname);
             $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
             if (!$uploaded) die("FILE NOT UPLOADED");

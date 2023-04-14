@@ -6,6 +6,7 @@ use Template\Template;
 use form\Creation_form;
 use form\Destruction_form;
 use recette\RecetteBD;
+use recette\Recette;
 use recette\RecetteRenderer;
 
 
@@ -18,6 +19,7 @@ use recette\RecetteRenderer;
 <?php
 
 $n_recette = new RecetteBD();
+$rec = new Recette();
 $logger = new Creation_form();
 $des = new Destruction_form();
 
@@ -26,7 +28,7 @@ if (empty($_POST['name'])){
 }
 else{
     $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
-    $n_recette->createRecette($_POST['name'], $_POST['description'], $imgFile);
+    $rec->createRecette($_POST['name'], $_POST['description'], $imgFile);
     $logger->generateCreationForm();
 }
 
