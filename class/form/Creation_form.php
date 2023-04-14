@@ -46,10 +46,10 @@ class Creation_form{
 
                 <div id="ing-tag">
                     <div id="alltag">
-                <label for="tag" class="CENTER">Tag</label>
-                <div id="form_tag">
-                    <input type="text" class="form-tag-input" id="tag_1" color = "black" name="tag">
-                    </div>
+                        <label for="tag" class="CENTER">Tag</label>
+                        <div id="form_tag">
+                            <input type="text" class="form-tag-input" id="tag_1" color = "black" name="tag">
+                        </div>
                     </div>
                     <div id="alling">
                 <label for="ingredient" class="CENTER">Ingrédient</label>
@@ -57,9 +57,8 @@ class Creation_form{
                     <input type="text" class="form-ingredient-input" id="ingredient_1" color = "black" name="ingredient">
                 </div>
                     </div>
-
-
                 </div>
+
                 <div id="sub-reset" style="display: flex">
                     <button type="submit" class="btn">Submit</button>
                     <div style="width: 30px"></div>
