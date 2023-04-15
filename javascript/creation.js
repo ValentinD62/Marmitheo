@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', function (){
                 console.log("If : " + inputs[i-1].type);
             }
 
-            if (i >= 3) {
+            if (i >= 2) {
                 console.log(name[i].value.length)
-                if (name[i].value.length == 0 && name[i-1].value.length == 0){
+                if (name[i].value.length === 0 && name[i-1].value.length === 0){
 
                     form_ingredient.removeChild(name[i])
                     form_ingredient.removeChild(image[i])
