@@ -16,7 +16,22 @@ use recette\RecetteRenderer;
 <?php ob_start() ?>
 
 <?php session_start() ;?>
+<div id="b">
+            <nav id="primary_nav_wrap1">
 
+                <ul>
+
+                    <li class="MainMenu" id="MainMenurot"><a href="#"></a>
+                        <p id="menu1"> Menu</p>
+                        <ul>
+                            <li><a href="#">CREATE</a></li>
+                            <li><a href="#">DELETE</a></li>
+                            <li><a href="#">EDIT</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 <?php
 
 $n_recette = new RecetteBD();

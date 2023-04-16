@@ -7,22 +7,7 @@ use recette\Tag;
 class Creation_form{
 
     public function generateCreationForm(){?>
-        <div id="b">
-            <nav id="primary_nav_wrap1">
 
-                <ul>
-
-                    <li class="MainMenu" id="MainMenurot"><a href="#"></a>
-                        <p id="menu"> Menu</p>
-                        <ul>
-                            <li><a href="#">DELETE</a></li>
-                            <li><a href="#">EDIT</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
         <div id ="General">
             <div id = "Creation">Créez vos recettes : </div>
             <form id="game-form" method="POST" enctype="multipart/form-data">
