@@ -23,8 +23,9 @@ class Template {
             <div id="main-content">
                 <?php echo $content ?> <!-- INJECTION DU CONTENU -->
             </div>
-            <?php include "footer.php" ?>
+
         </body>
+        <?php include "footer.php" ?>
         </html>
 
         <?php
