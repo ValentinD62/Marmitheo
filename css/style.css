@@ -675,3 +675,15 @@ textarea{
     font-size: 3vw;
     line-height: 200px;
 }
+
+#Delete_recette{
+    margin-left: 37%;
+    margin-top: 5%;
+    font-size: xx-large;
+}
+
+#Delete_tag{
+    margin-left: 37%;
+    margin-top: 5%;
+    font-size: xx-large;
+}

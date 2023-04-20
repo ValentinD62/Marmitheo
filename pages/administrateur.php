@@ -24,8 +24,8 @@ use recette\RecetteRenderer;
                     <li class="MainMenu" id="MainMenurot"><a href="#"></a>
                         <p id="menu1"> Menu</p>
                         <ul>
-                            <li><a href="#">CREATE</a></li>
-                            <li><a href="#">DELETE</a></li>
+                            <li><a href="#Creation">CREATE</a></li>
+                            <li><a href="#Delete_recette">DELETE</a></li>
                             <li><a href="#">EDIT</a></li>
                         </ul>
                     </li>

@@ -135,7 +135,7 @@ class Recette extends RecetteBD
                             'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
                             'name' => $name
                         ];
-                        this->exec($ajouter_tag_rec, $params);
+                        $this->exec($ajouter_tag_rec, $params);
                     }
                     else{
                         $T->createTag($tag);
@@ -146,7 +146,7 @@ class Recette extends RecetteBD
                             'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
                             'name_rec' => $name
                         ];
-                        this->exec($ajouter_tag_rec, $params);
+                        $this->exec($ajouter_tag_rec, $params);
                     }
                 }
             }
