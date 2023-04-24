@@ -40,15 +40,16 @@ $logger = new Creation_form();
 $des = new Destruction_form();
 $edition = new Edition_Form();
 
+
 if (empty($_POST['name'])){
     $logger->generateCreationForm();
 }
 else{
-    $i = 0;
+    $i = 1;
     $all_tag = array();
     while (!empty($_POST["tag_" . $i])){
-        $i ++;
         $all_tag[$i] = $_POST["tag_" . $i];
+        $i ++;
     }
     $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
     $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag);

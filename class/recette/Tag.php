@@ -2,7 +2,7 @@
 
 namespace recette;
 
-use classe\PDO;
+use PDO;
 
 class Tag extends RecetteBD
 {
@@ -10,38 +10,22 @@ class Tag extends RecetteBD
     public int $num_tag;
     public $alltag = array();
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
-        $this->init_alltag();
+        //$this->init_alltag();
     }
 
-    public function setName($name):void
-    {
+    public function setName($name):void{
         $this->name = $name;
     }
 
-    public function setNum_tag($num_tag):void
-    {
+    public function setNum_tag($num_tag):void{
         $this->num_tag = $num_tag;
     }
 
-    public function getAllTag(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM tag";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
 
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
 
-    public function init_alltag():void
-    {
-        $this->alltag = array();
+    /*public function init_alltag():void{
         $tab_tag = $this->getAllTag();
         $i = 0;
         foreach($tab_tag as $T){
@@ -49,20 +33,7 @@ class Tag extends RecetteBD
             $this->alltag[$i]->name = $T->nom_tag;
             $this->alltag[$i]->num_tag = $T->pk_num_tag;
         }
-    }
-
-    //permet d'ajouter des tags
-    public function createTag($name):void
-    {
-        $name = htmlspecialchars($name);
-        $query = 'INSERT INTO tag(nom_tag) VALUES (:name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($query, $params);
-    }
-
-
+    }*/
 
 
     //permet de modifier le tag

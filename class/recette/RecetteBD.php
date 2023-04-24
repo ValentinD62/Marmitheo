@@ -50,6 +50,17 @@ class RecetteBD
         return $data ;
     }
 
+    //permet d'ajouter des tags dans la base de données
+    public function addTagBD($name):void
+    {
+        $name = htmlspecialchars($name);
+        $query = 'INSERT INTO tag(nom_tag) VALUES (:name)';
+        $params = [
+            'name' => htmlspecialchars($name)
+        ];
+        $this->exec($query, $params);
+    }
+
     public function getAllRecette(): array{
         // Préparation d'une requête simple
         $sql = "SELECT* FROM recette";
@@ -71,6 +82,30 @@ class RecetteBD
 
         // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
         $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        return $results;
+    }
+
+    public function getAllTag(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM tag";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    public function getAllTag_Name(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT nom_tag FROM tag";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
     }
 }

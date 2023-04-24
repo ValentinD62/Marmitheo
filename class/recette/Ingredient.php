@@ -2,9 +2,9 @@
 
 namespace recette;
 
-use classe\PDO;
+use PDO;
 
-class Ingredient extends RecetteBD
+class Ingredient //extends RecetteBD
 {
     public string $name;
     public string $image;

@@ -123,31 +123,30 @@ class Recette extends RecetteBD
         ];
         $this->exec($query, $params);
         if($alltag != null){
-            $T = new Tag();
-            $tag_base = $T->getAllTag();
-            foreach ($tag_base as $tb){
-                foreach ($alltag as $tag){
-                    echo "tag";
-                    if($tb->nom_tag == $tag){
-                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
-                        $params = [
-                            'num_tag' =>$tb->pk_num_tag,
-                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
-                            'name' => $name
-                        ];
-                        $this->exec($ajouter_tag_rec, $params);
-                    }
-                    else{
-                        $T->createTag($tag);
-                        $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
-                        $params = [
-                            'num_tag' => 'SELECT pk_num_tag FROM tag WHERE nom_tag = :name_tag',
-                            'name_tag' => $tag,
-                            'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
-                            'name_rec' => $name
-                        ];
-                        $this->exec($ajouter_tag_rec, $params);
-                    }
+            $tag_nom_base = $this->getAllTag_Name();
+            foreach ($alltag as $tag){
+                echo "le tag est égal à " . $tag . '</br>';
+                var_dump($tag_nom_base);
+                $exists = array_key_exists($tag, $tag_nom_base); // Probleme là
+                if ($exists != false){
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                    $params = [
+                        'num_tag' =>$exists->pk_num_tag,
+                        'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
+                        'name' => $name
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
+                }
+                else{
+                    $this->addTagBD($tag);
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                    $params = [ // JE COMPRENDS PAS LA.
+                        'num_tag' => 'SELECT pk_num_tag FROM tag WHERE nom_tag = :name_tag',
+                        'name_tag' => $tag,
+                        'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
+                        'name_rec' => $name
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
                 }
             }
         }
