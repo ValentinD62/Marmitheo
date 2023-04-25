@@ -127,7 +127,6 @@ class Recette extends RecetteBD
         if($alltag != null){
             $tag_base = $this->getAllTag();
             $nb_recette_base = count($this->getAllRecette());
-            echo 'le nombre de recette est de : ' . $nb_recette_base;
             $i = 0;
             foreach($tag_base as $res){
                 $tab_name[$i] = $res->nom_tag;
@@ -135,7 +134,6 @@ class Recette extends RecetteBD
             }
 
             foreach ($alltag as $tag){
-                echo "le tag est égal à " . $tag . '</br>';
                 $exists = array_search($tag, $tab_name);
                 $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
