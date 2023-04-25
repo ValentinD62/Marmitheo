@@ -122,29 +122,39 @@ class Recette extends RecetteBD
             'description' => htmlspecialchars($description)
         ];
         $this->exec($query, $params);
+
+
         if($alltag != null){
-            $tag_nom_base = $this->getAllTag_Name();
+            $tag_base = $this->getAllTag();
+            $nb_recette_base = count($this->getAllRecette());
+            echo 'le nombre de recette est de : ' . $nb_recette_base;
+            $i = 0;
+            foreach($tag_base as $res){
+                $tab_name[$i] = $res->nom_tag;
+                $i++;
+            }
+
             foreach ($alltag as $tag){
                 echo "le tag est égal à " . $tag . '</br>';
-                var_dump($tag_nom_base);
-                $exists = array_key_exists($tag, $tag_nom_base); // Probleme là
+                $exists = array_search($tag, $tab_name);
+                $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
-                    $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
-                    $params = [
-                        'num_tag' =>$exists->pk_num_tag,
-                        'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name',
-                        'name' => $name
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec,:num_tag, :num_rec)';
+                    $params = [ // JE COMPRENDS PAS LA.
+                        'tag_rec' => $nb_tag_rec + 1,
+                        'num_tag' =>$tag_base[$exists]->pk_num_tag,
+                        'num_rec' => $nb_recette_base,
                     ];
                     $this->exec($ajouter_tag_rec, $params);
                 }
+
                 else{
                     $this->addTagBD($tag);
+                    $nb_rec = count($this->getAllTag());
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
                     $params = [ // JE COMPRENDS PAS LA.
-                        'num_tag' => 'SELECT pk_num_tag FROM tag WHERE nom_tag = :name_tag',
-                        'name_tag' => $tag,
-                        'num_rec' => 'SELECT pk_num_rec FROM recette WHERE nom_rec = :name_rec',
-                        'name_rec' => $name
+                        'num_tag' => $nb_rec,
+                        'num_rec' => $nb_recette_base,
                     ];
                     $this->exec($ajouter_tag_rec, $params);
                 }

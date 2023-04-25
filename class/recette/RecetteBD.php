@@ -61,6 +61,7 @@ class RecetteBD
         $this->exec($query, $params);
     }
 
+    //Retourne toutes les recettes sous forme de tableau de recettes.
     public function getAllRecette(): array{
         // Préparation d'une requête simple
         $sql = "SELECT* FROM recette";
@@ -68,7 +69,7 @@ class RecetteBD
         // Exécution de la requête
         $statement->execute() or die(var_dump($statement->errorInfo()));
 
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        // Récupération de la réponse sous forme d'un tableau d'instances de recette
         $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
         return $results;
     }
@@ -97,9 +98,9 @@ class RecetteBD
         return $results;
     }
 
-    public function getAllTag_Name(): array{
+    public function getAll_num_Tag_recette(): array{
         // Préparation d'une requête simple
-        $sql = "SELECT nom_tag FROM tag";
+        $sql = "SELECT pk_tag_rec FROM tag_recette";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));

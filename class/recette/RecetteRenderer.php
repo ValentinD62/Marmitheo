@@ -11,6 +11,7 @@ class RecetteRenderer{
             </div>
                 <div id="nom-recherche"><?= $this->nom_rec ?></div>
                 <!-- <div><? // = $this->description ?></div> -->
+                <div id="tags_recherche"></div>
         </div>
     <?php }
 }
