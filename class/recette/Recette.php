@@ -2,9 +2,6 @@
 
 namespace recette;
 
-
-use PDO;
-use recette\Tag;
 class Recette extends RecetteBD
 {
 
@@ -13,11 +10,10 @@ class Recette extends RecetteBD
     private string $description;
     private int $num_rec;
     private $ing = array();
-    private $tag = array();
+    private $liste_tag = array();
 
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
     }
 
@@ -38,32 +34,6 @@ class Recette extends RecetteBD
         $this->num_rec = $num_rec;
     }
 
-    //return tout les elements de la table ing_recette
-    public function getAllRecIng(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM ing_recette";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
-
-    //return tout les elements de la table tag_recette
-    public function getAllRecTag(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM tag_recette";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
 
     public function init_ing(): void
     {
@@ -90,11 +60,11 @@ class Recette extends RecetteBD
         $i = 0;
         foreach($tab_tagRec as $tagRec){
             if($this->num_rec == $tagRec->fk_num_rec){
-                $this->tag[$i] = new Tag();
-                $this->tag[$i]->num_tag = $tagRec->fk_num_tag;
+                $this->liste_tag[$i] = new Tag();
+                $this->liste_tag[$i]->num_tag = $tagRec->fk_num_tag;
                 $name = 'SELECT nom_tag FROM Tag WHERE pk_num_tag =:num ';
                 $params=['num' => $tagRec->fk_num_tag];
-                $this->tag[$i]->name = $this->exec($name, $params);
+                $this->liste_tag[$i]->name = $this->exec($name, $params);
                 $i = $i + 1;
             }
         }
@@ -157,6 +127,7 @@ class Recette extends RecetteBD
                     $this->exec($ajouter_tag_rec, $params);
                 }
             }
+            $this->init_tag();
         }
     }
 

@@ -12,7 +12,7 @@ class Recherche{
             $liste_recette = $recettes->getAllRecette(); ?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php foreach ($liste_recette as $recette): ?>
-                    <?= $recette->getHTML() ?>
+                    <?= $recette->getAllHTML() ?>
                 <?php endforeach; ?>
             </section> <?php
         }
@@ -24,7 +24,7 @@ class Recherche{
             else : ?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php foreach ($liste_recette as $recette): ?>
-                    <?= $recette->getHTML() ?>
+                    <?= $recette->getHTMLForSearch() ?>
                 <?php endforeach; ?>
             </section>
                 <?php endif;

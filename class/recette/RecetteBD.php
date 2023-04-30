@@ -109,6 +109,33 @@ class RecetteBD
         $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
     }
+
+    //return tout les elements de la table ing_recette
+    public function getAllRecIng(): array
+    {
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM ing_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    //return tout les elements de la table tag_recette
+    public function getAllRecTag(): array
+    {
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM tag_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
 }
 
 
