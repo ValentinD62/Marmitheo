@@ -5,12 +5,12 @@ namespace recette;
 class Recette extends RecetteBD
 {
 
-    private string $name;
-    private string $image;
-    private string $description;
-    private int $num_rec;
-    private $ing = array();
-    private $liste_tag = array();
+    public string $name;
+    public string $image;
+    public string $description;
+    public int $num_rec;
+    public $ing = array();
+    public $liste_tag = array();
 
 
     public function __construct(){
@@ -34,6 +34,10 @@ class Recette extends RecetteBD
         $this->num_rec = $num_rec;
     }
 
+    public function __toString()
+    {
+        return $this->name . " avec comme image : " . $this->image . "et comme description :" . $this->description;
+    }
 
     public function init_ing(): void
     {
@@ -48,23 +52,6 @@ class Recette extends RecetteBD
                 $params=['num' => $ingRec->fk_num_ing];
                 $this->ing[$i]->name = $this->exec($name, $params);
                 $this->ing[$i]->image = $this->exec($img, $params);
-                $i = $i + 1;
-            }
-        }
-    }
-
-    //initialise le tableau de tag
-    public function init_tag(): void
-    {
-        $tab_tagRec = $this->getAllRecTag();
-        $i = 0;
-        foreach($tab_tagRec as $tagRec){
-            if($this->num_rec == $tagRec->fk_num_rec){
-                $this->liste_tag[$i] = new Tag();
-                $this->liste_tag[$i]->num_tag = $tagRec->fk_num_tag;
-                $name = 'SELECT nom_tag FROM Tag WHERE pk_num_tag =:num ';
-                $params=['num' => $tagRec->fk_num_tag];
-                $this->liste_tag[$i]->name = $this->exec($name, $params);
                 $i = $i + 1;
             }
         }
@@ -127,8 +114,27 @@ class Recette extends RecetteBD
                     $this->exec($ajouter_tag_rec, $params);
                 }
             }
-            $this->init_tag();
         }
+    }
+
+    public function Allrecette($tab_get_allrecette): array{
+        $i = 0;
+        $tab_allrecette = array();
+        foreach ($tab_get_allrecette as $recette){
+            $tab_tag = $this->getTagofRecette($recette->pk_num_rec);
+            $n_recette = new Recette();
+            $n_recette->setName($recette->nom_rec);
+            $n_recette->setImage($recette->image_rec);
+            $n_recette->setDescription($recette->description);
+            $j = 0;
+            foreach ($tab_tag as $tag){
+                $n_recette->liste_tag[$j] = $tag->nom_tag;
+                $j++;
+            }
+            $tab_allrecette[$i] = $n_recette;
+            $i++;
+        }
+        return $tab_allrecette;
     }
 
     //supprimer la recette name dans la table recette
