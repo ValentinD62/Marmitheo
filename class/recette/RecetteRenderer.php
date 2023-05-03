@@ -4,12 +4,12 @@ namespace recette;
 
 class RecetteRenderer{
 
-    public function getHTMLForSearch(): void {?>
+    public function getHTMLForSearch($recette): void {?>
         <div class="recette">
             <div id="img-recherche">
-            <img src= "../img/<?= $this->image_rec?>">
+            <img src= "../img/<?= $recette->image ?>">
             </div>
-            <div id="nom-recherche"><?= $this->nom_rec ?></div>
+            <div id="nom-recherche"><?= $recette->name ?></div>
         </div>
     <?php }
 
