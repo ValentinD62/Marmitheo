@@ -16,10 +16,8 @@ class RecetteRenderer{
     public function getAllHTML($recette): void{ ?>
         <div class="recette-allHtml">
             <div id="img-allHtml">
-                <?= "OUI ??"?>
             <img src= "../img/<?= $recette->image?>">
             </div>
-                <?= "NON ??" ?>
             <div id="nom-allHtml"><?= $recette->name ?></div>
             <div id = "description-allHtml"><?= $recette->description ?></div>
             <?php if ($recette->liste_tag != null): ?>
