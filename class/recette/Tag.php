@@ -8,11 +8,9 @@ class Tag extends RecetteBD
 {
     public string $name;
     public int $num_tag;
-    public $alltag = array();
 
     public function __construct(){
         parent::__construct();
-        //$this->init_alltag();
     }
 
     public function setName($name):void{
@@ -22,19 +20,6 @@ class Tag extends RecetteBD
     public function setNum_tag($num_tag):void{
         $this->num_tag = $num_tag;
     }
-
-
-
-    /*public function init_alltag():void{
-        $tab_tag = $this->getAllTag();
-        $i = 0;
-        foreach($tab_tag as $T){
-            $this->alltag[$i] = new Tag();
-            $this->alltag[$i]->name = $T->nom_tag;
-            $this->alltag[$i]->num_tag = $T->pk_num_tag;
-        }
-    }*/
-
 
     //permet de modifier le tag
     public function editionTag($ancien_nom, $nouveau_nom):void

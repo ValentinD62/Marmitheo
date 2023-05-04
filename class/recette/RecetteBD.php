@@ -6,6 +6,8 @@ class RecetteBD
 {
     public PDO $pdo;
     public const UPLOAD_DIR = "../img/";
+
+    public const UPLOAD_DIR_ING = "../img/img_ingredient/";
     public function __construct()
     {
         // Informations sur la BDD et le serveur qui la contient
@@ -96,6 +98,20 @@ class RecetteBD
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
         $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
+    }
+
+    public function getAllIngredient(): array{
+
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM ingrédient";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances d'ingredient.
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+
     }
 
     public function getTagofRecette($num_recette): array{

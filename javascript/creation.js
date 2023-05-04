@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 let img_add = document.createElement("input");
                 img_add.type = "file";
                 img_add.classList.add("img_ing_add");
+                img_add.id = "image_ing_" + vrai_i;
                 img_add.name = "image_ing_" + vrai_i;
                 img_add.accept = "image/png, image/gif, image/jpeg";
                 form_ingredient.appendChild(img_add);

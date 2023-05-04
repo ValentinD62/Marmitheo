@@ -58,7 +58,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null, $alltag = null):void
+    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -80,7 +80,7 @@ class Recette extends RecetteBD
         ];
         $this->exec($query, $params);
 
-
+        // ----------- Partie pour ajouter les tags à la recette. -----------------------
         if($alltag != null){
             $tag_base = $this->getAllTag();
             $nb_recette_base = count($this->getAllRecette());
@@ -114,6 +114,12 @@ class Recette extends RecetteBD
                     $this->exec($ajouter_tag_rec, $params);
                 }
             }
+        }
+
+        // ----------- Partie pour ajouter les ingrédients à la recette. -----------------------
+
+        if($all_name_ing != null && $all_img_ing != null){
+
         }
     }
 
