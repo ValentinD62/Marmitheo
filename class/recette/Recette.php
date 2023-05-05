@@ -195,17 +195,6 @@ class Recette extends RecetteBD
         return $tab_allrecette;
     }
 
-    //supprimer la recette name dans la table recette
-    public function deleteRecette($name):void
-    {
-        $name = htmlspecialchars($name);
-        $del_rec = 'DELETE FROM recette WHERE pk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = :name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($del_rec, $params);
-    }
-
     //supprimer les lignes dans Ing_recette en lien avec la recette name
     public function deleteIngRec($name):void
     {
@@ -228,9 +217,22 @@ class Recette extends RecetteBD
         $this->exec($del_tag_rec, $params);
     }
 
+    //supprimer la recette name dans la table recette
+    public function deleteRecette($name):void
+    {
+        $name = htmlspecialchars($name);
+        $del_rec = 'DELETE FROM recette WHERE pk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = :name)';
+        $params = [
+            'name' => htmlspecialchars($name)
+        ];
+        $this->deleteIngRec($name);
+        $this->deleteTagRec($name);
+        $this->exec($del_rec, $params);
+    }
+
     public function editionRecette():void
     {
-        
+
     }
 
 }
