@@ -11,6 +11,10 @@ use form\Edition_Form;
 use recette\RecetteRenderer;
 
 
+
+
+
+
 ?>
 
 <?php ob_start() ?>
@@ -34,11 +38,13 @@ use recette\RecetteRenderer;
         </div>
 <?php
 
+
 $n_recette = new RecetteBD();
 $rec = new Recette();
 $logger = new Creation_form();
 $des = new Destruction_form();
 $edition = new Edition_Form();
+
 
 
 if (empty($_POST['name'])){
