@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
 html{
     width: 100%;
+    min-height: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 200px;
 }
 
 
@@ -10,6 +13,9 @@ body{
     height: 90%;
     width: 100%;
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 0;
     margin-top: 0;
     margin-left: 0;
@@ -54,11 +60,12 @@ header{
 footer{
     background: linear-gradient(to bottom right, white 20%,#FFD4CB 80%);
     height: 50px;
+    position: relative;
     width: 100%;
-    margin-top: 16%;
+    margin-top: auto;
     text-align: center;
     padding-top: 15px;
-    bottom: 0
+    bottom: 0;
 }
 
 #MainMenu
@@ -393,6 +400,7 @@ input {
 
 #carrousel{
     border: black 1px solid;
+    margin-bottom: 10%;
 }
 
 #General{
@@ -694,4 +702,63 @@ textarea{
     margin-left: 37%;
     margin-top: 5%;
     font-size: xx-large;
+}
+
+/* detail */
+
+#detail-Title{
+    margin-top: 5%;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+}
+
+#detail{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    background: #FEF2F4;
+    min-height: 600px;
+    border: 1px solid black;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    border-radius: 20px;
+
+
+
+}
+
+#detail-description{
+    width: 60%;
+    min-height: 500px;
+    border: 1px solid black;
+    margin: 5%  ;
+    border-radius: 20px;
+    background-color: #FFE6E6;
+    padding: 30px;
+}
+
+#detail-img{
+    display: flex;
+    text-align: center;
+    border-radius: 20px;
+    background-color: #FFE6E6;
+    width: 40%;
+    height: 500px;
+    margin: auto;
+    margin-right: 5%;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+
+}
+
+#detail-img img{
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 100%;
+
 }
