@@ -71,6 +71,9 @@ else{
 if(empty($_POST['nom_rec'])) {
     $des->generateDeleteRecetteForm();
 }
+else{
+
+}
 
 if(empty($_POST['nom_tag'])){
     $des->generateDeleteTagForm();
