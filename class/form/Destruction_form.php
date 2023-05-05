@@ -8,6 +8,8 @@ class Destruction_form{
         ?>
         <div id="General">
         <div id="Suppression">Supprimer une recette :</div>
+        <div id="Delete_recette">Supprimer une recette :</div>
+
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_rec" class="form-label">Nom recette</label>
@@ -27,7 +29,7 @@ class Destruction_form{
     public function generateDeleteTagForm()
     {
         ?>
-        <div id="Creation">Supprimer un Tag :</div>
+        <div id="Delete_tag">Supprimer un Tag :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
                 <label for="nom_tag class=" form-label">Nom Tag</label>

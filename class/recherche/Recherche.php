@@ -1,31 +1,40 @@
 <?php
 namespace recherche;
 
+use recette\Recette;
 use recette\RecetteBD;
+use recette\RecetteRenderer;
 
 class Recherche{
     function getRechercheRecette(): void{
-        $recettes = new RecetteBD();
+        $recettesBD = new RecetteBD();
+        $recettes = new Recette();
         $recherche = $_POST['recherche'];
         if ($recherche == ""){
-            $recettes = new RecetteBD();
-            $liste_recette = $recettes->getAllRecette(); ?>
+            $liste_recetteBD = $recettesBD->getAllRecette();
+            $liste_recette = $recettes->AllRecette($liste_recetteBD);
+            $i = 0;  ?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
-                <?php foreach ($liste_recette as $recette): ?>
-                    <?= $recette->getHTML() ?>
-                <?php endforeach; ?>
+                <?php foreach ($liste_recetteBD as $recette){
+                    echo $recette->getAllHTML($liste_recette[$i]);
+                    $i++;
+                }
+                ?>
             </section> <?php
         }
         else{
-            $liste_recette = $recettes->getRecetteByName($recherche);
-            if ($liste_recette == null): ?>
+            $liste_recetteBD = $recettesBD->getRecetteByName($recherche);
+            if ($liste_recetteBD == null): ?>
                 <div id = "nothing"> Nothing Here </div>
             <?php
-            else : ?>
+            else :
+                $liste_recette = $recettes->AllRecette($liste_recetteBD);
+                $i = 0;?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
-                <?php foreach ($liste_recette as $recette): ?>
-                    <?= $recette->getHTML() ?>
-                <?php endforeach; ?>
+                <?php foreach ($liste_recetteBD as $recette){
+                    echo $recette->getHTMLForSearch($liste_recette[$i]);
+                    $i++;
+                } ?>
             </section>
                 <?php endif;
         }

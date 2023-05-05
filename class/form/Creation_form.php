@@ -7,8 +7,7 @@ use recette\Tag;
 class Creation_form{
 
     public function generateCreationForm(){?>
-        <div id="b">
-            <nav id="primary_nav_wrap1">
+
 
                 <ul>
 
@@ -24,6 +23,7 @@ class Creation_form{
                 </ul>
             </nav>
         </div>
+
         <div id ="General">
             <div id = "Creation">Créez vos recettes : </div>
             <form id="game-form" method="POST" enctype="multipart/form-data">
@@ -62,7 +62,7 @@ class Creation_form{
                 <label for="ingredient" class="CENTER">Ingrédient</label>
                 <div id="form_ingredient">
                     <input type="text" class="form-ingredient-input" id="ingredient_1" name="ingredient_1">
-                    <input type="file" class="img_ing_add"  name="image_ing_1" accept="image/png, image/gif, image/jpeg">
+                    <input type="file" class="img_ing_add" id="image_ing_1" name="image_ing_1" accept="image/png, image/gif, image/jpeg">
                 </div>
                     </div>
                 </div>

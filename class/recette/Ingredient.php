@@ -2,7 +2,7 @@
 
 namespace recette;
 
-use classe\PDO;
+use PDO;
 
 class Ingredient extends RecetteBD
 {
@@ -10,12 +10,9 @@ class Ingredient extends RecetteBD
     public string $image;
     public int $num_ing;
 
-    public $alling = array();
-
     public function __construct()
     {
         parent::__construct();
-        $this->init_alling();
     }
 
     public function setName($name):void
@@ -33,34 +30,7 @@ class Ingredient extends RecetteBD
         $this->image = $img;
     }
 
-    //return tout les elements de la table Ingredient
-    public function getAllIngredient(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM ingrédient";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-
-    }
-
-    public function init_alling():void
-    {
-        $tab_ing = $this->getAllIngredient();
-        $i = 0;
-        foreach($tab_ing as $I){
-            $this->alling[$i] = new Ingredient();
-            $this->alling[$i]->name = $I->nom_ing;
-            $this->alling[$i]->num_ing = $I->pk_num_ing;
-            $this->alling[$i]->image = $I->image;
-        }
-    }
-
-    public function createIng($name, $img = null):void
+    /*public function createIng($name, $img = null):void
     {
         $name = htmlspecialchars($name);
         $imgName = null;
@@ -80,7 +50,7 @@ class Ingredient extends RecetteBD
         ];
         $this->exec($query, $params);
 
-    }
+    }*/
 
     public function editionIng($ancien_nom, $nouv_nom = null, $img = null):void
     {
