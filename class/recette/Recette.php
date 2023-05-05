@@ -95,7 +95,7 @@ class Recette extends RecetteBD
                 $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec,:num_tag, :num_rec)';
-                    $params = [ // JE COMPRENDS PAS LA.
+                    $params = [
                         'tag_rec' => $nb_tag_rec + 1,
                         'num_tag' =>$tag_base[$exists]->pk_num_tag,
                         'num_rec' => $nb_recette_base,
@@ -107,7 +107,7 @@ class Recette extends RecetteBD
                     $this->addTagBD($tag);
                     $nb_rec = count($this->getAllTag());
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
-                    $params = [ // JE COMPRENDS PAS LA.
+                    $params = [
                         'num_tag' => $nb_rec,
                         'num_rec' => $nb_recette_base,
                     ];
