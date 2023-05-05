@@ -89,7 +89,7 @@ class RecetteBD
 
     public function getRecetteByName($name): array{
         // Préparation d'une requête simple
-        $sql = "SELECT * FROM recette WHERE nom_rec like '%" . $name . "%'";
+            $sql = "SELECT * FROM recette WHERE nom_rec like '%" . $name . "%'";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump($statement->errorInfo()));

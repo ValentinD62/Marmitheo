@@ -7,12 +7,16 @@ class RecetteRenderer{
     //Fonction pour afficher la fonction minimaliste des informations
     //d'une recette.
     public function getHTMLForSearch($recette): void {?>
+
         <div class="recette">
-            <div id="img-recherche">
-            <img src= "../img/<?= $recette->image ?>">
-            </div>
-            <div id="nom-recherche"><?= $recette->name ?></div>
+
+                <div id="img-recherche">
+                <img src= "../img/<?= $recette->image ?>">
+                </div>
+                <div id="nom-recherche"><?= $recette->name ?></div>
+                <div id="id-recherche"><?= $recette->id ?></div>
         </div>
+
     <?php }
 
 

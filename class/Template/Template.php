@@ -13,7 +13,9 @@ class Template {
         <head>
             <link rel="stylesheet" href="../css/style.css">
             <script defer src="../javascript/script.js"></script>
+
             <?php include "..\javascript\creation.php";?>
+
             <meta charset="UTF-8">
             <title>PROJET TROP BIEN</title>
 
@@ -26,7 +28,7 @@ class Template {
                 <?php echo $content ?> <!-- INJECTION DU CONTENU -->
 
             </div>
-
+            <?php include "..\javascript\adetail.php";?>
 
         </body>
         <?php include "footer.php" ?>

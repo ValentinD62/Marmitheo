@@ -74,16 +74,19 @@ else{
 <img id="separateur" src="../img/separator.png">
 
 <?php
-if(empty($_POST['nom_rec'])) {
+if(empty($_POST['delete_name'])) {
     $des->generateDeleteRecetteForm();
 }
 else{
-
+    echo $_POST['delete_name'];
+    $rec->deleteRecette($_POST['delete_name']);
+    $des->generateDeleteRecetteForm();
 }
 
 if(empty($_POST['nom_tag'])){
     $des->generateDeleteTagForm();
 }
+
 ?>
 
 

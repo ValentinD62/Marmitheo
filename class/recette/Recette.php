@@ -5,6 +5,7 @@ namespace recette;
 class Recette extends RecetteBD
 {
 
+    public int $id;
     public string $name;
     public string $image;
     public string $description;
@@ -17,6 +18,10 @@ class Recette extends RecetteBD
         parent::__construct();
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
     public function setName(string $name):void
     {
         $this->name = $name;
@@ -177,6 +182,7 @@ class Recette extends RecetteBD
             $tab_tag = $this->getTagofRecette($recette->pk_num_rec);
             $tab_ing = $this->getIngofRecette($recette->pk_num_rec);
             $n_recette = new Recette();
+            $n_recette->setId($recette->pk_num_rec);
             $n_recette->setName($recette->nom_rec);
             $n_recette->setImage($recette->image_rec);
             $n_recette->setDescription($recette->description);
@@ -201,35 +207,34 @@ class Recette extends RecetteBD
     public function deleteIngRec($name):void
     {
         $name = htmlspecialchars($name);
-        $del_ing_rec = 'DELETE FROM ing_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($del_ing_rec, $params);
+        $del_ing_rec = "DELETE FROM ing_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = '" . $name. "' LIMIT 1)";
+        $statement = $this->pdo->prepare($del_ing_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
     }
 
     //supprimer les lignes dans Tag_recette en lien avec la recette name
     public function deleteTagRec($name):void
     {
         $name = htmlspecialchars($name);
-        $del_tag_rec = 'DELETE FROM tag_recette WHERE fk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = $name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($del_tag_rec, $params);
+        $del_tag_rec = "DELETE FROM tag_recette WHERE 'fk_num_rec' = (SELECT pk_num_rec FROM recette WHERE nom_rec = '" . $name. "' LIMIT 1 )";
+        $statement = $this->pdo->prepare($del_tag_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
     }
 
-    //supprimer la recette name dans la table recette
+    //supprimer la recette correspondant au $name dans les différentes tables recettes.
     public function deleteRecette($name):void
     {
         $name = htmlspecialchars($name);
-        $del_rec = 'DELETE FROM recette WHERE pk_num_rec = (SELECT pk_num_rec FROM recette WHERE nom_rec = :name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
+        $del_rec = "DELETE FROM recette WHERE nom_rec = '" . $name . "' LIMIT 1";
+
+        $statement = $this->pdo->prepare($del_rec);
+        // Exécution de la requête
+
         $this->deleteIngRec($name);
         $this->deleteTagRec($name);
-        $this->exec($del_rec, $params);
+        $statement->execute() or die(var_dump(statement->errorInfo()));
     }
 
     public function editionRecette():void
