@@ -13,7 +13,7 @@ session_destroy(); ?>
 
 <div id="detail-Title">Le nom de la recette</div>
 
-
+<div id="detail-all">
 <div id="detail">
     <div id="detail-description">
         aa aa aa aaa aaaaaaaa aaaaaaaaaaa aaa aaaaaaaaaaa aaa aa
@@ -26,6 +26,18 @@ session_destroy(); ?>
 
     </div>
 
+</div>
+    <div id="detail-tag-ing">
+
+        <div id="detail-tag">
+
+        </div>
+
+        <div id="detail-ing">
+
+        </div>
+
+    </div>
 
 
 
