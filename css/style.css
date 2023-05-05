@@ -656,7 +656,7 @@
     .recette{
         display: flex;
         flex-direction: row;
-
+        transition: transform .1s;
         height: 200px;
         width: 100%;
         background-color: #d2cacf;
@@ -702,6 +702,11 @@
         margin-left: 37%;
         margin-top: 5%;
         font-size: xx-large;
+    }
+
+    .recette:hover{
+        transform: scale(1.1);
+
     }
 
     /* detail */
@@ -779,3 +784,4 @@
     #detail-tag,#detail-ing{
         width: 50%;
     }
+
