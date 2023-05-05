@@ -135,6 +135,16 @@ class RecetteBD
         return $results;
     }
 
+    public function getIngofRecette($num_recette): array{
+        $sql = "SELECT nom_ing, image FROM ingrédient INNER JOIN ing_recette on ingrédient.pk_num_ing = ing_recette.fk_num_ing WHERE ing_recette.fk_num_rec = " . $num_recette;
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
     public function getAll_num_Tag_recette(): array{
         // Préparation d'une requête simple
         $sql = "SELECT pk_tag_rec FROM tag_recette";
