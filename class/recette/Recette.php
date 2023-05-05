@@ -9,7 +9,7 @@ class Recette extends RecetteBD
     public string $image;
     public string $description;
     public int $num_rec;
-    public $ing = array();
+    public $liste_ing = array();
     public $liste_tag = array();
 
 
@@ -173,6 +173,7 @@ class Recette extends RecetteBD
         $tab_allrecette = array();
         foreach ($tab_get_allrecette as $recette){
             $tab_tag = $this->getTagofRecette($recette->pk_num_rec);
+            $tab_ing = $this->getIngofRecette($recette->pk_num_rec);
             $n_recette = new Recette();
             $n_recette->setName($recette->nom_rec);
             $n_recette->setImage($recette->image_rec);
@@ -180,6 +181,12 @@ class Recette extends RecetteBD
             $j = 0;
             foreach ($tab_tag as $tag){
                 $n_recette->liste_tag[$j] = $tag->nom_tag;
+                $j++;
+            }
+            $j = 0;
+            foreach ($tab_ing as $ing) {
+                $n_recette->liste_ing[$j][0] = $ing->nom_ing;
+                $n_recette->liste_ing[$j][1] = $ing->image;
                 $j++;
             }
             $tab_allrecette[$i] = $n_recette;

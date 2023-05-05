@@ -26,6 +26,13 @@ class RecetteRenderer{
                     <?php endforeach; ?>
                  </div>
             <?php endif ?>
+            <?php if ($recette->liste_ing != null): ?>
+                <div id="ings_allHtml"><?php foreach ($recette->liste_ing as $ing): ?>
+                        <div id = "ing_recette"><?= $ing[0]?></div>
+                        <img src= "../img/img_ingredient/<?=$ing[1]?>">
+                    <?php endforeach; ?>
+                </div>
+            <?php endif ?>
         </div>
     <?php }
 }
