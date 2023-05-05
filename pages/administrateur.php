@@ -55,11 +55,9 @@ else{
     $all_name_ing = array();
     $all_img_ing = array();
     while(!empty($_POST["ingredient_" . $i]) && !empty($_FILES["image_ing_" . $i])){
-        $all_name_ing[$i] = $_POST["ingredient_" . $i];
-        $all_img_ing[$i] = $_FILES["image_ing_" . $i];
+        $all_name_ing[$i - 1] = $_POST["ingredient_" . $i];
+        $all_img_ing[$i - 1] = $_FILES["image_ing_" . $i];
         $i++;
-        echo $all_name_ing[$i];
-        echo $all_img_ing[$i];
     }
     $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
     $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing);

@@ -63,6 +63,17 @@ class RecetteBD
         $this->exec($query, $params);
     }
 
+    public function addIngBD($name, $image):void
+    {
+        $name = htmlspecialchars($name);
+        $query = 'INSERT INTO ingrédient(nom_ing, image) VALUES (:name, :img)';
+        $params = [
+            'name' => htmlspecialchars($name),
+            'img' => $image
+        ];
+        $this->exec($query, $params);
+    }
+
     //Retourne toutes les recettes sous forme de tableau de recettes.
     public function getAllRecette(): array{
         // Préparation d'une requête simple
@@ -127,6 +138,18 @@ class RecetteBD
     public function getAll_num_Tag_recette(): array{
         // Préparation d'une requête simple
         $sql = "SELECT pk_tag_rec FROM tag_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    public function getAll_num_Ing_recette(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT pk_id FROM ing_recette";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));

@@ -58,7 +58,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette
-    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void
+    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing, $all_img_ing):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -94,8 +94,8 @@ class Recette extends RecetteBD
                 $exists = array_search($tag, $tab_name);
                 $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
-                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec,:num_tag, :num_rec)';
-                    $params = [ // JE COMPRENDS PAS LA.
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                    $params = [
                         'tag_rec' => $nb_tag_rec + 1,
                         'num_tag' =>$tag_base[$exists]->pk_num_tag,
                         'num_rec' => $nb_recette_base,
@@ -106,8 +106,9 @@ class Recette extends RecetteBD
                 else{
                     $this->addTagBD($tag);
                     $nb_rec = count($this->getAllTag());
-                    $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
-                    $params = [ // JE COMPRENDS PAS LA.
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec, fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                    $params = [
+                        'tag_rec' => $nb_tag_rec + 1,
                         'num_tag' => $nb_rec,
                         'num_rec' => $nb_recette_base,
                     ];
@@ -119,7 +120,51 @@ class Recette extends RecetteBD
         // ----------- Partie pour ajouter les ingrédients à la recette. -----------------------
 
         if($all_name_ing != null && $all_img_ing != null){
+            $ing_base = $this->getAllIngredient();
+            $nb_recette_base = count($this->getAllRecette());
+            $i = 0;
+            foreach($ing_base as $ing){
+                $tab_ing_name[$i] = $ing->nom_ing;
+                $i++;
+            }
 
+            $i = 0;
+            foreach ($all_name_ing as $ing) {
+                $exists = array_search($ing, $tab_ing_name);
+                $nb_ing_rec = count($this->getAll_num_Ing_recette());
+                if ($exists != false) {
+                    $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
+                    $params = [
+                        'id' => $nb_ing_rec + 1,
+                        'num_rec' => $nb_recette_base,
+                        'num_ing' => $ing_base[$exists]->pk_num_ing,
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
+                }
+
+                else{
+                    $img_Ing_Name = null;
+                    if ($img != null) {
+                        $tmpName = $all_img_ing[$i]['tmp_name'];
+                        $img_Ing_Name = $all_img_ing[$i]['name'];
+                        $img_Ing_Name = urlencode(htmlspecialchars($img_Ing_Name));
+                        $dirname = self::UPLOAD_DIR_ING;
+                        if (!is_dir($dirname)) mkdir($dirname);
+                        $uploaded = move_uploaded_file($tmpName, $dirname . $img_Ing_Name);
+                        if (!$uploaded) die("FILE NOT UPLOADED");
+                    } else echo "NO IMAGE !!!!";
+                    $this->addIngBD($ing, $img_Ing_Name);
+                    $nb_rec = count($this->getAllIngredient());
+                    $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
+                    $params = [
+                        'id' => $nb_ing_rec + 1,
+                        'num_rec' => $nb_recette_base,
+                        'num_ing' => $nb_rec,
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
+                }
+                $i++;
+            }
         }
     }
 
