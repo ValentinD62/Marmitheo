@@ -15,6 +15,7 @@ class Creation_form{
                     <li class="MainMenu" id="MainMenurot"><a href="#"></a>
                         <p id="menu"> Menu</p>
                         <ul>
+                            <li><a href="#">CREATE</a></li>
                             <li><a href="#">DELETE</a></li>
                             <li><a href="#">EDIT</a></li>
 
