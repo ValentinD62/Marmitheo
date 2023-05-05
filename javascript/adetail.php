@@ -10,8 +10,8 @@ $recette = new RecetteBD();
 var button = document.getElementsByClassName('recette');
 function m() {
 
-    elems = this.querySelector("#nom-recherche").innerHTML
-    location.href="../pages/detail.php?name=" + elems  ;
+    elems = this.querySelector("#id-recherche").innerHTML
+    location.href="../pages/detail.php?id=" + elems  ;
 };
 
 for (var i = 0;i<button.length;i++) {
