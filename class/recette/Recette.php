@@ -5,6 +5,7 @@ namespace recette;
 class Recette extends RecetteBD
 {
 
+    public int $id;
     public string $name;
     public string $image;
     public string $description;
@@ -17,6 +18,10 @@ class Recette extends RecetteBD
         parent::__construct();
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
     public function setName(string $name):void
     {
         $this->name = $name;
@@ -175,6 +180,7 @@ class Recette extends RecetteBD
             $tab_tag = $this->getTagofRecette($recette->pk_num_rec);
             $tab_ing = $this->getIngofRecette($recette->pk_num_rec);
             $n_recette = new Recette();
+            $n_recette->setId($recette->pk_num_rec);
             $n_recette->setName($recette->nom_rec);
             $n_recette->setImage($recette->image_rec);
             $n_recette->setDescription($recette->description);
