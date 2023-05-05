@@ -94,7 +94,11 @@ class Recette extends RecetteBD
                 $exists = array_search($tag, $tab_name);
                 $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
+<<<<<<< HEAD
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec,:num_tag, :num_rec)';
+=======
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+>>>>>>> 798d1d3aa9813e34470a3d69c9bdfbd67f43d944
                     $params = [
                         'tag_rec' => $nb_tag_rec + 1,
                         'num_tag' =>$tag_base[$exists]->pk_num_tag,
@@ -106,9 +110,14 @@ class Recette extends RecetteBD
                 else{
                     $this->addTagBD($tag);
                     $nb_rec = count($this->getAllTag());
+<<<<<<< HEAD
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(fk_num_tag, fk_num_rec) VALUES (:num_tag, :num_rec)';
+                    $params = [
+=======
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec, fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                     $params = [
                         'tag_rec' => $nb_tag_rec + 1,
+>>>>>>> 798d1d3aa9813e34470a3d69c9bdfbd67f43d944
                         'num_tag' => $nb_rec,
                         'num_rec' => $nb_recette_base,
                     ];
