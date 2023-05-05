@@ -4,6 +4,8 @@ namespace recette;
 
 class RecetteRenderer{
 
+    //Fonction pour afficher la fonction minimaliste des informations
+    //d'une recette.
     public function getHTMLForSearch($recette): void {?>
         <div class="recette">
             <div id="img-recherche">
@@ -13,6 +15,8 @@ class RecetteRenderer{
         </div>
     <?php }
 
+
+    //Fonction pour afficher toutes les informations d'une recette.
     public function getAllHTML($recette): void{ ?>
         <div id="detail-Title"><?= $recette->name ?></div>
 
@@ -36,7 +40,8 @@ class RecetteRenderer{
             }?>
             </div>
             <?php if ($recette->liste_ing != null): ?>
-                <div id="ings_allHtml"><?php foreach ($recette->liste_ing as $ing): ?>
+                <div id="detail-ing">
+                    <?php foreach ($recette->liste_ing as $ing): ?>
                         <div id = "ing_recette"><?= $ing[0]?></div>
                         <img src= "../img/img_ingredient/<?=$ing[1]?>">
                     <?php endforeach; ?>
