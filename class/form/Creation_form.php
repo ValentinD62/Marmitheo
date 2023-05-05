@@ -44,19 +44,20 @@ class Creation_form{
                         <label for="tag" class="CENTER">Tag</label>
 
                         <div id="form_tag">
-                            <select name="tag">
+
+                            <input type="text" class="form-tag-input" id="tag_1" name="tag_1" list="list_tag_1">
+                            <datalist id="list_tag_1">
                                 <?php
                                 $m = new RecetteBD();
                                 $query = $m->getAllTag();
+
                                 for ($i = 0; $i < sizeof($query); $i++) {
                                     ?>
                                     <option value="<?php echo $query[$i]->nom_tag; ?>">
                                         <?php echo $query[$i]->nom_tag; ?>
                                     </option>
                                 <?php } ?>
-                            </select>
-                            <input type="text" class="form-tag-input" id="tag_1" name="tag_1">
-
+                            </datalist>
 
                         </div>
 
@@ -65,7 +66,9 @@ class Creation_form{
                 <label for="ingredient" class="CENTER">Ingrédient</label>
 
                 <div id="form_ingredient">
-                    <select name="ingredient">
+
+                    <input type="text" class="form-ingredient-input" id="ingredient_1" name="ingredient_1" list="list_ingredient_1">
+                    <datalist id="list_ingredient_1">
                         <?php
                         $m = new RecetteBD();
                         $query = $m->getAllIngredient();
@@ -76,8 +79,7 @@ class Creation_form{
                                 <?php echo $query[$i]->nom_ing; ?>
                             </option>
                         <?php } ?>
-                    </select>
-                    <input type="text" class="form-ingredient-input" id="ingredient_1" name="ingredient_1">
+                    </datalist>
                     <input type="file" class="img_ing_add" id="image_ing_1" name="image_ing_1" accept="image/png, image/gif, image/jpeg">
                 </div>
                     </div>

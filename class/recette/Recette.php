@@ -87,10 +87,12 @@ class Recette extends RecetteBD
             $i = 0;
             foreach($tag_base as $res){
                 $tab_name[$i] = $res->nom_tag;
+
                 $i++;
             }
 
             foreach ($alltag as $tag){
+
                 $exists = array_search($tag, $tab_name);
                 $nb_tag_rec = count($this->getAll_num_Tag_recette());
                 if ($exists != false){
