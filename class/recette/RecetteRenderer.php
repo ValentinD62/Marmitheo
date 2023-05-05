@@ -4,6 +4,8 @@ namespace recette;
 
 class RecetteRenderer{
 
+    //Fonction pour afficher la fonction minimaliste des informations
+    //d'une recette.
     public function getHTMLForSearch($recette): void {?>
         <div class="recette">
             <div id="img-recherche">
@@ -13,18 +15,37 @@ class RecetteRenderer{
         </div>
     <?php }
 
+
+    //Fonction pour afficher toutes les informations d'une recette.
     public function getAllHTML($recette): void{ ?>
-        <div class="recette-allHtml">
-            <div id="img-allHtml">
-            <img src= "../img/<?= $recette->image?>">
+        <div id="detail-Title"><?= $recette->name ?></div>
+
+        <div id="detail">
+            <div id = "detail-description"><?= $recette->description ?></div>
+
+            <div id="detail-img">
+                <img src= "../img/<?= $recette->image?>">
             </div>
-            <div id="nom-allHtml"><?= $recette->name ?></div>
-            <div id = "description-allHtml"><?= $recette->description ?></div>
-            <?php if ($recette->liste_tag != null): ?>
-                 <div id="tags_allHtml"><?php foreach ($recette->liste_tag as $tag): ?>
-                    <div id = "tag_recette"><?= $tag ?></div>
+
+        </div>
+
+        <div id = "detail-tag-ing">
+
+            <div id = "detail-tag">
+            <?php
+            if ($recette->liste_tag != null){
+                     foreach ($recette->liste_tag as $tag){
+                         echo $tag;
+                     }
+            }?>
+            </div>
+            <?php if ($recette->liste_ing != null): ?>
+                <div id="detail-ing">
+                    <?php foreach ($recette->liste_ing as $ing): ?>
+                        <div id = "ing_recette"><?= $ing[0]?></div>
+                        <img src= "../img/img_ingredient/<?=$ing[1]?>">
                     <?php endforeach; ?>
-                 </div>
+                </div>
             <?php endif ?>
         </div>
     <?php }

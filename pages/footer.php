@@ -1,5 +1,5 @@
 <footer>
 
-    Ceci a était réalisé par Valentin Decroix, Honoré Duportail et Florent Doyer.
+    Ceci a été réalisé par Valentin Decroix, Honoré Duportail et Florent Doier.
 
 </footer>
