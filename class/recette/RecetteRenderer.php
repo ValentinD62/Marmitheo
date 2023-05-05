@@ -14,18 +14,27 @@ class RecetteRenderer{
     <?php }
 
     public function getAllHTML($recette): void{ ?>
-        <div class="recette-allHtml">
-            <div id="img-allHtml">
-            <img src= "../img/<?= $recette->image?>">
+        <div id="detail-Title"><?= $recette->name ?></div>
+
+        <div id="detail">
+            <div id = "detail-description"><?= $recette->description ?></div>
+
+            <div id="detail-img">
+                <img src= "../img/<?= $recette->image?>">
             </div>
-            <div id="nom-allHtml"><?= $recette->name ?></div>
-            <div id = "description-allHtml"><?= $recette->description ?></div>
-            <?php if ($recette->liste_tag != null): ?>
-                 <div id="tags_allHtml"><?php foreach ($recette->liste_tag as $tag): ?>
-                    <div id = "tag_recette"><?= $tag ?></div>
-                    <?php endforeach; ?>
-                 </div>
-            <?php endif ?>
+
+        </div>
+
+        <div id = "detail-tag-ing">
+
+            <div id = "detail-tag">
+            <?php
+            if ($recette->liste_tag != null){
+                     foreach ($recette->liste_tag as $tag){
+                         echo $tag;
+                     }
+            }?>
+            </div>
             <?php if ($recette->liste_ing != null): ?>
                 <div id="ings_allHtml"><?php foreach ($recette->liste_ing as $ing): ?>
                         <div id = "ing_recette"><?= $ing[0]?></div>
