@@ -88,18 +88,17 @@ class Recette extends RecetteBD
         // ----------- Partie pour ajouter les tags à la recette. -----------------------
         if($alltag != null){
             $tag_base = $this->getAllTag();
-            $nb_recette_base = count($this->getAllRecette());
+            $nb_recette_base = max($this->getAll_num_Recette());
             $i = 0;
             foreach($tag_base as $res){
                 $tab_name[$i] = $res->nom_tag;
-
                 $i++;
             }
 
             foreach ($alltag as $tag){
 
                 $exists = array_search($tag, $tab_name);
-                $nb_tag_rec = count($this->getAll_num_Tag_recette());
+                $nb_tag_rec = max($this->getAll_num_Tag_recette());
                 if ($exists != false){
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                     $params = [
@@ -112,7 +111,7 @@ class Recette extends RecetteBD
 
                 else{
                     $this->addTagBD($tag);
-                    $nb_rec = count($this->getAllTag());
+                    $nb_rec = $this->getAll_num_Tag();
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec, fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                     $params = [
                         'tag_rec' => $nb_tag_rec + 1,
@@ -128,7 +127,7 @@ class Recette extends RecetteBD
 
         if($all_name_ing != null && $all_img_ing != null){
             $ing_base = $this->getAllIngredient();
-            $nb_recette_base = count($this->getAllRecette());
+            $nb_recette_base = max($this->getAll_num_Recette());
             $i = 0;
             foreach($ing_base as $ing){
                 $tab_ing_name[$i] = $ing->nom_ing;
@@ -138,7 +137,7 @@ class Recette extends RecetteBD
             $i = 0;
             foreach ($all_name_ing as $ing) {
                 $exists = array_search($ing, $tab_ing_name);
-                $nb_ing_rec = count($this->getAll_num_Ing_recette());
+                $nb_ing_rec = max($this->getAll_num_Ing_recette());
                 if ($exists != false) {
                     $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                     $params = [
@@ -161,7 +160,7 @@ class Recette extends RecetteBD
                         if (!$uploaded) die("FILE NOT UPLOADED");
                     } else echo "NO IMAGE !!!!";
                     $this->addIngBD($ing, $img_Ing_Name);
-                    $nb_rec = count($this->getAllIngredient());
+                    $nb_rec = max($this->getAll_num_Ing());
                     $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
                     $params = [
                         'id' => $nb_ing_rec + 1,

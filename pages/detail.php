@@ -3,6 +3,8 @@
 Autoloader::register();
 
 
+use recette\Recette;
+use recette\RecetteBD;
 use Template\Template;
 ?>
 
@@ -11,37 +13,19 @@ use Template\Template;
 <?php session_start() ;
 session_destroy(); ?>
 
-<div id="detail-Title">Le nom de la recette</div>
+<?php
+$id_recette = $_GET['id'];
+$recettesBD = new RecetteBD();
+$recette = new Recette();
+$recettesBD = $recettesBD->getRecetteById($id_recette);
+$liste_recette = $recette->AllRecette($recettesBD);
+$i = 0;
+foreach ($recettesBD as $recette){
+    $recette->getAllHTML($liste_recette[$i]);
+    $i++;
+}
 
-<div id="detail-all">
-<div id="detail">
-    <div id="detail-description">
-        aa aa aa aaa aaaaaaaa aaaaaaaaaaa aaa aaaaaaaaaaa aaa aa
-        aa aa aa aaa aaaaaaaa aaaaaaaaaaa aaa aaaaaaaaaaa aaa aa
-
-    </div>
-
-    <div id="detail-img">
-        <img src="../img/Chocolat_Matheo.jpg">
-
-    </div>
-
-</div>
-    <div id="detail-tag-ing">
-
-        <div id="detail-tag">
-
-        </div>
-
-        <div id="detail-ing">
-
-        </div>
-
-    </div>
-
-
-
-</div>
+?>
 
 
 

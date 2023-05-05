@@ -99,6 +99,18 @@ class RecetteBD
         return $results;
     }
 
+    public function getRecetteById($id): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT * FROM recette WHERE pk_num_rec =" . $id;
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        return $results;
+    }
+
     public function getAllTag(): array{
         // Préparation d'une requête simple
         $sql = "SELECT* FROM tag";
@@ -159,7 +171,43 @@ class RecetteBD
 
     public function getAll_num_Ing_recette(): array{
         // Préparation d'une requête simple
-        $sql = "SELECT pk_id FROM ing_recette";
+        $sql = "SELECT MAX(pk_id) FROM ing_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetch(PDO::FETCH_UNIQUE);
+        return $results;
+    }
+
+    public function getAll_num_Recette(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT pk_num_rec FROM recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    public function getAll_num_Tag(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT pk_num_tag FROM tag";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    public function getAll_num_Ing(): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT pk_num_ing FROM ingredient";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
