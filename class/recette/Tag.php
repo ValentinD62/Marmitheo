@@ -34,28 +34,25 @@ class Tag extends RecetteBD
         $this->exec($edition_tag, $params);
     }
 
-    //supprimer le Tag name dans la table Tag
-    public function deleteTag($name):void
+
+    //supprimer les lignes dans Tag_recette en lien avec le tag name.
+    public function deleteTagRecByTag($name):void
     {
         $name = htmlspecialchars($name);
-        $del_tag = 'DELETE FROM tag WHERE pk_num_tag = (SELECT pk_num_tag FROM recette WHERE nom_tag = :name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($del_tag, $params);
-
+        $del_tag_rec = "DELETE FROM tag_recette WHERE 'fk_num_tag' = (SELECT pk_num_tag FROM tag WHERE nom_tag = '" . $name. "' LIMIT 1 )";
+        $statement = $this->pdo->prepare($del_tag_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
-    //permet de supprimer toute les elements de tag_recette qui on pour tag name
-    public function deleteRecTag($name):void
-    {
+    //supprimer les lignes dans tag en lien avec le tag name.
+    public function deleteTag($name): void{
         $name = htmlspecialchars($name);
-        $del_rec_tag = 'DELETE FROM tag_recette WHERE fk_num_tag = (SELECT pk_num_tag FROM tag WHERE nom_rec = :name)';
-        $params = [
-            'name' => htmlspecialchars($name)
-        ];
-        $this->exec($del_rec_tag, $params);
+        $del_tag = "DELETE FROM tag WHERE nom_tag = '" . $name . "' LIMIT 1";
+
+        $statement = $this->pdo->prepare($del_tag);
+
+        $this->deleteTagRecByTag($name);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
     }
-
-
 }

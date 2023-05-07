@@ -2,6 +2,7 @@
 
 Autoloader::register();
 
+use recette\Tag;
 use Template\Template;
 use form\Creation_form;
 use form\Destruction_form;
@@ -41,6 +42,7 @@ use recette\RecetteRenderer;
 
 $n_recette = new RecetteBD();
 $rec = new Recette();
+$tag = new Tag();
 $logger = new Creation_form();
 $des = new Destruction_form();
 $edition = new Edition_Form();
@@ -83,7 +85,12 @@ else{
     $des->generateDeleteRecetteForm();
 }
 
-if(empty($_POST['nom_tag'])){
+if(empty($_POST['delete_tag'])){
+    $des->generateDeleteTagForm();
+}
+else{
+    echo $_POST['delete_tag'];
+    $tag->deleteTag($_POST['delete_tag']);
     $des->generateDeleteTagForm();
 }
 
