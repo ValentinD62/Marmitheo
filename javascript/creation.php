@@ -1,7 +1,8 @@
 <?php
 
 use recette\RecetteBD;
-
+//Atag = tableau de tout les tags present dans la base de donnees
+//Aing = tableau de tout les ingredients present dans la base de donnees
 $m = new RecetteBD();
 $Atag = $m->getAllTag();
 $Aing = $m->getAllIngredient();
@@ -11,7 +12,7 @@ $Aing = $m->getAllIngredient();
 
 
 <script>
-
+//fonction qui permet de gerer les inputs des formulaires.
 document.addEventListener('DOMContentLoaded', function (){
     // récupération du formulaire
     let form_tag = document.getElementById("form_tag");
@@ -28,13 +29,28 @@ document.addEventListener('DOMContentLoaded', function (){
                 let vrai_i = i+1;
                 let data = document.createElement("datalist");
                 data.id = "list_tag_" + vrai_i;
+                let l = 0;
+                for (let input of inputs){
+                    if (input.type === "text"){
+                        l = l+1;
+                    }
+                }
+                let num = 0;
                 <?php
-
                 for ($i = 0; $i < sizeof($Atag); $i++) {?>
+                num = 0;
+                //ne pas afficher les tags deja selectionner
+                for(let k = 0; k < l; k++){
+                    if("<?php echo $Atag[$i]->nom_tag; ?>" == inputs[k].value){
+                        num = num + 1;
+                    }}
+
+                if(num == 0) {
                     let opt_<?= $i ?> = document.createElement("option");
                     opt_<?= $i ?>.value = "<?php echo $Atag[$i]->nom_tag; ?>";
                     opt_<?= $i ?>.innerHTML = "<?php echo $Atag[$i]->nom_tag; ?>";
                     data.appendChild(opt_<?= $i ?>);
+                }
                 <?php }?>
 
 
@@ -89,11 +105,21 @@ document.addEventListener('DOMContentLoaded', function (){
                 let data = document.createElement("datalist");
                 data.id = "list_ingredient_" + vrai_i;
 
+                let num = 0;
                 <?php for ($i = 0; $i < sizeof($Aing); $i++) {?>
-                    let opt_<?= $i ?>= document.createElement("option");
-                    opt_<?= $i ?>.value = "<?php echo $Aing[$i]->nom_ing; ?>";
-                    opt_<?= $i ?>.innerHTML = "<?php echo $Aing[$i]->nom_ing; ?>";
-                    data.appendChild(opt_<?= $i ?>);
+
+                    num = 0;
+                    for(let k = 0; k < l; k++){
+                        if(<?php echo $Aing[$i]->nom_ing; ?> == inputs[k].value){
+                            num = num + 1;
+                    }}
+                    if(num == 0){
+                        let opt_<?= $i ?>= document.createElement("option");
+                        opt_<?= $i ?>.value = "<?php echo $Aing[$i]->nom_ing; ?>";
+                        opt_<?= $i ?>.innerHTML = "<?php echo $Aing[$i]->nom_ing; ?>";
+                        data.appendChild(opt_<?= $i ?>);
+                    }
+
                 <?php }?>
 
 
