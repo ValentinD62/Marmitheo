@@ -5,6 +5,7 @@ Autoloader::register();
 
 use recette\Recette;
 use recette\RecetteBD;
+use recette\RecetteRenderer;
 use Template\Template;
 ?>
 
@@ -15,21 +16,17 @@ session_destroy(); ?>
 
 <?php
 $id_recette = $_GET['id'];
+$recette_R = new RecetteRenderer();
 $recettesBD = new RecetteBD();
 $recette = new Recette();
 $recettesBD = $recettesBD->getRecetteById($id_recette);
 $liste_recette = $recette->AllRecette($recettesBD);
-$i = 0;
-foreach ($recettesBD as $recette){
-    $recette->getAllHTML($liste_recette[$i]);
-    $i++;
-}
+
+$recette_R->getAllHTML($liste_recette[0]);
 
 ?>
-
 
 
 <?php $content = ob_get_clean();
 Template::render($content);
 ?>
-
