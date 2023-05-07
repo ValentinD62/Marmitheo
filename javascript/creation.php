@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function (){
                 <?php for ($i = 0; $i < sizeof($Aing); $i++) {?>
 
                     num = 0;
-                    for(let k = 0; k < l; k++){
-                        if(<?php echo $Aing[$i]->nom_ing; ?> == inputs[k].value){
+                    for(let k = 0; k < i; k++){
+                        if("<?php echo $Aing[$i]->nom_ing; ?>" == inputs[k].value){
                             num = num + 1;
                     }}
                     if(num == 0){
@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function (){
                     }
 
                 <?php }?>
+
 
 
                 let inp = document.createElement("input");
