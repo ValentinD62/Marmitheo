@@ -432,15 +432,25 @@
         grid-column: span 1;
     }
 
-
-    .login-btn:nth-last-child(1):nth-child(even) {
+    .mid{
         grid-column: 2;
+
     }
+
+    #back{
+        grid-column: 3;
+
+    }
+
+
 
     .btn{
         margin-left: 30%;
         border-radius: 15px;
     }
+
+
+
 
     .bt1{
         border-radius: 15px;

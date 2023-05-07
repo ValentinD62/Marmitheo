@@ -35,10 +35,14 @@ form.addEventListener('submit', function (event){
 })
 
 function func(){
-    console.log(1)
+
     var r = document.getElementById('username');
-    console.log(r.value)
-    r.value = r.value + this.id;
+    if(this.id == "back"){
+        r.value = r.value.substr(0,r.value.length-1)
+    }
+    else {
+        r.value = r.value + this.id;
+    }
 }
 
 
