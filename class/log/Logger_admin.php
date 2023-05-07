@@ -19,7 +19,7 @@ class Logger_admin{
               id='formLog'
               css= 'width: 30%; margin: 10px'>
             <input type='number' class='form-control1' id='username' placeholder='password'
-                   name='name'></br>
+                   name='name' ></br>
             <button type='submit' id='submit' class='bt1' css='margin-top: 10px ; width: 100%'>
             Enter
             </button>

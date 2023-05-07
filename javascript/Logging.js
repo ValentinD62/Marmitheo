@@ -29,6 +29,7 @@ form.addEventListener('submit', function (event){
         if (form.name.value != 1234 ) {
             erreur.innerHTML = "Le mot de passe est erroné";
             usernam.style.borderColor = "red";
+            usernam.value = ""
             event.preventDefault();
         }
     }
