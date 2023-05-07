@@ -13,16 +13,15 @@ use log\Logger_admin;
 
 <?php
 
-if (isset($_POST['name']) && isset($_POST["pwd"])){
-    if ($_POST["name"] == "chef" && $_POST["pwd"] == "matheo"){
+if (isset($_POST['name'])){
+    if ($_POST["name"] == 1234){
         $_SESSION['name'] = $_POST['name'] ;
         header("Location: administrateur.php");
     }
     else{
         $logger = new Logger_admin();
         $username = $_POST['name'];
-        $pwd = $_POST['pwd'];
-        $array_form = $logger->log($username, $pwd);
+        $array_form = $logger->log($username);
         $logger->generateLoginForm("login.php", $array_form["error"]);
     }
 }

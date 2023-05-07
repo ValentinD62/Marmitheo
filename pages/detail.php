@@ -3,6 +3,9 @@
 Autoloader::register();
 
 
+use recette\Recette;
+use recette\RecetteBD;
+use recette\RecetteRenderer;
 use Template\Template;
 ?>
 
@@ -11,41 +14,19 @@ use Template\Template;
 <?php session_start() ;
 session_destroy(); ?>
 
-<div id="detail-Title">Le nom de la recette</div>
+<?php
+$id_recette = $_GET['id'];
+$recette_R = new RecetteRenderer();
+$recettesBD = new RecetteBD();
+$recette = new Recette();
+$recettesBD = $recettesBD->getRecetteById($id_recette);
+$liste_recette = $recette->AllRecette($recettesBD);
 
-<div id="detail-all">
-<div id="detail">
-    <div id="detail-description">
-        aa aa aa aaa aaaaaaaa aaaaaaaaaaa aaa aaaaaaaaaaa aaa aa
-        aa aa aa aaa aaaaaaaa aaaaaaaaaaa aaa aaaaaaaaaaa aaa aa
+$recette_R->getAllHTML($liste_recette[0]);
 
-    </div>
-
-    <div id="detail-img">
-        <img src="../img/Chocolat_Matheo.jpg">
-
-    </div>
-
-</div>
-    <div id="detail-tag-ing">
-
-        <div id="detail-tag">
-
-        </div>
-
-        <div id="detail-ing">
-
-        </div>
-
-    </div>
-
-
-
-</div>
-
+?>
 
 
 <?php $content = ob_get_clean();
 Template::render($content);
 ?>
-
