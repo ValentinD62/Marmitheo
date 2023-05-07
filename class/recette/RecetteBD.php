@@ -157,19 +157,19 @@ class RecetteBD
         return $results;
     }
 
-    public function getAll_num_Tag_recette(): array{
+    public function getMax_num_Tag_recette(): int{
         // Préparation d'une requête simple
-        $sql = "SELECT pk_tag_rec FROM tag_recette";
+        $sql = "SELECT MAX(pk_tag_rec) FROM tag_recette";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
+        $results = $statement->fetch(PDO::FETCH_UNIQUE);
+        return $results[0];
     }
 
-    public function getAll_num_Ing_recette(): array{
+    public function getMax_num_Ing_recette(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_id) FROM ing_recette";
         $statement = $this->pdo->prepare($sql);
@@ -178,43 +178,43 @@ class RecetteBD
 
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
         $results = $statement->fetch(PDO::FETCH_UNIQUE);
-        return $results;
+        return $results[0];
     }
 
-    public function getAll_num_Recette(): array{
+    public function getMax_num_Recette(): int{
         // Préparation d'une requête simple
-        $sql = "SELECT pk_num_rec FROM recette";
+        $sql = "SELECT MAX(pk_num_rec) FROM recette";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
+        $results = $statement->fetch(PDO::FETCH_UNIQUE);
+        return $results[0];
     }
 
-    public function getAll_num_Tag(): array{
+    public function getMax_num_Tag(): int{
         // Préparation d'une requête simple
-        $sql = "SELECT pk_num_tag FROM tag";
+        $sql = "SELECT MAX(pk_num_tag) FROM tag";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
+        $results = $statement->fetch(PDO::FETCH_UNIQUE);
+        return $results[0];
     }
 
-    public function getAll_num_Ing(): array{
+    public function getMax_num_Ing(): int{
         // Préparation d'une requête simple
-        $sql = "SELECT pk_num_ing FROM ingredient";
+        $sql = "SELECT MAX(pk_num_ing) FROM ingrédient";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
+        $results = $statement->fetch(PDO::FETCH_UNIQUE);
+        return $results[0];
     }
 
     //return tout les elements de la table ing_recette
