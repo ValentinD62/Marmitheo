@@ -49,12 +49,17 @@
     #header-a-log{
         margin-top: 0.5%;
         margin-left: 18%;
+        margin-right: 2%;
     }
 
     #main-content{
         width: 100%;
         height: 70% ;
     }
+
+
+
+
 
 
     footer{
@@ -349,12 +354,13 @@
     #login-form{
         display: flex;
         flex-direction: column;
-        padding-left: 9%;
+
         height: 30%;
         padding-top: 5%;
         padding-bottom: 5%;
         margin-top: 5%;
         margin-left: 27%;
+        margin-bottom: 5%;
         width: 35%;
         border: 1px solid  rgb(0,0,0,0.2);
         font-family: 'Alkatra', cursive;
@@ -363,6 +369,11 @@
         box-shadow: 8px 8px 12px #FFD4CB;
 
     }
+
+
+
+
+
 
     input::placeholder {
         font-family: 'Alkatra', cursive;
@@ -387,15 +398,63 @@
         border-radius: 10px;
     }
 
+    .form-control1{
+
+        border-radius: 10px;
+        height: 30px;
+        margin-right: 15%;
+    }
+
+    #text-login{
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        place-self: center;
+        background-color: 	#FFECE8;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+    #button-login {
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-gap: 15px;
+        justify-content: center;
+        margin-top: 5%;
+        grid-column: span 1;
+    }
+
+
+    .login-btn:nth-last-child(1):nth-child(even) {
+        grid-column: 2;
+    }
+
     .btn{
         margin-left: 30%;
         border-radius: 15px;
     }
 
+    .bt1{
+        border-radius: 15px;
+        height: 35px;
+        width: 50px;
+        background-color: 	#FFECE8;
+    }
+
     .error{
-        padding-left: 18%;
+        display: flex;
+        justify-content: center;
         font-size: x-large;
         color: darkred;
+        margin-bottom: 5%   ;
     }
 
     #carrousel{
@@ -499,6 +558,13 @@
         border-radius: 25px;
         box-shadow: 2px 2px 3px 2px #aaaaaa;
 
+    }
+
+    #formLog{
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+        justify-content: center;
     }
 
     .form-ingredient-input,.form-tag-input{

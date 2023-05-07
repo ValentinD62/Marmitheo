@@ -13,44 +13,53 @@ class Logger_admin{
 <div id = 'login-form'>
         <div id = 'text-login'>Connexion pour mode admin </div></br>
          <div class ='error' id='erreur'> $erreur </div>
+
         <form method='post'
               action = $action
               id='formLog'
               css= 'width: 30%; margin: 10px'>
-            <input type='text' class='form-control' id='username' placeholder='username'
+            <input type='number' class='form-control1' id='username' placeholder='password'
                    name='name'></br>
-            <input type='password' class='form-control' id='password' placeholder='password'
-                   name='pwd'></br>
-            <button type='submit' id='submit' class='btn' css='margin-top: 10px ; width: 100%'>
-            Login
+            <button type='submit' id='submit' class='bt1' css='margin-top: 10px ; width: 100%'>
+            Enter
             </button>
-        </form>
+    </form>
+        
+        <div id='button-login'>
+         <button id='1' class='login-btn'>1</button>
+         <button id='2' class='login-btn'>2</button>
+         <button id='3' class='login-btn'>3</button>
+         <button id='4' class='login-btn'>4</button>
+         <button id='5' class='login-btn'>5</button>
+         <button id='6' class='login-btn'>6</button>
+         <button id='7' class='login-btn'>7</button>
+         <button id='8' class='login-btn'>8</button>
+         <button id='9' class='login-btn'>9</button>
+         <button id='0' class='login-btn'>0</button>
+         <button id='0' class='login-btn'>0</button>
+         </div>
     </div>";
     }
 
-    public function log(string $username, string $password) : array{
+    public function log(string $username) : array{
         $array = array(
             "granted" => false,
             "nick" => null,
             "error" => null
         );
         if (empty($username)){
-            $array["error"] = "username is empty";
+            $array["error"] = "password  is empty";
         }
         else{
-            if (empty($password)){
-                $array["error"] = "password is empty";
+
+            if ($username == 1234){
+                $array["granted"] = true;
+                $array["nick"] = "CHEF";
             }
             else{
-                if ($password == "matheo" && $username == "chef"){
-                    $array["granted"] = true;
-                    $array["nick"] = "CHEF";
-                }
-                else{
-                    $array["error"] = "authentification failed";
-                }
-            }
+                $array["error"] = "authentification failed";}
         }
+
         return $array;
     }
 
