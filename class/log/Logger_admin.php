@@ -41,7 +41,7 @@ class Logger_admin{
     </div>";
     }
 
-    public function log(string $username) : array{
+    public function log(string $username) : array{ //Fonction qui vérifie le bon mot de passe pour pouvoir transmettre les informations.
         $array = array(
             "granted" => false,
             "nick" => null,

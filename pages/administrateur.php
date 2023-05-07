@@ -12,10 +12,6 @@ use form\Edition_Form;
 use recette\RecetteRenderer;
 
 
-
-
-
-
 ?>
 
 <?php ob_start() ?>
