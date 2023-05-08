@@ -85,8 +85,9 @@ else{
                 $i++;
             }
             $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
-            $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing);
-            $logger->generateCreationForm();
+            $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing); ?>
+            <div id = "bravo" > Recette ajoutée dans la base de données </div>
+            <?php $logger->generateCreationForm();
         }
     }
 }
