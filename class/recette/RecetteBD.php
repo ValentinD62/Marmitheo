@@ -8,7 +8,7 @@ class RecetteBD
     public const UPLOAD_DIR = "../img/";
 
     public const UPLOAD_DIR_ING = "../img/img_ingredient/";
-    public function __construct()
+    public function __construct() // Constructeur pour pouvoir lier le php avec la BDD
     {
         // Informations sur la BDD et le serveur qui la contient
         $db_name = "Projet_3" ;
@@ -63,6 +63,7 @@ class RecetteBD
         $this->exec($query, $params);
     }
 
+    //permet d'ajouter des ingrédients dans la base de données
     public function addIngBD($name, $image):void
     {
         $name = htmlspecialchars($name);
@@ -87,18 +88,20 @@ class RecetteBD
         return $results;
     }
 
-    public function getRecetteByName($name): array{
+    //Fonction qui récupère les fonctions correspondant à (ou contenant) $name.
+    public function getRecetteByName($name): array{ //
         // Préparation d'une requête simple
             $sql = "SELECT * FROM recette WHERE nom_rec like '%" . $name . "%'";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump($statement->errorInfo()));
 
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        // Récupération de la réponse sous forme d'un tableau d'instances de recette
         $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
         return $results;
     }
 
+    //Fonction qui récupère la recette correspondant à l'id dans la BDD.
     public function getRecetteById($id): array{
         // Préparation d'une requête simple
         $sql = "SELECT * FROM recette WHERE pk_num_rec =" . $id;
@@ -106,11 +109,47 @@ class RecetteBD
         // Exécution de la requête
         $statement->execute() or die(var_dump($statement->errorInfo()));
 
+        // Récupération de la réponse sous forme d'un tableau d'instances de recette
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        return $results;
+    }
+
+    //Fonction qui récupère les recettes ayant le tag $name
+    public function getRecetteByTag($name): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT * FROM recette INNER JOIN tag_recette on recette.pk_num_rec = tag_recette.fk_num_rec INNER JOIN tag on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag.pk_num_tag = (SELECT pk_num_tag FROM tag WHERE nom_tag ='" . $name . "')";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
         // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
         $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
         return $results;
     }
 
+    //Fonction qui récupère le nom des tags liés à la recette avec l'id $num_recette
+    public function getTagofRecette($num_recette): array{
+        $sql = "SELECT nom_tag FROM tag INNER JOIN tag_recette on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag_recette.fk_num_rec = " . $num_recette;
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    //Fonction qui récupère les informations des ingrédients liés à la recette avec l'id $num_recette
+    public function getIngofRecette($num_recette): array{
+        $sql = "SELECT nom_ing, image FROM ingrédient INNER JOIN ing_recette on ingrédient.pk_num_ing = ing_recette.fk_num_ing WHERE ing_recette.fk_num_rec = " . $num_recette;
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    //Fonction qui récupère tous les tags de la BDD.
     public function getAllTag(): array{
         // Préparation d'une requête simple
         $sql = "SELECT* FROM tag";
@@ -123,6 +162,7 @@ class RecetteBD
         return $results;
     }
 
+    //Fonction qui récupère tous les ingrédients de la BDD.
     public function getAllIngredient(): array{
 
         // Préparation d'une requête simple
@@ -137,26 +177,20 @@ class RecetteBD
 
     }
 
-    public function getTagofRecette($num_recette): array{
-        $sql = "SELECT nom_tag FROM tag INNER JOIN tag_recette on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag_recette.fk_num_rec = " . $num_recette;
+    //Fonction qui récupère les informations des tags ayant le nom $name.
+    public function getTagbyName($name): array{
+        // Préparation d'une requête simple
+        $sql = "SELECT * FROM tag WHERE nom_tag = '" . $name . "'";
         $statement = $this->pdo->prepare($sql);
         // Exécution de la requête
         $statement->execute() or die(var_dump(statement->errorInfo()));
 
+        // Récupération de la réponse sous forme d'un tableau d'instances de tag
         $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
     }
 
-    public function getIngofRecette($num_recette): array{
-        $sql = "SELECT nom_ing, image FROM ingrédient INNER JOIN ing_recette on ingrédient.pk_num_ing = ing_recette.fk_num_ing WHERE ing_recette.fk_num_rec = " . $num_recette;
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
-
+    //récupère le numéro du dernier tag_recette créé.
     public function getMax_num_Tag_recette(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_tag_rec) FROM tag_recette";
@@ -169,6 +203,7 @@ class RecetteBD
         return $results[0];
     }
 
+    //récupère le numéro du dernier ing_recette créé.
     public function getMax_num_Ing_recette(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_id) FROM ing_recette";
@@ -181,6 +216,7 @@ class RecetteBD
         return $results[0];
     }
 
+    //récupère le numéro de la dernière recette créé.
     public function getMax_num_Recette(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_num_rec) FROM recette";
@@ -193,6 +229,7 @@ class RecetteBD
         return $results[0];
     }
 
+    //récupère le numéro du dernier tag créé.
     public function getMax_num_Tag(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_num_tag) FROM tag";
@@ -205,6 +242,7 @@ class RecetteBD
         return $results[0];
     }
 
+    //récupère le numéro du dernier ingrédient créé.
     public function getMax_num_Ing(): int{
         // Préparation d'une requête simple
         $sql = "SELECT MAX(pk_num_ing) FROM ingrédient";

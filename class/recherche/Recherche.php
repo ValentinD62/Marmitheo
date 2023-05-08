@@ -23,15 +23,18 @@ class Recherche{
             </section> <?php
         }
         else{
-            $liste_recetteBD = $recettesBD->getRecetteByName($recherche);
-            if ($liste_recetteBD == null): ?>
+            $liste_recetteBD = $recettesBD->getRecetteByName($recherche); // Récupération des recettes par nom
+            $liste_recetteBD_tag = $recettesBD->getRecetteByTag($recherche); // Récupération des recettes par nom de tag.
+            $liste_recette_finale = array_merge($liste_recetteBD, $liste_recetteBD_tag);
+
+            if ($liste_recette_finale == null): ?>
                 <div id = "nothing"> Nothing Here </div>
             <?php
             else :
-                $liste_recette = $recettes->AllRecette($liste_recetteBD);
+                $liste_recette = $recettes->AllRecette($liste_recette_finale);
                 $i = 0;?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
-                <?php foreach ($liste_recetteBD as $recette){
+                <?php foreach ($liste_recette_finale as $recette){
                     echo $recette->getHTMLForSearch($liste_recette[$i]);
                     $i++;
                 } ?>
