@@ -58,6 +58,7 @@ else{
     }
     if (!$bon){?>
         <div id = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
+        $logger->generateCreationForm();
     }
     else{
         if(empty($_FILES['image']['name'])){?>
