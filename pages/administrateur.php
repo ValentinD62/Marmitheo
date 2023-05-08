@@ -49,32 +49,44 @@ if (empty($_POST['name'])){
     $logger->generateCreationForm();
 }
 else{
-    if(empty($_FILES['image']['name'])){?>
-        <div id = "error_admin"><?= "Il manque la photo" ?> </div> <?php
-        $logger->generateCreationForm();
+    $all_recette = $n_recette->getAllRecette();
+    $bon = true;
+    foreach($all_recette as $recette){
+        if ($recette->nom_rec == $_POST['name']){
+            $bon = false;
+        }
+    }
+    if (!$bon){?>
+        <div id = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
     }
     else{
-        if (empty($_POST['description'])){?>
-            <div id = "error_admin"> <?= "Veuillez mettre une description svp" ?></div> <?php
+        if(empty($_FILES['image']['name'])){?>
+            <div id = "error_admin"><?= "Il manque la photo" ?> </div> <?php
             $logger->generateCreationForm();
         }
-        $i = 1;
-        $all_tag = array();
-        while (!empty($_POST["tag_" . $i])){
-            $all_tag[$i] = $_POST["tag_" . $i];
-            $i ++;
+        else{
+            if (empty($_POST['description'])){?>
+                <div id = "error_admin"> <?= "Veuillez mettre une description svp" ?></div> <?php
+                $logger->generateCreationForm();
+            }
+            $i = 1;
+            $all_tag = array();
+            while (!empty($_POST["tag_" . $i])){
+                $all_tag[$i] = $_POST["tag_" . $i];
+                $i ++;
+            }
+            $i = 1;
+            $all_name_ing = array();
+            $all_img_ing = array();
+            while(!empty($_POST["ingredient_" . $i]) && !empty($_FILES["image_ing_" . $i])){
+                $all_name_ing[$i - 1] = $_POST["ingredient_" . $i];
+                $all_img_ing[$i - 1] = $_FILES["image_ing_" . $i];
+                $i++;
+            }
+            $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
+            $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing);
+            $logger->generateCreationForm();
         }
-        $i = 1;
-        $all_name_ing = array();
-        $all_img_ing = array();
-        while(!empty($_POST["ingredient_" . $i]) && !empty($_FILES["image_ing_" . $i])){
-            $all_name_ing[$i - 1] = $_POST["ingredient_" . $i];
-            $all_img_ing[$i - 1] = $_FILES["image_ing_" . $i];
-            $i++;
-        }
-        $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
-        $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing);
-        $logger->generateCreationForm();
     }
 }
 ?>

@@ -21,6 +21,21 @@ class Tag extends RecetteBD
         $this->num_tag = $num_tag;
     }
 
+    //Fonction qui permet de convertir un array de classe reçu par le PDO en classe Tag.
+    public function Convertir_tag($tab_tag) :array{
+        $tab_classe_tag = array();
+        $i = 0;
+        foreach ($tab_tag as $tag){
+            $n_tag = new Tag();
+            $n_tag->setNum_tag($tag->pk_num_tag);
+            $n_tag->setName($tag->nom_tag);
+            $tab_classe_tag[$i] = $n_tag;
+            $i++;
+        }
+
+        return $tab_classe_tag;
+    }
+
     //permet de modifier le tag
     public function editionTag($ancien_nom, $nouveau_nom):void
     {

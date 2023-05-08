@@ -175,13 +175,16 @@ class Recette extends RecetteBD
         }
     }
 
-    public function Allrecette($tab_get_allrecette): array{
+    //Fonction qui permet de convertir un array de classe reçu par le PDO en classe Recette.
+    public function Convertir_recette($tab_get_allrecette): array{
         $i = 0;
         $tab_allrecette = array();
         foreach ($tab_get_allrecette as $recette){
-            $tab_tag = $this->getTagofRecette($recette->pk_num_rec);
-            $tab_ing = $this->getIngofRecette($recette->pk_num_rec);
+            $tab_tag = $this->getTagofRecette($recette->pk_num_rec); //Liste des tags_recette de la recette
+            $tab_ing = $this->getIngofRecette($recette->pk_num_rec); //Liste des ing_recette de la recette
             $n_recette = new Recette();
+
+            //Set des différentes informations.
             $n_recette->setId($recette->pk_num_rec);
             $n_recette->setName($recette->nom_rec);
             $n_recette->setImage($recette->image_rec);

@@ -4,16 +4,31 @@ Autoloader::register();
 
 
 use Template\Template;
+use recherche\RechercheAvancee;
 
-ob_start()  ?>
+ob_start() ?>
 
+
+<?php
+$recherche_a = new RechercheAvancee();
+?>
 <div id = "input_recherche_avancée">
-
+    <form method='post' action = 'recherche_avancee.php' id="form-rech" >
+        <input type="text" id="recherche_avancee" name="recherche_avancee" placeholder="Cherchez une recette, un tag...">
+    </form>
 </div>
 
-<div id = "liste-tags">
+<div id = "liste-avancee">
+    <div id = "liste_tag">
+        <?php
+            $recherche_a->afficher_liste_tag();
+        ?>
+    </div>
+    <div id = "liste_ing">
 
+    </div>
 </div>
+
 
 <div id = "resultat_recherche_avancée">
 
