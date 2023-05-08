@@ -51,7 +51,7 @@ if (empty($_POST['name'])){
 else{
     $all_recette = $n_recette->getAllRecette();
     $bon = true;
-    foreach($all_recette as $recette){
+    foreach($all_recette as $recette){ //Vérification pour voir si le nom de la recette est déjà dans la base de données.
         if ($recette->nom_rec == $_POST['name']){
             $bon = false;
         }
