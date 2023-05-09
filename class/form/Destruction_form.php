@@ -9,7 +9,7 @@ class Destruction_form{
     {
         ?>
         <div class="General">
-        <div class="Suppression">Supprimer une recette :</div>
+        <div class="Suppression" id="sup-menu">Supprimer une recette :</div>
 
         <form id="recette-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
@@ -43,7 +43,7 @@ class Destruction_form{
     {
         ?>
         <div class="General">
-        <div class="Suppression">Supprimer un Tag :</div>
+        <div class="Suppression" >Supprimer un Tag :</div>
         <form id="recette-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_tag class=" form-label">Nom du tag :</label>
