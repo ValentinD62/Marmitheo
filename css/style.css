@@ -914,7 +914,12 @@
         width: 50%;
     }
 
-
+    #liste-avancee{
+        width: 25%;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 
 
 
