@@ -102,7 +102,6 @@ if(empty($_POST['delete_name'])) {
     $des->generateDeleteRecetteForm();
 }
 else{
-    echo $_POST['delete_name'];
     $rec->deleteRecette($_POST['delete_name']);
     $des->generateDeleteRecetteForm();
 }
