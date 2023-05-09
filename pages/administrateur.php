@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "/../class/autoload.php";
+    <?php require_once __DIR__ . "/../class/autoload.php";
 
 Autoloader::register();
 
@@ -95,7 +95,7 @@ else{
 }
 ?>
 
-<img id="separateur" src="../img/separator.png">
+<img class="separateur" src="../img/separator.png">
 
 <?php
 if(empty($_POST['delete_name'])) {
@@ -106,7 +106,9 @@ else{
     $rec->deleteRecette($_POST['delete_name']);
     $des->generateDeleteRecetteForm();
 }
-
+?>
+<img class="separateur" src="../img/separator.png">
+<?php
 if(empty($_POST['delete_tag'])){
     $des->generateDeleteTagForm();
 }
