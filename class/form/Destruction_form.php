@@ -8,8 +8,8 @@ class Destruction_form{
     public function generateDeleteRecetteForm()
     {
         ?>
-        <div id="General">
-        <div id="Suppression">Supprimer une recette :</div>
+        <div class="General">
+        <div class="Suppression">Supprimer une recette :</div>
 
         <form id="recette-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
@@ -28,7 +28,7 @@ class Destruction_form{
                     <?php } ?>
                 </datalist>
             </div>
-            <div id="sub-supp">
+            <div class="sub-supp">
                 <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
                 <button type="reset" style="border-radius: 20px">Reset</button>
@@ -42,11 +42,12 @@ class Destruction_form{
     public function generateDeleteTagForm()
     {
         ?>
-        <div id="Delete_tag">Supprimer un Tag :</div>
+        <div class="General">
+        <div class="Suppression">Supprimer un Tag :</div>
         <form id="recette-form" method="POST" enctype="multipart/form-data">
-            <div class="mb-3 neon">
-                <label for="nom_tag class=" form-label">Nom Tag</label>
-                <input type="text" class="form-control" id="delete_tag" name="delete_tag" aria-describedby="name" list="list_tag">
+            <div class="should_center_this">
+                <label for="nom_tag class=" form-label">Nom du tag :</label>
+                <input type="text" class="form-control2" id="delete_tag" name="delete_tag" aria-describedby="name" list="list_tag">
                 <datalist id="list_tag">
                     <?php
                     $m = new RecetteBD();
@@ -60,12 +61,13 @@ class Destruction_form{
                     <?php } ?>
                 </datalist>
             </div>
-            <div style="display: flex">
-                <button type="submit" class="btn neon">Submit</button>
+            <div class="sub-supp">
+                <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
-                <button type="reset" class="btn neon">Reset</button>
+                <button type="reset" style="border-radius: 20px">Reset</button>
             </div>
         </form>
+            </div>
         <?php
 
     }
@@ -73,11 +75,12 @@ class Destruction_form{
     public function generateDeleteIngredientForm()
     {
         ?>
-        <div id="Delete_ing">Supprimer un Ingredient :</div>
+        <div class="General">
+        <div class="Suppression">Supprimer un Ingredient :</div>
         <form id="recette-form" method="POST" enctype="multipart/form-data">
-            <div class="mb-3 neon">
-                <label for="nom_ing class=" form-label">Nom Ingredient</label>
-                <input type="text" class="form-control" id="delete_ing" name="delete_ing" aria-describedby="name" list="list_ing">
+            <div class="should_center_this">
+                <label for="nom_ing class=" form-label">Nom de l'ingredient :</label>
+                <input type="text" class="form-control2" id="delete_ing" name="delete_ing" aria-describedby="name" list="list_ing">
                 <datalist id="list_ing">
                     <?php
                     $m = new RecetteBD();
@@ -91,12 +94,13 @@ class Destruction_form{
                     <?php } ?>
                 </datalist>
             </div>
-            <div style="display: flex">
-                <button type="submit" class="btn neon">Submit</button>
+            <div class="sub-supp">
+                <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
-                <button type="reset" class="btn neon">Reset</button>
+                <button type="reset" style="border-radius: 20px">Reset</button>
             </div>
         </form>
+            </div>
         <?php
 
     }

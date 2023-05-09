@@ -248,7 +248,8 @@
     #primary_nav_wrap1 ul ul li
     {
         float:none;
-        width:200px
+        width:100%;
+        border-radius: 0 20px 20px 0;
     }
 
     #primary_nav_wrap1 ul ul a
@@ -478,15 +479,15 @@
         margin-bottom: 10%;
     }
 
-    #General{
+    .General{
         background: linear-gradient(to top right, #FFD4CB 1%,white 80%) ;
         border-radius: 50px;
-        margin-top: 5%;
         margin-left: 22%;
         margin-right: 20%;
         padding-bottom: 3%;
         border: 1px solid black;
         height: 100%;
+        margin-bottom: 5%;
     }
 
     #carrousel{
@@ -561,7 +562,7 @@
         font-size: xx-large;
     }
 
-    #Suppression{
+    .Suppression{
         display: flex;
         justify-content: center;
         margin-top: 5%;
@@ -600,7 +601,7 @@
         margin-bottom: 20px;
     }
 
-    #sub-supp{
+    .sub-supp{
         display: flex;
         justify-content: center;
         margin-top: 25px;
@@ -816,7 +817,8 @@
     }
 
     #Delete_tag{
-        margin-left: 37%;
+        display: flex;
+        justify-content: center;
         margin-top: 5%;
         font-size: xx-large;
     }

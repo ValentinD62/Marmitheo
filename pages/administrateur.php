@@ -118,6 +118,11 @@ else{
     $des->generateDeleteTagForm();
 }
 
+?>
+    <img class="separateur" src="../img/separator.png">
+
+    <?php
+
 if(empty($_POST['delete_ing'])){
     $des->generateDeleteIngredientForm();
 }
