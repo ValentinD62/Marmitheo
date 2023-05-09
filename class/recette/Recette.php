@@ -97,8 +97,12 @@ class Recette extends RecetteBD
             }
 
             foreach ($alltag as $tag){
-
-                $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
+                if ($tab_name == null){
+                    $exists = false;
+                }
+                else {
+                    $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
+                }
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_rectte enregistré.
                 if ($exists != false){
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
