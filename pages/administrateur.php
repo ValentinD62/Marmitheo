@@ -3,6 +3,7 @@
 Autoloader::register();
 
 use recette\Tag;
+use recette\Ingredient;
 use Template\Template;
 use form\Creation_form;
 use form\Destruction_form;
@@ -39,6 +40,7 @@ use recette\RecetteRenderer;
 $n_recette = new RecetteBD();
 $rec = new Recette();
 $tag = new Tag();
+$ing = new Ingredient();
 $logger = new Creation_form();
 $des = new Destruction_form();
 $edition = new Edition_Form();
@@ -93,7 +95,7 @@ else{
 }
 ?>
 
-<img id="separateur" src="../img/separator.png">
+<img class="separateur" src="../img/separator.png">
 
 <?php
 if(empty($_POST['delete_name'])) {
@@ -104,13 +106,24 @@ else{
     $rec->deleteRecette($_POST['delete_name']);
     $des->generateDeleteRecetteForm();
 }
-
+?>
+<img class="separateur" src="../img/separator.png">
+<?php
 if(empty($_POST['delete_tag'])){
     $des->generateDeleteTagForm();
 }
 else{
     echo $_POST['delete_tag'];
     $tag->deleteTag($_POST['delete_tag']);
+    $des->generateDeleteTagForm();
+}
+
+if(empty($_POST['delete_ing'])){
+    $des->generateDeleteIngredientForm();
+}
+else{
+    echo $_POST['delete_ing'];
+    $ing->deleteIng($_POST['delete_ing']);
     $des->generateDeleteTagForm();
 }
 
