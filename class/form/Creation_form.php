@@ -14,7 +14,7 @@ class Creation_form{
 
 
 
-        <div id ="General">
+        <div class ="General">
             <div id = "Creation">Créez vos recettes : </div>
             <form id="game-form" method="POST" enctype="multipart/form-data">
                <div id="one">
