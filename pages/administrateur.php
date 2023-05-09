@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "/../class/autoload.php";
+    <?php require_once __DIR__ . "/../class/autoload.php";
 
 Autoloader::register();
 

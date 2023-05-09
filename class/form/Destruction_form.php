@@ -13,8 +13,8 @@ class Destruction_form{
 
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
-                <label for="nom_rec" class="form-label">Nom recette</label>
-                <input type="text" class="form-control" id="delete_name" name="delete_name" aria-describedby="name" list="list_rec">
+                <label for="nom_rec" class="form-label">Nom de la recette :</label>
+                <input type="text" class="form-control2" id="delete_name" name="delete_name" aria-describedby="name" list="list_rec">
                 <datalist id="list_rec">
                     <?php
                     $m = new RecetteBD();
@@ -28,10 +28,10 @@ class Destruction_form{
                     <?php } ?>
                 </datalist>
             </div>
-            <div style="display: flex">
-                <button type="submit" class="btn">Submit</button>
+            <div id="sub-supp">
+                <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
-                <button type="reset" class="btn">Reset</button>
+                <button type="reset" style="border-radius: 20px">Reset</button>
             </div>
 
         </form>

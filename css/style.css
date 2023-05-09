@@ -398,6 +398,11 @@
         border-radius: 10px;
     }
 
+    .form-control2{
+        margin-left: 5%;
+        border-radius: 10px;
+    }
+
     .form-control1{
 
         border-radius: 10px;
@@ -549,13 +554,15 @@
 
 
     #Creation{
-        margin-left: 37%;
+        display: flex;
+        justify-content: center;
         margin-top: 5%;
         font-size: xx-large;
     }
 
     #Suppression{
-        margin-left: 33%;
+        display: flex;
+        justify-content: center;
         margin-top: 5%;
         margin-bottom: 5%;
         font-size: xx-large;
@@ -579,12 +586,25 @@
 
     .form-ingredient-input,.form-tag-input{
         display: flex;
-        flex-direction: column;
         border-radius: 25px;
         box-shadow: 2px 2px 3px 2px #aaaaaa;
-        margin-left: 35%;
+        margin-bottom: 10px ;
+        width: 100px;
         margin-top: 2%;
     }
+
+    .should_center_this{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    #sub-supp{
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
 
     #description{
         display: flex;
@@ -627,6 +647,8 @@
         margin-left: -15%;
     }
 
+
+
     #descriadd{
         width: 100%;
         display: flex;
@@ -641,9 +663,9 @@
 
     }
     #ima{
-        margin-left: 20%;
-        margin-top: 5%;
         display: flex;
+        justify-content: center;
+        margin-top: 5%;
         flex-direction: row;
     }
 
@@ -681,15 +703,28 @@
 
     #ing-tag{
         display: flex;
+        justify-content: center;
         flex-direction: row;
     }
 
-    #alltag,#alling{
+    #alltag,#alling {
         display: flex;
         flex-direction: column;
-        width: 50%;
+        width: 40%;
     }
 
+    #form_ingredient{
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+
+    }
+
+     #form_tag{
+         display: flex;
+         justify-content: center;
+     }
     .CENTER{
         text-align: center;
     }
@@ -708,6 +743,8 @@
         flex-direction: column;
         margin-left: 25%;
     }
+
+
 
 
 
@@ -833,12 +870,10 @@
         display: flex;
         text-align: center;
         border-radius: 20px;
-        background-color: #FFE6E6;
         width: 40%;
         height: 500px;
         margin: auto;
         margin-right: 5%;
-        border: 1px solid black;
         position: relative;
         overflow: hidden;
 

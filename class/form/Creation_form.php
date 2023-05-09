@@ -81,6 +81,7 @@ class Creation_form{
                         <?php } ?>
                     </datalist>
                     <input type="file" class="img_ing_add" id="image_ing_1" name="image_ing_1" accept="image/png, image/gif, image/jpeg">
+                    
                 </div>
                     </div>
                 </div>
