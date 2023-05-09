@@ -10,13 +10,9 @@ ob_start() ?>
 
 
 <?php
-$recherche_a = new RechercheAvancee();
+    $recherche_a = new RechercheAvancee();
+    $recherche_a->Recherche_avancee_form();
 ?>
-<div id = "input_recherche_avancée">
-    <form method='post' action = 'recherche_avancee.php' id="form-rech" >
-        <input type="text" id="recherche_avancee" name="recherche_avancee" placeholder="Cherchez une recette, un tag...">
-    </form>
-</div>
 
 <div id = "liste-avancee">
     <div class = "titre_liste_avancee"> TAG :</div>

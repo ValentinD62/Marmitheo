@@ -20,7 +20,7 @@ $recette_R = new RecetteRenderer();
 $recettesBD = new RecetteBD();
 $recette = new Recette();
 $recettesBD = $recettesBD->getRecetteById($id_recette);
-$liste_recette = $recette->AllRecette($recettesBD);
+$liste_recette = $recette->Convertir_recette($recettesBD);
 
 $recette_R->getAllHTML($liste_recette[0]);
 

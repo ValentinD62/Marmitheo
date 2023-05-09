@@ -8,6 +8,14 @@ use recette\Tag;
 class RechercheAvancee{
 
 
+    public function Recherche_avancee_form(): void{?>
+        <div id = "input_recherche_avancée">
+            <form method='post' action = 'recherche_avancee.php' id="form-rech" >
+                <input type="text" id="recherche_avancee" name="recherche_avancee" placeholder="Cherchez une recette, un tag...">
+            </form>
+        </div>
+        <?php
+    }
     public function afficher_liste_tag(): void{
         $tags = new Tag();
         $recettesBD = new RecetteBD();
