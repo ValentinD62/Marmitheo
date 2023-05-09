@@ -83,6 +83,26 @@ class Ingredient extends RecetteBD
 
     }
 
+    //supprimer les lignes dans Tag_recette en lien avec le tag name.
+    public function deleteIngRecByIng($name):void
+    {
+        $name = htmlspecialchars($name);
+        $del_tag_rec = "DELETE FROM ing_recette WHERE 'fk_num_ing' = (SELECT pk_num_ing FROM ingrédient WHERE nom_ing = '" . $name. "' LIMIT 1 )";
+        $statement = $this->pdo->prepare($del_tag_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+    }
+
+    //supprimer les lignes dans tag en lien avec le tag name.
+    public function deleteIng($name): void{
+        $name = htmlspecialchars($name);
+        $del_tag = "DELETE FROM ingrédient WHERE nom_ing = '" . $name . "' LIMIT 1";
+
+        $statement = $this->pdo->prepare($del_tag);
+
+        $this->deleteIngRecByIng($name);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+    }
 
 
 }

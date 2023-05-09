@@ -11,7 +11,7 @@ class Destruction_form{
         <div id="General">
         <div id="Suppression">Supprimer une recette :</div>
 
-        <form id="game-form" method="POST" enctype="multipart/form-data">
+        <form id="recette-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_rec" class="form-label">Nom recette</label>
                 <input type="text" class="form-control" id="delete_name" name="delete_name" aria-describedby="name" list="list_rec">
@@ -43,7 +43,7 @@ class Destruction_form{
     {
         ?>
         <div id="Delete_tag">Supprimer un Tag :</div>
-        <form id="game-form" method="POST" enctype="multipart/form-data">
+        <form id="recette-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
                 <label for="nom_tag class=" form-label">Nom Tag</label>
                 <input type="text" class="form-control" id="delete_tag" name="delete_tag" aria-describedby="name" list="list_tag">
@@ -56,6 +56,37 @@ class Destruction_form{
                         ?>
                         <option value="<?php echo $query[$i]->nom_tag; ?>">
                             <?php echo $query[$i]->nom_tag; ?>
+                        </option>
+                    <?php } ?>
+                </datalist>
+            </div>
+            <div style="display: flex">
+                <button type="submit" class="btn neon">Submit</button>
+                <div style="width: 30px"></div>
+                <button type="reset" class="btn neon">Reset</button>
+            </div>
+        </form>
+        <?php
+
+    }
+
+    public function generateDeleteIngredientForm()
+    {
+        ?>
+        <div id="Delete_ing">Supprimer un Ingredient :</div>
+        <form id="recette-form" method="POST" enctype="multipart/form-data">
+            <div class="mb-3 neon">
+                <label for="nom_ing class=" form-label">Nom Ingredient</label>
+                <input type="text" class="form-control" id="delete_ing" name="delete_ing" aria-describedby="name" list="list_ing">
+                <datalist id="list_ing">
+                    <?php
+                    $m = new RecetteBD();
+                    $query = $m->getAllIngredient();
+
+                    for ($i = 0; $i < sizeof($query); $i++) {
+                        ?>
+                        <option value="<?php echo $query[$i]->nom_ing; ?>">
+                            <?php echo $query[$i]->nom_ing; ?>
                         </option>
                     <?php } ?>
                 </datalist>
