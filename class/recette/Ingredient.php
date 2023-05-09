@@ -104,5 +104,21 @@ class Ingredient extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
+    //Fonction qui permet de convertir un array de classe reçu par le PDO en classe Ingredient.
+    public function Convertir_Ingredient($tab_ing) :array{
+        $tab_classe_ing = array();
+        $i = 0;
+        foreach ($tab_ing as $ing){
+            $n_ing = new Ingredient();
+            $n_ing->setNum_ing($ing->pk_num_ing);
+            $n_ing->setImage($ing->image);
+            $n_ing->setName($ing->nom_ing);
+            $tab_classe_ing[$i] = $n_ing;
+            $i++;
+        }
+
+        return $tab_classe_ing;
+    }
+
 
 }

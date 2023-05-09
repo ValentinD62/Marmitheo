@@ -19,13 +19,17 @@ $recherche_a = new RechercheAvancee();
 </div>
 
 <div id = "liste-avancee">
+    <div class = "titre_liste_avancee"> TAG :</div>
     <div id = "liste_tag">
         <?php
             $recherche_a->afficher_liste_tag();
         ?>
     </div>
+    <div class = "titre_liste_avancee"> INGREDIENT :</div>
     <div id = "liste_ing">
-
+        <?php
+            $recherche_a->afficher_liste_ing();
+        ?>
     </div>
 </div>
 
