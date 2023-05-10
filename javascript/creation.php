@@ -123,6 +123,22 @@ document.addEventListener('DOMContentLoaded', function (){
                 <?php }?>
 
 
+                let nbr = 0;
+                <?php for($i = 0; $i < sizeof($Aing); $i++) {?>
+                    if(name[i].value == "<?php echo $Aing[$i]->nom_ing; ?>"){
+                        nbr = nbr + 1;
+                    }
+                <?php }?>
+                if(nbr == 0){
+                    let img_add = document.createElement("input");
+                    img_add.type = "file";
+                    img_add.classList.add("img_ing_add");
+                    img_add.id = "image_ing_" + vrai_i;
+                    img_add.name = "image_ing_" + vrai_i;
+                    img_add.accept = "image/png, image/gif, image/jpeg";
+                    form_ingredient.appendChild(img_add);
+                }
+&
 
                 let inp = document.createElement("input");
                 inp.type = "text";
@@ -133,13 +149,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 inp.setAttribute('list', "list_ingredient_" + vrai_i);
                 form_ingredient.appendChild(inp);
                 form_ingredient.appendChild(data);
-                let img_add = document.createElement("input");
-                img_add.type = "file";
-                img_add.classList.add("img_ing_add");
-                img_add.id = "image_ing_" + vrai_i;
-                img_add.name = "image_ing_" + vrai_i;
-                img_add.accept = "image/png, image/gif, image/jpeg";
-                form_ingredient.appendChild(img_add);
+
                 console.log("If : " + inputs[i-1].type);
             }
 
