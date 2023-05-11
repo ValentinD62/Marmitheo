@@ -128,7 +128,7 @@ if(empty($_POST['delete_ing'])){
 else{
     echo $_POST['delete_ing'];
     $ing->deleteIng($_POST['delete_ing']);
-    $des->generateDeleteTagForm();
+    $des->generateDeleteIngredientForm();
 }
 
 ?>
