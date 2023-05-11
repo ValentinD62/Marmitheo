@@ -4,7 +4,12 @@ Autoloader::register();
 
 
 use Template\Template;
+use recette\RecetteBD;
 use recherche\RechercheAvancee;
+
+session_start() ;
+
+session_destroy();
 
 ob_start() ?>
 
@@ -31,7 +36,14 @@ ob_start() ?>
 
 
 <div id = "resultat_recherche_avancée">
-
+    <?php
+        if (isset($_POST['recherche_avancee'])){
+            echo $_POST['recherche_avancee'];
+        }
+        else{
+            $recherche_a->getRechercheRecette();
+        }
+    ?>
 </div>
 <?php $content = ob_get_clean();
 Template::render($content);

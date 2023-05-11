@@ -138,16 +138,12 @@ class Recette extends RecetteBD
                 $tab_ing_name[$i] = $ing->nom_ing;
                 $i++;
             }
-
+            var_dump($ing_base);
             $i = 0;
             foreach ($all_name_ing as $ing) {
-                if ($ing_base == null){
-                    $exists = false;
-                }
-                else{
-                    $exists = array_search($ing, $tab_ing_name); //Vérifie si l'ingrédient est dans la BDD.
-                }
+                $exists = array_search($ing, $tab_ing_name); //Vérifie si l'ingrédient est dans la BDD.
                 $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
+
                 if ($exists != false) {
                     $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                     $params = [
