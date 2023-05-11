@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function (){
                     img_add.accept = "image/png, image/gif, image/jpeg";
                     form_ingredient.appendChild(img_add);
                 }
-&
+
 
                 let inp = document.createElement("input");
                 inp.type = "text";
