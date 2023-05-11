@@ -17,7 +17,7 @@ class RechercheAvancee{
         </div>
         <?php
     }
-    public function afficher_liste_check(): void{?>
+    public function afficher_liste_checks(): void{?>
             <div id = "liste-avancee">
             <form class="input_recherche_avancee" action="recherche_avancee.php" method="post" autocomplete="off">
                 <button type = submit id = "button-avancee"> RECHERCHER </button>

@@ -18,7 +18,7 @@ ob_start() ?>
     $recherche_a = new RechercheAvancee();
     $recherche_a->Recherche_avancee_form();
 
-    $recherche_a->afficher_liste_check();
+    $recherche_a->afficher_liste_checks();
 ?>
 
 <div id = "resultat_recherche_avancée">
