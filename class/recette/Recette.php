@@ -89,7 +89,6 @@ class Recette extends RecetteBD
         // ----------- Partie pour ajouter les tags à la recette. -----------------------
         if($alltag != null){
             $tag_base = $this->getAllTag(); // récupère tous les tags sous formes de classes données par le PDO.
-            var_dump($tag_base);
             $nb_recette_base = $this->getMax_num_Recette(); // récupère le num max de recette qui vaut donc la nouvelle recette qu'on vient d'ajouter.
             $i = 0;
             foreach($tag_base as $res){ // Récupération de tous les noms des tags.
