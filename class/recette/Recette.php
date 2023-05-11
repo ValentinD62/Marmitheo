@@ -89,6 +89,7 @@ class Recette extends RecetteBD
         // ----------- Partie pour ajouter les tags à la recette. -----------------------
         if($alltag != null){
             $tag_base = $this->getAllTag(); // récupère tous les tags sous formes de classes données par le PDO.
+            var_dump($tag_base);
             $nb_recette_base = $this->getMax_num_Recette(); // récupère le num max de recette qui vaut donc la nouvelle recette qu'on vient d'ajouter.
             $i = 0;
             foreach($tag_base as $res){ // Récupération de tous les noms des tags.
@@ -97,14 +98,9 @@ class Recette extends RecetteBD
             }
 
             foreach ($alltag as $tag){
-                if ($tab_name == null){
-                    $exists = false;
-                }
-                else {
-                    $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
-                }
+                $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_rectte enregistré.
-                if ($exists != false){
+                if (gettype($exists) != "boolean"){
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                     $params = [
                         'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
@@ -144,7 +140,7 @@ class Recette extends RecetteBD
                 $exists = array_search($ing, $tab_ing_name); //Vérifie si l'ingrédient est dans la BDD.
                 $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
 
-                if ($exists != false) {
+                if (gettype($exists) != "boolean") {
                     $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                     $params = [
                         'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
