@@ -9,11 +9,11 @@ class Edition_Form{
     {
         ?>
         <div class="General">
-        <div class="Edit">Modifier une recette :</div>
+        <div class="Edit" id="recette-edit">Modifier une recette :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_rec" class="form-label">Nom de la recette :</label>
-                <input type="text" class="form-control2 " id="edit_name" color="black" name="name" aria-describedby="name">
+                <input type="text" class="form-control2 " id="edit_name" color="black" name="name" aria-describedby="name" list="list_rec">
                 <datalist id="list_rec">
                     <?php
                     $m = new RecetteBD();
@@ -28,7 +28,7 @@ class Edition_Form{
                 </datalist>
             </div>
              <div class="sub-supp">
-                <button type="submit"style="border-radius: 20px">Submit</button>
+                <button type="submit"style="border-radius: 20px" onclick="ah()">Submit</button>
                 <div style="width: 30px"></div>
                 <button type="reset"style="border-radius: 20px" >Reset</button>
             </div>
@@ -44,7 +44,6 @@ class Edition_Form{
         <div class="Edit">Modifier un ingrédient :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
-
                 <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
                 <input type="text" class="form-control2" id="nom_ing" color="black" name="nom_ing" aria-describedby="name" list="list_ing">
 
@@ -56,7 +55,7 @@ class Edition_Form{
 
                     for ($i = 0; $i < sizeof($query); $i++) {
                         ?>
-                        <option value="<?php echo $query[$i]->nom_ing; ?>">
+                        <option value="<?php echo $query[$i]->pk_num_rec; ?>">
                             <?php echo $query[$i]->nom_ing; ?>
                         </option>
                     <?php } ?>
