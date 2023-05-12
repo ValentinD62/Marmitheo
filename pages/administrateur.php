@@ -208,6 +208,7 @@ else{
     }
     else{
         if(!empty($_POST['nouveau_nom_ing'])){
+            var_dump( $_POST['nouveau_nom_ing']);
             $ing->editionNomIng($_POST['nom_ing'], $_POST['nouveau_nom_ing']); ?>
             <div class = "bravo"> Tag supprimé de la base de données </div> <?php
             $edition->generateEditionTagForm();
