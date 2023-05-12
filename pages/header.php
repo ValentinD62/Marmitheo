@@ -31,7 +31,7 @@
   </div>
     
   <form method='post' action = 'recherche.php' id="form-rech" >
-        <input type="text" id="rech" name="recherche" placeholder="Cherchez une recette, un tag...">
+        <input type="text" id="rech" name="recherche" placeholder="Cherchez une recette avec un nom, un tag...">
   </form>
 
     <?php
