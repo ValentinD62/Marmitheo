@@ -56,13 +56,22 @@ class RechercheAvancee{
     public function getRechercheRecette(): void{
         $recettesBD = new RecetteBD();
         $recettes = new Recette();
-        if (empty($_POST['recherche_avancee'])){
+        if (!empty($_POST['recherche_avancee']))
             $recherche = $_POST['recherche_avancee'];
-        }
-        else{
+        else
             $recherche = "";
-        }
-        if ($recherche == ""){
+
+        if (!empty($_POST['selection_tag']))
+            $recherche_tag = $_POST['selection_tag'];
+        else
+            $recherche_tag = "";
+
+        if (!empty($_POST['selection_ing']))
+            $recherche_ing = $_POST['selection_ing'];
+        else
+            $recherche_ing = "";
+
+        if ($recherche == "" && $recherche_ing == "" && $recherche_tag == ""){
             $liste_recetteBD = $recettesBD->getAllRecette();
             $liste_recette = $recettes->Convertir_recette($liste_recetteBD);
             $i = 0;  ?>
@@ -75,19 +84,53 @@ class RechercheAvancee{
             </section> <?php
         }
         else{
-            $liste_recetteBD = $recettesBD->getRecetteByName($recherche); // Récupération des recettes par nom
-            $liste_recetteBD_tag = $recettesBD->getRecetteByTag($recherche); // Récupération des recettes par nom de tag.
-            $liste_recette_finale = array_merge($liste_recetteBD, $liste_recetteBD_tag); // Permet de concaténer les 2 arrays obtenus précédemment.
+            $liste_recetteBD = array();
+            $liste_recetteBD_ing = array();
+            $liste_recetteBD_tag = array();
 
-            if ($liste_recette_finale == null): ?>
+            if ($recherche != "")
+                $liste_recetteBD = $recettesBD->getRecetteByName($recherche); // Récupération des recettes par nom
+
+            if ($recherche_tag != ""){
+                $i = 0;
+                foreach ($recherche_tag as $tag){
+                    $liste_recetteBD_t = $recettesBD->getRecetteByTagId($tag); // Récupération des recettes par id de tag.
+                    $liste_recetteBD_tag[$i] = $liste_recetteBD_t;
+                    $i++;
+                }
+            }
+
+            if ($recherche_ing != ""){
+                $i = 0;
+                foreach ($recherche_ing as $ing){
+                    $liste_recetteBD_ing[$i] = $recettesBD->getRecetteByIngID($ing);
+                    $i++;
+                }
+
+            }
+
+            $liste_recette_finale = array_merge($liste_recetteBD, $liste_recetteBD_tag, $liste_recetteBD_ing); // Permet de concaténer les 2 arrays obtenus précédemment.
+            $bon = true;
+            foreach ($liste_recette_finale as $fin){
+                if (gettype($fin) == "array"){
+                    if (sizeof($fin) == 0)
+                        $bon = false;
+                }
+            }
+
+            if ($bon == false): ?>
                 <div id = "nothing"> Nothing Here </div>
             <?php
             else :
-                $liste_recette = $recettes->Convertir_recette($liste_recette_finale);
+                $liste_recette = array();
+                foreach ($liste_recette_finale as $fin){
+                    $liste_recette = array_merge($liste_recette, $recettes->Convertir_recette($fin));
+                }
+                var_dump($liste_recette);
                 $i = 0;?>
                 <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                     <?php foreach ($liste_recette_finale as $recette){
-                        echo $recette->getHTMLForSearch($liste_recette[$i]);
+                        echo $recette[$i]->getHTMLForSearch($liste_recette[$i]);
                         $i++;
                     } ?>
                 </section>

@@ -26,7 +26,7 @@ class Recherche{
             $liste_recetteBD = $recettesBD->getRecetteByName($recherche); // Récupération des recettes par nom
             $liste_recetteBD_tag = $recettesBD->getRecetteByTag($recherche); // Récupération des recettes par nom de tag.
             $liste_recette_finale = array_merge($liste_recetteBD, $liste_recetteBD_tag);
-
+            var_dump($liste_recette_finale);
             if ($liste_recette_finale == null): ?>
                 <div id = "nothing"> Nothing Here </div>
             <?php

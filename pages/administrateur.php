@@ -171,6 +171,27 @@ else{
     }
 }
 
+
+if(empty($_POST['edit_recette'])){
+    $edition->generateEditionRecetteForm();
+}
+else{
+    $edition->generateEditionRecetteForm();
+}
+
+if(empty($_POST['edit_tag'])){
+    $edition->generateEditionTagForm();
+}
+else{
+    $edition->generateEditionTagForm();
+}
+
+if(empty($_POST['edit_ing'])){
+    $edition->generateEditionIngForm();
+}
+else{
+    $edition->generateEditionIngForm();
+}
 ?>
 
 
