@@ -41,12 +41,9 @@ class Tag extends RecetteBD
     {
         $ancien_nom = htmlspecialchars($ancien_nom);
         $nouveau_nom = htmlspecialchars($nouveau_nom);
-        $edition_tag = 'UPDATE tag SET nom_tag = :n_nom WHERE nom_tag = :a_nom ';
-        $params = [
-            'n_nom' => htmlspecialchars($nouveau_nom),
-            'a_nom' => htmlspecialchars($ancien_nom)
-            ];
-        $this->exec($edition_tag, $params);
+        $edition_tag = "UPDATE tag SET nom_tag = '". $nouveau_nom."' WHERE nom_tag = '" .$ancien_nom."'";
+        $statement = $this->pdo->prepare($edition_tag);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
 

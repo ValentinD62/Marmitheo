@@ -57,12 +57,10 @@ class Ingredient extends RecetteBD
         if($nouv_nom != null){
             $nouv_nom = htmlspecialchars($nouv_nom);
             $ancien_nom = htmlspecialchars($ancien_nom);
-            $edition_ing_nom = 'UPDATE ingrédient SET nom_ing = :n_nom WHERE nom_tag = :a_nom ';
-            $params = [
-                'n_nom' => htmlspecialchars($nouv_nom),
-                'a_nom' => htmlspecialchars($ancien_nom)
-            ];
-            $this->exec($edition_ing_nom, $params);
+            $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouv_nom. "' WHERE nom_tag = '". $ancien_nom . "'";
+            $statement = $this->pdo->prepare($edition_ing_nom);
+            $statement->execute() or die(var_dump($statement->errorInfo()));
+
         }
         if($img != null){
             $ancien_nom = htmlspecialchars($ancien_nom);
@@ -73,12 +71,10 @@ class Ingredient extends RecetteBD
             if (!is_dir($dirname)) mkdir($dirname);
             $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
             if (!$uploaded) die("FILE NOT UPLOADED");
-            $edition_ing_img = 'UPDATE ingrédient SET image = :img WHERE nom_ing = : a_nom';
-            $params = [
-                'img' => imgName,
-                'a_nom' => htmlspecialchars($ancien_nom)
-            ];
-            $this->exec($edition_ing_img, $params);
+            $edition_ing_img = "UPDATE ingrédient SET image  '" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
+            $statement = $this->pdo->prepare($edition_ing_img);
+            $statement->execute() or die(var_dump($statement->errorInfo()));
+            
         }
 
     }
