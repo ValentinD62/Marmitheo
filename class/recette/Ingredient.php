@@ -62,7 +62,7 @@ class Ingredient extends RecetteBD
         if (!is_dir($dirname)) mkdir($dirname);
         $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
         if (!$uploaded) die("FILE NOT UPLOADED");
-        $edition_ing_img = "UPDATE ingrédient SET image  '" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
+        $edition_ing_img = "UPDATE ingrédient SET image  ='" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
         $statement = $this->pdo->prepare($edition_ing_img);
         $statement->execute() or die(var_dump($statement->errorInfo()));
 

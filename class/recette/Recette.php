@@ -274,14 +274,7 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
-    public function editionTagRec($ancien_nom, $ancien_tag,  $nouv_tag):void
-    {
-        $nouv_tag = htmlspecialchars($nouv_tag);
-        $ancien_tag = htmlspecialchars($ancien_tag);
-        $ancien_nom = htmlspecialchars($ancien_nom);
-
-
-    }
+    
 
 
 
