@@ -45,7 +45,9 @@ class Edition_Form{
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
-                <input type="text" class="form-control2" id="Ing-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
+                <input type="text" class="form-control2" id="nom_ing" color="black" name="nom_ing" aria-describedby="name" list="list_ing">
+
+
                 <datalist id="list_ing">
                     <?php
                     $m = new RecetteBD();
