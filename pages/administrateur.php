@@ -207,18 +207,13 @@ else{
         $edition->generateEditionIngForm();
     }
     else{
-        if(!empty($_POST['nouveau_nom_ing'])  && empty($_FILES['nouveau_img_ing'])){
-            $ing->editionIng($_POST['nom_ing'], $_POST['nouveau_nom_ing'], null); ?>
+        if(!empty($_POST['nouveau_nom_ing'])){
+            $ing->editionNomIng($_POST['nom_ing'], $_POST['nouveau_nom_ing']); ?>
             <div class = "bravo"> Tag supprimé de la base de données </div> <?php
             $edition->generateEditionTagForm();
         }
-        if(empty($_POST['nouveau_nom_ing']) && !empty($_FILES['nouveau_img_ing'])){
-            $ing->editionIng($_POST['nom_ing'], null, $_FILES['nouveau_img_ing']); ?>
-            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
-            $edition->generateEditionTagForm();
-        }
-        else{
-            $ing->editionIng($_POST['nom_ing'], $_POST['nouveau_nom_ing'], $_FILES['nouveau_img_ing']); ?>
+        if(!empty($_FILES['nouveau_img_ing'])){
+            $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>
             <div class = "bravo"> Tag supprimé de la base de données </div> <?php
             $edition->generateEditionTagForm();
         }
