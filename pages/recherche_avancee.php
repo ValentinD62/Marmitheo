@@ -41,7 +41,7 @@ $recherche_a->Recherche_avancee_form();
     ?>
 </div>
 </div>
-</div>s
+</div>
 <?php $content = ob_get_clean();
 Template::render($content);
 ?>
