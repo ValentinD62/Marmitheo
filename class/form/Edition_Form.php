@@ -46,7 +46,7 @@ class Edition_Form{
             <div class="should_center_this">
 
                 <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
-                <input type="text" class="form-control2" id="tag-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
+                <input type="text" class="form-control2" id="nom_ing" color="black" name="nom_ing" aria-describedby="name" list="list_ing">
 
 
                 <datalist id="list_ing">
