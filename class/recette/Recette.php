@@ -246,7 +246,8 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
-    public function editionRecette():void
+    //edition de recette
+    public function editionRecette($ancien_nom, $nouv_nom):void
     {
 
     }

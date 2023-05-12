@@ -13,7 +13,7 @@ class Edition_Form{
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_rec" class="form-label">Nom de la recette :</label>
-                <input type="text" class="form-control2 " id="edit_name" color="black" name="name" aria-describedby="name">
+                <input type="text" class="form-control2 " id="edit_name" color="black" name="name" aria-describedby="name" list="list_rec">
                 <datalist id="list_rec">
                     <?php
                     $m = new RecetteBD();
@@ -44,11 +44,8 @@ class Edition_Form{
         <div class="Edit">Modifier un ingrédient :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
-
                 <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
                 <input type="text" class="form-control2" id="Ing-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
-
-
                 <datalist id="list_ing">
                     <?php
                     $m = new RecetteBD();
