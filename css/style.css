@@ -826,9 +826,9 @@
         width: 100%;
         height: 100%;
         justify-content: center;
-        font-size: 3vw;
-        line-height: 200px;
-    }
+        font-size: 2vw;
+        align-items:center;
+        }
 
 
     #Delete_recette{
@@ -1051,13 +1051,15 @@
 }
 
 #gauche_oskour{
-    min-width: 55%;
+    min-width: 75%;
+}
+
+#resultat_recherche_avancée{
+    min-width: 100%;
 }
 
 
-#gauche_oskour{
-    min-width: 55%;
-}
+
 
 
 
