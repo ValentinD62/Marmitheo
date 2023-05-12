@@ -52,30 +52,29 @@ class Ingredient extends RecetteBD
 
     }*/
 
-    public function editionIng($ancien_nom, $nouv_nom = null, $img = null):void
+    public function editionImgIng($ancien_nom, $img ):void
     {
-        if($nouv_nom != null){
+        $ancien_nom = htmlspecialchars($ancien_nom);
+        $tmpName = $img['tmp_name'];
+        $imgName = $img['name'];
+        $imgName = urlencode(htmlspecialchars($imgName));
+        $dirname = self::UPLOAD_DIR;
+        if (!is_dir($dirname)) mkdir($dirname);
+        $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
+        if (!$uploaded) die("FILE NOT UPLOADED");
+        $edition_ing_img = "UPDATE ingrédient SET image  '" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
+        $statement = $this->pdo->prepare($edition_ing_img);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+    }
+
+    public function editionNomIng($ancien_nom, $nouv_nom):void
+    {
             $nouv_nom = htmlspecialchars($nouv_nom);
             $ancien_nom = htmlspecialchars($ancien_nom);
             $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouv_nom. "' WHERE nom_tag = '". $ancien_nom . "'";
             $statement = $this->pdo->prepare($edition_ing_nom);
             $statement->execute() or die(var_dump($statement->errorInfo()));
-
-        }
-        if($img != null){
-            $ancien_nom = htmlspecialchars($ancien_nom);
-            $tmpName = $img['tmp_name'];
-            $imgName = $img['name'];
-            $imgName = urlencode(htmlspecialchars($imgName));
-            $dirname = self::UPLOAD_DIR;
-            if (!is_dir($dirname)) mkdir($dirname);
-            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
-            if (!$uploaded) die("FILE NOT UPLOADED");
-            $edition_ing_img = "UPDATE ingrédient SET image  '" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
-            $statement = $this->pdo->prepare($edition_ing_img);
-            $statement->execute() or die(var_dump($statement->errorInfo()));
-
-        }
 
     }
 
