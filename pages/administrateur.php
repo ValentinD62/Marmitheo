@@ -59,17 +59,17 @@ else{
         }
     }
     if (!$bon){?>
-        <div id = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
+        <div class = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
         $logger->generateCreationForm();
     }
     else{
         if(empty($_FILES['image']['name'])){?>
-            <div id = "error_admin"><?= "Il manque la photo" ?> </div> <?php
+            <div class = "error_admin"><?= "Il manque la photo" ?> </div> <?php
             $logger->generateCreationForm();
         }
         else{
             if (empty($_POST['description'])){?>
-                <div id = "error_admin"> <?= "Veuillez mettre une description svp" ?></div> <?php
+                <div class = "error_admin"> <?= "Veuillez mettre une description svp" ?></div> <?php
                 $logger->generateCreationForm();
             }
             $i = 1;
@@ -103,19 +103,19 @@ if(empty($_POST['delete_name'])) {
 }
 else{
     $all_recette = $n_recette->getAllRecette();
-    $bon = true;
+    $bon = false;
     foreach($all_recette as $recette){ //Vérification pour voir si le nom de la recette est déjà dans la base de données.
-        if ($recette->nom_rec != $_POST['delete_name']){
-            $bon = false;
+        if ($recette->nom_rec == $_POST['delete_name']){
+            $bon = true;
         }
     }
     if (!$bon){?>
-        <div id = "error_admin"><?= "La recette n'est pas présente dans la base de données." ?> </div><?php
+        <div class = "error_admin"><?= "La recette n'est pas présente dans la base de données." ?> </div><?php
         $des->generateDeleteRecetteForm();
         }
     else{
         $rec->deleteRecette($_POST['delete_name']);?>
-        <div id = "bravo" > Recette supprimer de la base de données </div><?php
+        <div class = "bravo" > Recette supprimé de la base de données </div><?php
         $des->generateDeleteRecetteForm();
     }
 }
@@ -126,9 +126,22 @@ if(empty($_POST['delete_tag'])){
     $des->generateDeleteTagForm();
 }
 else{
-    echo $_POST['delete_tag'];
-    $tag->deleteTag($_POST['delete_tag']);
-    $des->generateDeleteTagForm();
+    $all_tag = $n_recette->getAllTag();
+    $bon = false;
+    foreach($all_tag as $recette){ //Vérification pour voir si le nom de la recette est déjà dans la base de données.
+        if ($recette->nom_tag == $_POST['delete_tag']){
+            $bon = true;
+        }
+    }
+    if (!$bon){ ?>
+        <div class = "error_admin"><?= "Le tag n'est pas présent dans la base de données." ?> </div><?php
+        $des->generateDeleteTagForm();
+    }
+    else{
+        $tag->deleteTag($_POST['delete_tag']); ?>
+    <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+        $des->generateDeleteTagForm();
+    }
 }
 
 ?>
@@ -140,9 +153,22 @@ if(empty($_POST['delete_ing'])){
     $des->generateDeleteIngredientForm();
 }
 else{
-    echo $_POST['delete_ing'];
-    $ing->deleteIng($_POST['delete_ing']);
-    $des->generateDeleteIngredientForm();
+    $all_ing = $n_recette->getAllIngredient();
+    $bon = false;
+    foreach($all_ing as $recette){ //Vérification pour voir si le nom de la recette est déjà dans la base de données.
+        if ($recette->nom_ing == $_POST['delete_ing']){
+            $bon = true;
+        }
+    }
+    if (!$bon){ ?>
+        <div class = "error_admin"><?= "Le tag n'est pas présent dans la base de données." ?> </div><?php
+        $des->generateDeleteIngredientForm();
+    }
+    else{
+        $ing->deleteIng($_POST['delete_ing']); ?>
+        <div class = "bravo"> Ingrédient supprimé de la base de données </div> <?php
+        $des->generateDeleteIngredientForm();
+    }
 }
 
 ?>
