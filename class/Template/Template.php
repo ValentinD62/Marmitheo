@@ -29,7 +29,7 @@ class Template {
 
             </div>
             <?php include "..\javascript\adetail.php";?>
-
+            <?php include "..\javascript\aedit.php";?>
         </body>
         <?php include "footer.php" ?>
         </html>

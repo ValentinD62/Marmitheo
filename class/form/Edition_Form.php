@@ -9,7 +9,7 @@ class Edition_Form{
     {
         ?>
         <div class="General">
-        <div class="Edit">Modifier une recette :</div>
+        <div class="Edit" id="recette-edit">Modifier une recette :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="nom_rec" class="form-label">Nom de la recette :</label>
@@ -28,7 +28,7 @@ class Edition_Form{
                 </datalist>
             </div>
              <div class="sub-supp">
-                <button type="submit"style="border-radius: 20px">Submit</button>
+                <button type="submit"style="border-radius: 20px" onclick="ah()">Submit</button>
                 <div style="width: 30px"></div>
                 <button type="reset"style="border-radius: 20px" >Reset</button>
             </div>
