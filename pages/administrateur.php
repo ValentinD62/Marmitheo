@@ -170,6 +170,9 @@ else{
         $des->generateDeleteIngredientForm();
     }
 }
+    ?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
 
 
 if(empty($_POST['edit_recette'])){
@@ -178,6 +181,9 @@ if(empty($_POST['edit_recette'])){
 else{
     $edition->generateEditionRecetteForm();
 }
+    ?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
 
 if(empty($_POST['edit_tag'])){
     $edition->generateEditionTagForm();
@@ -185,6 +191,9 @@ if(empty($_POST['edit_tag'])){
 else{
     $edition->generateEditionTagForm();
 }
+    ?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
 
 if(empty($_POST['edit_ing'])){
     $edition->generateEditionIngForm();
@@ -192,6 +201,7 @@ if(empty($_POST['edit_ing'])){
 else{
     $edition->generateEditionIngForm();
 }
+
 ?>
     <img class="separateur" src="../img/separator.png">
 
@@ -273,6 +283,7 @@ else{
     }
 
 }
+
 
 
 
