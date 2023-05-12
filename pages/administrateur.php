@@ -28,7 +28,7 @@ use recette\RecetteRenderer;
                         <ul>
                             <li><a href="#Creation">CREATE</a></li>
                             <li><a href="#sup-menu">DELETE</a></li>
-                            <li><a href="#">EDIT</a></li>
+                            <li><a href="#recette-edit">EDIT</a></li>
                         </ul>
                     </li>
                 </ul>
