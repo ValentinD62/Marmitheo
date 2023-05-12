@@ -63,6 +63,13 @@ class Edition_Form{
                 </datalist>
 
             </div>
+            <div class="should_center_this">
+                <label for="nouveau_nom_ing" class="form-label2">Nouveau nom Ingredient</label>
+                <input type="text" class="form-control2" id="new_ing" color="black" name="nouveau_nom_ing" aria-describedby="nouveau_nom_ing">
+                <input type="file" class="form-2" id="new_img" color="black" name="nouveau_img_ing" aria-describedby="nouveau_img_ing">
+            </div>
+
+
             <div class="sub-supp">
                 <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
