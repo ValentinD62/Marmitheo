@@ -418,7 +418,7 @@
         justify-content: center;
     }
 
-    .error_admin, #bravo{
+    .error_admin, .bravo{
         font-size: x-large;
         display: flex;
         justify-content: center;
@@ -428,7 +428,7 @@
         color: red;
     }
 
-    #bravo{
+    .bravo{
         color: green;
     }
 

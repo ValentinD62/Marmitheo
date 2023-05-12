@@ -88,7 +88,7 @@ else{
             }
             $imgFile = isset($_FILES['image']) ? $_FILES['image'] : null ;
             $rec->createRecette($_POST['name'], $_POST['description'], $imgFile, $all_tag, $all_name_ing, $all_img_ing); ?>
-            <div id = "bravo" > Recette ajoutée dans la base de données </div>
+            <div class = "bravo" > Recette ajoutée dans la base de données </div>
             <?php $logger->generateCreationForm();
         }
     }
@@ -231,14 +231,14 @@ else{
 
     //edition des tags
 
-if(empty($_POST['nom_tag'])){
+if(empty($_POST['ancien_nom_tag'])){
         $edition->generateEditionTagForm();
     }
 else{
     $all_tag = $n_recette->getAllTag();
     $bon2 = false;
     foreach($all_tag as $recette){ //Vérification pour voir si le nom du tag est déjà dans la base de données.
-        if ($recette->nom_tag == $_POST['edit_tag']){
+        if ($recette->nom_tag == $_POST['ancien_nom_tag']){
             $bon2 = true;
         }
     }
@@ -247,8 +247,8 @@ else{
         $edition->generateEditionTagForm();
     }
     else{
-        $tag->editionTag($_POST['ancien_nom_tag'], $_POST['nouveau_nom_tag'],); ?>
-        <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+        $tag->editionTag($_POST['ancien_nom_tag'], $_POST['nouveau_nom_tag']); ?>
+        <div class = "bravo"> Tag édité avec succès </div> <?php
         $edition->generateEditionTagForm();
     }
 
