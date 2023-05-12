@@ -170,7 +170,11 @@ else{
         $des->generateDeleteIngredientForm();
     }
 }
+    ?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
 
+    //edition recette
 
 if(empty($_POST['edit_recette'])){
     $edition->generateEditionRecetteForm();
@@ -179,21 +183,84 @@ else{
     $edition->generateEditionRecetteForm();
 }
 
-if(empty($_POST['edit_tag'])){
-    $edition->generateEditionTagForm();
-}
-else{
-    $edition->generateEditionTagForm();
-}
+?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
 
-if(empty($_POST['edit_ing'])){
+    //edition ingredient
+
+
+if(empty($_POST['nom_ing'])){
     $edition->generateEditionIngForm();
 }
 else{
-    $edition->generateEditionIngForm();
-}
+    $all_ing = $n_recette->getAllIngredient();
+    $bon1 = false;
+    foreach($all_ing as $ing){ //Vérification pour voir si le nom de l'ingredient est déjà dans la base de données.
+        if ($ing->nom_ing == $_POST['edit_ing']){
+            $bon1 = true;
+        }
+    }
+    if (!$bon1){ ?>
+        <div class = "error_admin"><?= "L'ingredient' n'est pas présent dans la base de données." ?> </div><?php
+        $edition->generateEditionIngForm();
+    }
+    else{
+        if(!empty($_POST['nouveau_nom_ing'])  && empty($_FILES['nouveau_img_ing'])){
+            $ing->editionIng($_POST['nom_ing'], $_POST['nouveau_nom_ing'], null); ?>
+            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+            $edition->generateEditionTagForm();
+        }
+        if(empty($_POST['nouveau_nom_ing']) && !empty($_FILES['nouveau_img_ing'])){
+            $ing->editionIng($_POST['nom_ing'], null, $_FILES['nouveau_img_ing']); ?>
+            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+            $edition->generateEditionTagForm();
+        }
+        else{
+            $ing->editionIng($_POST['nom_ing'], $_POST['nouveau_nom_ing'], $_FILES['nouveau_img_ing']); ?>
+            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+            $edition->generateEditionTagForm();
+        }
+    }
+
+    }
 ?>
 
+
+    <img class="separateur" src="../img/separator.png">
+
+    <?php
+
+
+    //edition des tags
+
+if(empty($_POST['nom_tag'])){
+        $edition->generateEditionTagForm();
+    }
+else{
+    $all_tag = $n_recette->getAllTag();
+    $bon2 = false;
+    foreach($all_tag as $recette){ //Vérification pour voir si le nom du tag est déjà dans la base de données.
+        if ($recette->nom_tag == $_POST['edit_tag']){
+            $bon2 = true;
+        }
+    }
+    if (!$bon2){ ?>
+        <div class = "error_admin"><?= "Le tag n'est pas présent dans la base de données." ?> </div><?php
+        $edition->generateEditionTagForm();
+    }
+    else{
+        $tag->editionTag($_POST['ancien_nom_tag'], $_POST['nouveau_nom_tag'],); ?>
+        <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+        $edition->generateEditionTagForm();
+    }
+
+}
+
+
+
+
+?>
 
 <!-- Récupère le contenu du buffer (et le vide) -->
 <?php $content=ob_get_clean() ?>

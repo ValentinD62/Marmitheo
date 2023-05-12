@@ -577,7 +577,7 @@
         font-size: xx-large;
     }
 
-    .Suppression{
+    .Suppression,.Edit{
         display: flex;
         justify-content: center;
         margin-top: 5%;
@@ -992,6 +992,8 @@
 
 
 
+
+
     #button-avancee{
         width: 50%  ;
         display: flex;
@@ -1059,6 +1061,20 @@
 }
 
 
+
+/* edit ? je suppose j'en ai marre */
+    .sendhelp{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .new-img-ing{
+        display: flex;
+        justify-content: center;
+    }
+
+    
 
 
 
