@@ -211,9 +211,14 @@ else{
     else{
         $ing = new Ingredient();
         if(!empty($_POST['nouveau_nom_ing'])){
-            var_dump( $_POST['nouveau_nom_ing']);
-            $ing->editionNomIng($_POST['nom_ing'], $_POST['nouveau_nom_ing']); ?>
+            $n_ing = $_POST['nouveau_nom_ing'];
+            $n_ing = htmlspecialchars($n_ing);
+            $ing->editionNomIng($a_ing, $n_ing); ?>
             <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
+            $edition->generateEditionIngForm();
+        }
+        else{ ?>
+            <div class = "error_admin"><?= "Le nouveau nom est déjà dans la base de données." ?> </div><?php
             $edition->generateEditionIngForm();
         }
         if(!empty($_FILES['nouveau_img_ing'])){
