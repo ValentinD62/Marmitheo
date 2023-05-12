@@ -114,13 +114,17 @@ class RechercheAvancee{
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php
                 $bon = false;
+                $liste_dans_page = array();
                 foreach ($liste_recette as $rec){
                     if ($rec != null){
                         for ($i = 0; $i < sizeof($rec); $i++){
-                            $this->getHTMLForSearch($rec[$i]);
-                            $bon = true;
+                            $est_dedans = array_search($rec[$i]->id, $liste_dans_page);
+                            if (gettype($est_dedans) == "boolean"){
+                                $this->getHTMLForSearch($rec[$i]);
+                                $liste_dans_page[$i] = $rec[$i]->id;
+                                $bon = true;
+                            }
                         }
-
                     }
                 }
                 if (!$bon){ ?>

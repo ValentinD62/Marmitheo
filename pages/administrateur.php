@@ -235,10 +235,12 @@ if(empty($_POST['ancien_nom_tag'])){
         $edition->generateEditionTagForm();
     }
 else{
+    $a_tag = $_POST['ancien_nom_tag'];
+    $a_tag = htmlspecialchars($a_tag);
     $all_tag = $n_recette->getAllTag();
     $bon2 = false;
     foreach($all_tag as $recette){ //Vérification pour voir si le nom du tag est déjà dans la base de données.
-        if ($recette->nom_tag == $_POST['ancien_nom_tag']){
+        if ($recette->nom_tag == $a_tag){
             $bon2 = true;
         }
     }
@@ -247,9 +249,18 @@ else{
         $edition->generateEditionTagForm();
     }
     else{
-        $tag->editionTag($_POST['ancien_nom_tag'], $_POST['nouveau_nom_tag']); ?>
-        <div class = "bravo"> Tag édité avec succès </div> <?php
-        $edition->generateEditionTagForm();
+        if (empty($_POST['nouveau_nom_tag'])){ ?>
+            <div class = "error_admin"><?= "Veuillez mettre un nouveau nom." ?> </div> <?php
+            $edition->generateEditionTagForm();
+        }
+        else{
+            $n_tag = $_POST['nouveau_nom_tag'];
+            $n_tag = htmlspecialchars($n_tag);
+            $tag->editionTag($a_tag, $n_tag); ?>
+            <div class = "bravo"> Tag édité avec succès </div>
+            <?php $edition->generateEditionTagForm();
+        }
+
     }
 
 }
