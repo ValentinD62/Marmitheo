@@ -971,6 +971,17 @@
 
 
 
+    /* recherche avancée */
+
+
+    #recheche-all{
+        display: flex;
+        flex-direction: row;
+    }
+
+
+
+
 
 
 
