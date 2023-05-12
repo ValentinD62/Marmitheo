@@ -52,11 +52,11 @@ class Ingredient extends RecetteBD
 
     }*/
 
-    public function editionImgIng($ancien_nom, $img ):void
+    public function editionImgIng($ancien_nom, $img_ing ):void
     {
         $ancien_nom = htmlspecialchars($ancien_nom);
-        $tmpName = $img['tmp_name'];
-        $imgName = $img['name'];
+        $tmpName = $img_ing['tmp_name'];
+        $imgName = $img_ing['name'];
         $imgName = urlencode(htmlspecialchars($imgName));
         $dirname = self::UPLOAD_DIR;
         if (!is_dir($dirname)) mkdir($dirname);
@@ -68,11 +68,11 @@ class Ingredient extends RecetteBD
 
     }
 
-    public function editionNomIng($ancien_nom, $nouv_nom):void
+    public function editionNomIng($ancien_nom, $nouveau_nom):void
     {
-            $nouv_nom = htmlspecialchars($nouv_nom);
+            $nouveau_nom = htmlspecialchars($nouveau_nom);
             $ancien_nom = htmlspecialchars($ancien_nom);
-            $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouv_nom. "' WHERE nom_tag = '". $ancien_nom . "'";
+            $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouveau_nom. "' WHERE nom_tag = '". $ancien_nom . "'";
             $statement = $this->pdo->prepare($edition_ing_nom);
             $statement->execute() or die(var_dump($statement->errorInfo()));
 

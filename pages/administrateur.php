@@ -196,13 +196,13 @@ if(empty($_POST['nom_ing'])){
 else{
     echo $_POST['nom_ing'];
     $all_ing = $n_recette->getAllIngredient();
-    $bon = false;
+    $bon1 = false;
     foreach($all_ing as $ing){ //Vérification pour voir si le nom de l'ingredient est déjà dans la base de données.
         if ($ing->nom_ing == $_POST['nom_ing']){
             $bon1 = true;
         }
     }
-    if (!$bon){ ?>
+    if (!$bon1){ ?>
         <div class = "error_admin"><?= "L'ingredient n'est pas présent dans la base de données." ?> </div><?php
         $edition->generateEditionIngForm();
     }
@@ -210,12 +210,12 @@ else{
         if(!empty($_POST['nouveau_nom_ing'])){
             var_dump( $_POST['nouveau_nom_ing']);
             $ing->editionNomIng($_POST['nom_ing'], $_POST['nouveau_nom_ing']); ?>
-            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+            <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
             $edition->generateEditionTagForm();
         }
         if(!empty($_FILES['nouveau_img_ing'])){
             $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>
-            <div class = "bravo"> Tag supprimé de la base de données </div> <?php
+            <div class = "bravo"> Image édité avec succès </div> <?php
             $edition->generateEditionTagForm();
         }
     }
