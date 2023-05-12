@@ -63,10 +63,14 @@ class Edition_Form{
                 </datalist>
 
             </div>
+            <div class="sendhelp">
             <div class="should_center_this">
-                <label for="nouveau_nom_ing" class="form-label2">Nouveau nom Ingredient</label>
+                <label for="nouveau_nom_ing" class="form-label2">Nouveau nom d'Ingredient :</label>
                 <input type="text" class="form-control2" id="new_ing" color="black" name="nouveau_nom_ing" aria-describedby="nouveau_nom_ing">
+            </div>
+                <div class = "new-img-ing">
                 <input type="file" class="form-2" id="new_img" color="black" name="nouveau_img_ing" aria-describedby="nouveau_img_ing">
+                </div>
             </div>
 
 
