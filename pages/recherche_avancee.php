@@ -17,20 +17,15 @@ ob_start() ?>
 <?php
     $recherche_a = new RechercheAvancee();
 
-
-
     $recherche_a->afficher_liste_checks();
 
    ?>
 
 <div id="gauche_oskour">
-<?php
-$recherche_a->Recherche_avancee_form();
-?>
 
 <div id = "resultat_recherche_avancée">
     <?php
-        $recherche_a->getRechercheRecette();
+        $recherche_a->getRechercheRecette_avancee();
     ?>
 </div>
 </div>
