@@ -59,7 +59,7 @@ else{
         }
     }
     if (!$bon){?>
-        <div class = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
+        <div class = "error_admin"><?= "La recette est déjà dans la base de données" ?> </div><?php
         $logger->generateCreationForm();
     }
     else{
