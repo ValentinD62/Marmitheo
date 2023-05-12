@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 if (input.type === "text"){
                     i = i+1;
                     name[i] = input;
-                    console.log(name[i].value)
+
                 }
             }
             let j = 0;
@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 if (input.type === "file"){
                     j = j+1;
                     image[i] = input;
+
                 }
             }
             if (name[i].value.length >= 1){
@@ -123,21 +124,36 @@ document.addEventListener('DOMContentLoaded', function (){
                 <?php }?>
 
 
-                let nbr = 0;
+
+                let nbr = false;
                 <?php for($i = 0; $i < sizeof($Aing); $i++) {?>
-                    if(name[i].value == "<?php echo $Aing[$i]->nom_ing; ?>"){
-                        nbr = nbr + 1;
+                    if(name[i].value === "<?php echo $Aing[$i]->nom_ing; ?>"){
+                        nbr = true;
                     }
                 <?php }?>
-                if(nbr == 0){
-                    let img_add = document.createElement("input");
+                let img_add = document.createElement("input");
+                if(nbr === false){
                     img_add.type = "file";
                     img_add.classList.add("img_ing_add");
-                    img_add.id = "image_ing_" + vrai_i;
-                    img_add.name = "image_ing_" + vrai_i;
+                    img_add.id = "image_ing_" + (vrai_i - 1);
+                    img_add.name = "image_ing_" + (vrai_i - 1);
                     img_add.accept = "image/png, image/gif, image/jpeg";
-                    form_ingredient.appendChild(img_add);
+
                 }
+                else{
+
+                    img_add.type = "file";
+                    img_add.classList.add("img_ing_add");
+                    img_add.id = "image_ing_" + (vrai_i - 1);
+                    img_add.name = "image_ing_" + (vrai_i - 1);
+                    img_add.accept = "image/png, image/gif, image/jpeg";
+                    img_add.style.display = "none";
+            }
+
+
+                form_ingredient.appendChild(img_add);
+
+
 
 
                 let inp = document.createElement("input");
@@ -150,15 +166,13 @@ document.addEventListener('DOMContentLoaded', function (){
                 form_ingredient.appendChild(inp);
                 form_ingredient.appendChild(data);
 
-                console.log("If : " + inputs[i-1].type);
             }
 
             if (i >= 2) {
-                console.log(name[i].value.length)
                 if (name[i].value.length === 0 && name[i-1].value.length === 0){
                     form_ingredient.removeChild(name[i])
                     form_ingredient.removeChild(image[i])
-                    form_ingredient.removeChild(datalist[i-1])
+                    form_ingredient.removeChild(datalist[i])
                 }
             }
         })
