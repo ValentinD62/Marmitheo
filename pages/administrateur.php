@@ -174,6 +174,7 @@ else{
     <img class="separateur" src="../img/separator.png">
     <?php
 
+    //edition recette
 
 if(empty($_POST['edit_recette'])){
     $edition->generateEditionRecetteForm();
@@ -181,35 +182,7 @@ if(empty($_POST['edit_recette'])){
 else{
     $edition->generateEditionRecetteForm();
 }
-    ?>
-    <img class="separateur" src="../img/separator.png">
-    <?php
 
-if(empty($_POST['edit_tag'])){
-    $edition->generateEditionTagForm();
-}
-else{
-    $edition->generateEditionTagForm();
-}
-    ?>
-    <img class="separateur" src="../img/separator.png">
-    <?php
-
-if(empty($_POST['edit_ing'])){
-    $edition->generateEditionIngForm();
-}
-else{
-    $edition->generateEditionIngForm();
-}
-
-?>
-    <img class="separateur" src="../img/separator.png">
-
-    <?php
-
-if(empty($_POST['nom_rec'])){
-    $edition->generateEditionRecetteForm();
-}
 ?>
     <img class="separateur" src="../img/separator.png">
     <?php
