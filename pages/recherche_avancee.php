@@ -30,14 +30,7 @@ $recherche_a->Recherche_avancee_form();
 
 <div id = "resultat_recherche_avancée">
     <?php
-
-        if (isset($_POST['recherche_avancee'])){
-            echo $_POST['recherche_avancee'];
-        }
-        else{
-            $recherche_a->getRechercheRecette();
-            echo $_POST['recherche_avancee'];
-        }
+        $recherche_a->getRechercheRecette();
     ?>
 </div>
 </div>

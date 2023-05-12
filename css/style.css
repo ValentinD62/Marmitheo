@@ -418,6 +418,20 @@
         justify-content: center;
     }
 
+    .error_admin, #bravo{
+        font-size: x-large;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 30px;
+        text-decoration: underline;
+        color: red;
+    }
+
+    #bravo{
+        color: green;
+    }
+
     .login-btn{
         display: flex;
         justify-content: center;
@@ -483,10 +497,10 @@
     .General{
         background: linear-gradient(to top right, #FFD4CB 1%,white 80%) ;
         border-radius: 50px;
-        margin-left: 22%;
-        margin-right: 20%;
+        margin: auto;
         padding-bottom: 3%;
         border: 1px solid black;
+        width: 70%;
         height: 100%;
         margin-bottom: 5%;
     }
@@ -903,7 +917,7 @@
     #detail-tag-ing{
         display: flex;
         justify-content: center;
-        width: 35%;
+        width: 40%;
         border: 1px solid black;
         margin: auto;
         border-radius: 20px;
@@ -949,8 +963,9 @@
     .detail-ing img{
         max-height: 75px;
         max-width: 75px;
-        border-radius: 40px;
+        border-radius: 60px;
         margin-left: 15px;
+        margin-bottom: 15px;
     }
 
 
@@ -1027,6 +1042,7 @@
 
 #recherche_avancee_h{
     width: 50%;
+    border-bottom: 1px black solid;
     border-left: none;
     border-right: none;
     border-top: none;
@@ -1034,8 +1050,14 @@
 
 }
 
+#gauche_oskour{
+    min-width: 55%;
+}
 
 
+#gauche_oskour{
+    min-width: 55%;
+}
 
 
 

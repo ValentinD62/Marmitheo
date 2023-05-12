@@ -44,8 +44,11 @@ class Edition_Form{
         <div id="Creation">Modifier un ingrédient :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
+
                 <label for="nom_ing" class="form-label">Nom ingrédient</label>
                 <input type="text" class="form-control" id="name" color="black" name="name" aria-describedby="name" list="list_ing">
+
+
                 <datalist id="list_ing">
                     <?php
                     $m = new RecetteBD();
@@ -79,6 +82,7 @@ class Edition_Form{
             <div class="mb-3 neon">
                 <label for="ancien_nom_tag" class="form-label">nom Tag</label>
                 <input type="text" class="form-control" id="name" color="black" name="ancien_nom_tag" aria-describedby="ancien_nom_tag" list="list_tag">
+
                 <datalist id="list_tag">
                     <?php
                     $m = new RecetteBD();
@@ -101,6 +105,7 @@ class Edition_Form{
                 <div style="width: 30px"></div>
                 <button type="reset" class="btn neon">Reset</button>
             </div>
+
         </form>
         </div>
         <?php

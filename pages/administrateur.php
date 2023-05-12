@@ -59,7 +59,7 @@ else{
         }
     }
     if (!$bon){?>
-        <div class = "error_admin"><?= "La recette est déjà dans la base de données, si vous voulez la modifier, vous pouvez aller dans la rubrique Edition." ?> </div><?php
+        <div class = "error_admin"><?= "La recette est déjà dans la base de données" ?> </div><?php
         $logger->generateCreationForm();
     }
     else{
@@ -171,6 +171,27 @@ else{
     }
 }
 
+
+if(empty($_POST['edit_recette'])){
+    $edition->generateEditionRecetteForm();
+}
+else{
+    $edition->generateEditionRecetteForm();
+}
+
+if(empty($_POST['edit_tag'])){
+    $edition->generateEditionTagForm();
+}
+else{
+    $edition->generateEditionTagForm();
+}
+
+if(empty($_POST['edit_ing'])){
+    $edition->generateEditionIngForm();
+}
+else{
+    $edition->generateEditionIngForm();
+}
 ?>
     <img class="separateur" src="../img/separator.png">
 
