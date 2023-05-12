@@ -72,7 +72,7 @@ class Ingredient extends RecetteBD
     {
             $nouveau_nom = htmlspecialchars($nouveau_nom);
             $ancien_nom = htmlspecialchars($ancien_nom);
-            $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouveau_nom. "' WHERE nom_tag = '". $ancien_nom . "'";
+            $edition_ing_nom = "UPDATE ingrédient SET nom_ing ='". $nouveau_nom. "' WHERE nom_ing = '". $ancien_nom . "'";
             $statement = $this->pdo->prepare($edition_ing_nom);
             $statement->execute() or die(var_dump($statement->errorInfo()));
 
