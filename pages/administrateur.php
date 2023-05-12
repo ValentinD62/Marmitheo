@@ -216,6 +216,7 @@ else{
             <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
             $edition->generateEditionIngForm();
         }
+
         if(!empty($_FILES['nouveau_img_ing'])){
             $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>
             <div class = "bravo"> Image édité avec succès </div> <?php
