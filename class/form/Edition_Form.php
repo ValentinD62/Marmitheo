@@ -11,8 +11,8 @@ class Edition_Form{
         <div id="Creation">Modifier une recette :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
-                <label for="nom_rec" class="form-label">Nom recette</label>
-                <input type="text" class="form-control" id="name" color="black" name="name" aria-describedby="name">
+                <label for="nom_rec" class="form-label">Editer recette</label>
+                <input type="text" class="form-control" id="edit_recette" color="black" name="edit_recette" aria-describedby="name">
             </div>
              <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>
@@ -29,8 +29,8 @@ class Edition_Form{
         <div id="Creation">Modifier un ingrédient :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
-                <label for="nom_ing" class="form-label">Nom ingrédient</label>
-                <input type="text" class="form-control" id="name" color="black" name="name" aria-describedby="name" >
+                <label for="nom_ing" class="form-label">Editer Ingrédient</label>
+                <input type="text" class="form-control" id="edit_ing" color="black" name="edit_ing" aria-describedby="name" >
                 <datalist id="list_ing">
 
             </div>
@@ -49,8 +49,8 @@ class Edition_Form{
         <div id="Creation">Modifier un Tag :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="mb-3 neon">
-                <label for="ancien_nom_tag" class="form-label">Ancien nom Tag</label>
-                <input type="text" class="form-control" id="name" color="black" name="ancien_nom_tag" aria-describedby="ancien_nom_tag" list="list_tag">
+                <label for="ancien_nom_tag" class="form-label">Editer tag</label>
+                <input type="text" class="form-control" id="edit_tag" color="black" name="edit_tag" aria-describedby="ancien_nom_tag" list="list_tag">
                 <datalist id="list_tag">
                     <?php
                     $m = new RecetteBD();
@@ -63,15 +63,6 @@ class Edition_Form{
                         </option>
                     <?php } ?>
                 </datalist>
-            </div>
-            <div class="mb-3 neon">
-                <label for="nouveau_nom_tag" class="form-label">Nouveau nom Tag</label>
-                <input type="text" class="form-control" id="name" color="black" name="nouveau_nom_tag" aria-describedby="nouveau_nom_tag">
-            </div>
-            <div style="display: flex">
-                <button type="submit" class="btn neon">Submit</button>
-                <div style="width: 30px"></div>
-                <button type="reset" class="btn neon">Reset</button>
             </div>
         </form>
         <?php

@@ -1042,11 +1042,16 @@
 
 #recherche_avancee_h{
     width: 50%;
+    border-bottom: 1px black solid;
     border-left: none;
     border-right: none;
     border-top: none;
     background: none;
 
+}
+
+#gauche_oskour{
+    min-width: 55%;
 }
 
 

@@ -127,6 +127,50 @@ class RecetteBD
         return $results;
     }
 
+    //Fonction qui récupère les recettes ayant le tag de $id
+    public function getRecetteByTagId($id): array{
+        // Préparation d'une requête simple
+        $sql1 ="SELECT fk_num_rec FROM tag_recette INNER JOIN tag on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag.pk_num_tag =" . $id ;
+        $statement1 = $this->pdo->prepare($sql1);
+        $statement1->execute() or die(var_dump($statement1->errorInfo()));
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results1 = $statement1->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        $results_final = array();
+        foreach ($results1 as $res){
+            $sql = "SELECT * FROM recette WHERE pk_num_rec =" . $res->fk_num_rec;
+            $statement = $this->pdo->prepare($sql);
+            // Exécution de la requête
+            $statement->execute() or die(var_dump($statement->errorInfo()));
+            // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+            $results_final = array_merge($results_final, $results);
+        }
+
+        return $results_final;
+    }
+
+    //Fonction qui récupère les recettes ayant le tag de $id
+    public function getRecetteByIngID($id): array{
+        // Préparation d'une requête simple
+        $sql1 ="SELECT fk_num_rec FROM ing_recette INNER JOIN ingrédient on ingrédient.pk_num_ing = ing_recette.fk_num_ing WHERE ingrédient.pk_num_ing =" . $id;
+        $statement1 = $this->pdo->prepare($sql1);
+        $statement1->execute() or die(var_dump($statement1->errorInfo()));
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results1 = $statement1->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+        $results_final = array();
+        foreach ($results1 as $res){
+            $sql = "SELECT * FROM recette WHERE pk_num_rec =" . $res->fk_num_rec;
+            $statement = $this->pdo->prepare($sql);
+            // Exécution de la requête
+            $statement->execute() or die(var_dump($statement->errorInfo()));
+            // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
+            $results_final = array_merge($results_final, $results);
+        }
+
+        return $results_final;
+    }
+
     //Fonction qui récupère le nom des tags liés à la recette avec l'id $num_recette
     public function getTagofRecette($num_recette): array{
         $sql = "SELECT nom_tag FROM tag INNER JOIN tag_recette on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag_recette.fk_num_rec = " . $num_recette;
