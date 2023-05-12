@@ -209,17 +209,30 @@ else{
         $edition->generateEditionIngForm();
     }
     else{
-        $ing = new Ingredient();
         if(!empty($_POST['nouveau_nom_ing'])){
             $n_ing = $_POST['nouveau_nom_ing'];
             $n_ing = htmlspecialchars($n_ing);
-            $ing->editionNomIng($a_ing, $n_ing); ?>
-            <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
-            $edition->generateEditionIngForm();
+            $bon2 = false;
+            foreach($all_ing as $ing) { //Vérification pour voir si le nom de l'ingredient est déjà dans la base de données.
+                if ($ing->nom_ing == $n_ing) {
+                    $bon2 = true;
+                }
+            }
+            $ing = new Ingredient();
+            if ($bon2){ ?>
+                <div class = "error_admin"><?= "Le nouveau nom est déjà dans la base de données." ?> </div><?php
+                $edition->generateEditionIngForm();
+            }
+            else{
+                $edition->generateEditionIngForm();
+                $ing->editionNomIng($a_ing, $n_ing); ?>
+                <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
+            }
+
         }
-        else{ ?>
+        else{?>
             <div class = "error_admin"><?= "Le nouveau nom est déjà dans la base de données." ?> </div><?php
-            $edition->generateEditionIngForm();
+                $edition->generateEditionIngForm();
         }
         if(!empty($_FILES['nouveau_img_ing'])){
             $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>

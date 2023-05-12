@@ -8,7 +8,6 @@ use Template\Template;
 
 session_start() ;
 
-session_destroy();
 ?>
 
 <?php ob_start() ?>
