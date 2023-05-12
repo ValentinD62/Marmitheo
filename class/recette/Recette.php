@@ -64,7 +64,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette et de l'ajouter dans la base de données.
-    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing, $all_img_ing):void
+    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing, $all_img_ing = null):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -126,27 +126,29 @@ class Recette extends RecetteBD
         // ----------- Partie pour ajouter les ingrédients à la recette. -----------------------
 
         if($all_name_ing != null && $all_img_ing != null){
+
             $ing_base = $this->getAllIngredient(); // récupère tous les ingrédients sous formes de classes données par le PDO.
             $nb_recette_base = $this->getMax_num_Recette(); // donne le numéro de la recette que l'on vient de créer.
             $i = 0;
+
             foreach($ing_base as $ing){ // Récupération de tous les noms des ingrédients.
                 $tab_ing_name[$i] = $ing->nom_ing;
                 $i++;
             }
-            var_dump($ing_base);
+
             $i = 0;
             foreach ($all_name_ing as $ing) {
                 $exists = array_search($ing, $tab_ing_name); //Vérifie si l'ingrédient est dans la BDD.
                 $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
 
                 if (gettype($exists) != "boolean") {
-                    $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
+                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                     $params = [
                         'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
                         'num_rec' => $nb_recette_base, //le numéro de la recette que l'on vient de créer.
                         'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
                     ];
-                    $this->exec($ajouter_tag_rec, $params);
+                    $this->exec($ajouter_ing_rec, $params);
                 }
 
                 else{
@@ -156,19 +158,20 @@ class Recette extends RecetteBD
                         $img_Ing_Name = $all_img_ing[$i]['name'];
                         $img_Ing_Name = urlencode(htmlspecialchars($img_Ing_Name));
                         $dirname = self::UPLOAD_DIR_ING;
-                        if (!is_dir($dirname)) mkdir($dirname);
-                        $uploaded = move_uploaded_file($tmpName, $dirname . $img_Ing_Name);
-                        if (!$uploaded) die("FILE NOT UPLOADED");
+                       if (!is_dir($dirname)) mkdir($dirname);
+                       $uploaded = move_uploaded_file($tmpName, $dirname . $img_Ing_Name);
+                       if (!$uploaded) die("FILE NOT UPLOADED");
                     } else echo "NO IMAGE !!!!";
                     $this->addIngBD($ing, $img_Ing_Name); // ajoute le nouvel ingrédient dans la BDD.
                     $nb_rec = $this->getMax_num_Ing(); // donne le numéro de l'ingrédient que l'on vient de créer.
-                    $ajouter_tag_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
+                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
                     $params = [
                         'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
                         'num_rec' => $nb_recette_base, // le numéro de la recette que l'on vient de créer.
                         'num_ing' => $nb_rec, //le numéro de l'ingrédient que l'on vient de mettre dans la BDD.
                     ];
-                    $this->exec($ajouter_tag_rec, $params);
+                    $this->exec($ajouter_ing_rec, $params);
+
                 }
                 $i++;
             }
