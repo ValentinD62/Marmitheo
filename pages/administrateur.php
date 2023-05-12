@@ -195,13 +195,13 @@ if(empty($_POST['nom_ing'])){
 }
 else{
     $all_ing = $n_recette->getAllIngredient();
-    $bon1 = false;
+    $bon = false;
     foreach($all_ing as $ing){ //Vérification pour voir si le nom de l'ingredient est déjà dans la base de données.
         if ($ing->nom_ing == $_POST['edit_ing']){
             $bon1 = true;
         }
     }
-    if (!$bon1){ ?>
+    if (!$bon){ ?>
         <div class = "error_admin"><?= "L'ingredient' n'est pas présent dans la base de données." ?> </div><?php
         $edition->generateEditionIngForm();
     }
