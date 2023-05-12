@@ -63,6 +63,11 @@ class Edition_Form{
                 </datalist>
 
             </div>
+            <div class="mb-3 neon">
+                <label for="nouveau_nom_ing" class="form-label">Nouveay nom Tag</label>
+                <input type="text" class="form-control" id="name" color="black" name="nouveau_nom_ing" aria-describedby="nouveau_nom_ing">
+                <input type="file" class="form-control" id="name" color="black" name="nouveau_img_ing" aria-describedby="nouveau_img_ing">
+            </div>
             <div style="display: flex">
                 <button type="submit" class="btn neon">Submit</button>
                 <div style="width: 30px"></div>
