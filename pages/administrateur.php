@@ -172,7 +172,36 @@ else{
 }
 
 ?>
+    <img class="separateur" src="../img/separator.png">
 
+    <?php
+
+if(empty($_POST['nom_rec'])){
+    $edition->generateEditionRecetteForm();
+}
+?>
+    <img class="separateur" src="../img/separator.png">
+    <?php
+
+if(empty($_POST['nom_ing'])){
+    $edition->generateEditionIngForm();
+}
+?>
+
+    <img class="separateur" src="../img/separator.png">
+
+    <?php
+
+if(empty($_POST['nom_tag'])){
+        $edition->generateEditionTagForm();
+    }
+else{
+    $tag->editionTag($_POST['']);
+}
+
+
+
+?>
 
 <!-- Récupère le contenu du buffer (et le vide) -->
 <?php $content=ob_get_clean() ?>
