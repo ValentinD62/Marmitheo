@@ -577,7 +577,7 @@
         font-size: xx-large;
     }
 
-    .Suppression{
+    .Suppression,.Edit{
         display: flex;
         justify-content: center;
         margin-top: 5%;

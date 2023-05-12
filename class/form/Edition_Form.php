@@ -9,17 +9,17 @@ class Edition_Form{
     {
         ?>
         <div class="General">
-        <div id="Creation">Modifier une recette :</div>
+        <div class="Edit">Modifier une recette :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
-            <div class="mb-3 neon">
-                <label for="nom_rec" class="form-label">Nom recette</label>
-                <input type="text" class="form-control" id="name" color="black" name="name" aria-describedby="name">
+            <div class="should_center_this">
+                <label for="nom_rec" class="form-label">Nom de la recette :</label>
+                <input type="text" class="form-control2 " id="edit_name" color="black" name="name" aria-describedby="name">
                 <datalist id="list_rec">
                     <?php
                     $m = new RecetteBD();
                     $query = $m->getAllRecette();
 
-                    for ($i = 0; $i < sizeof($query); $i++) {
+                    for ($i =   0; $i < sizeof($query); $i++) {
                         ?>
                         <option value="<?php echo $query[$i]->nom_rec; ?>">
                             <?php echo $query[$i]->nom_rec; ?>
@@ -27,10 +27,10 @@ class Edition_Form{
                     <?php } ?>
                 </datalist>
             </div>
-             <div style="display: flex">
-                <button type="submit" class="btn neon">Submit</button>
+             <div class="sub-supp">
+                <button type="submit"style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
-                <button type="reset" class="btn neon">Reset</button>
+                <button type="reset"style="border-radius: 20px" >Reset</button>
             </div>
         </form>
         </div>
@@ -41,12 +41,12 @@ class Edition_Form{
     {
         ?>
         <div class="General">
-        <div id="Creation">Modifier un ingrédient :</div>
+        <div class="Edit">Modifier un ingrédient :</div>
         <form id="game-form" method="POST" enctype="multipart/form-data">
-            <div class="mb-3 neon">
+            <div class="should_center_this">
 
-                <label for="nom_ing" class="form-label">Nom ingrédient</label>
-                <input type="text" class="form-control" id="name" color="black" name="name" aria-describedby="name" list="list_ing">
+                <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
+                <input type="text" class="form-control2" id="tag-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
 
 
                 <datalist id="list_ing">
@@ -63,10 +63,10 @@ class Edition_Form{
                 </datalist>
 
             </div>
-            <div style="display: flex">
-                <button type="submit" class="btn neon">Submit</button>
+            <div class="sub-supp">
+                <button type="submit" style="border-radius: 20px">Submit</button>
                 <div style="width: 30px"></div>
-                <button type="reset" class="btn neon">Reset</button>
+                <button type="reset" style="border-radius: 20px">Reset</button>
             </div>
         </form>
         </div>
