@@ -35,20 +35,27 @@ class RecetteRenderer{
 
         <div id = "detail-tag-ing">
 
-            <div id = "detail-tag">
+            <div class = "detail-tag">
+                <div class="txt-detail"> Tag : </div>
             <?php
             if ($recette->liste_tag != null){
-                     foreach ($recette->liste_tag as $tag){
-                         echo $tag;
+                     foreach ($recette->liste_tag as $tag){ ?>
+                         <div class = "tag_recette"><?= $tag?></div>
+                     <?php
                      }
             }?>
             </div>
             <?php if ($recette->liste_ing != null): ?>
-                <div id="detail-ing">
+                <div class="detail-ing">
+                    <div class="txt-detail">Ingredients : </div>
+
                     <?php foreach ($recette->liste_ing as $ing): ?>
-                        <div id = "ing_recette"><?= $ing[0]?></div>
+                    <div class = "sep-detail-ing">
                         <img src= "../img/img_ingredient/<?=$ing[1]?>">
+                        <div class = "ing_recette"><?= $ing[0]?></div>
+                    </div>
                     <?php endforeach; ?>
+
                 </div>
             <?php endif ?>
         </div>

@@ -13,18 +13,24 @@ session_destroy();
 
 ob_start() ?>
 
-
+<div id="recheche-all">
 <?php
     $recherche_a = new RechercheAvancee();
-    $recherche_a->Recherche_avancee_form();
+
+
 
     $recherche_a->afficher_liste_checks();
+
+   ?>
+
+<div id="gauche_oskour">
+<?php
+$recherche_a->Recherche_avancee_form();
 ?>
 
 <div id = "resultat_recherche_avancée">
     <?php
-    echo var_dump($_POST["selection_tag"]);
-    echo var_dump($_POST["selection_ing"]);
+
         if (isset($_POST['recherche_avancee'])){
             echo $_POST['recherche_avancee'];
         }
@@ -33,6 +39,8 @@ ob_start() ?>
             echo $_POST['recherche_avancee'];
         }
     ?>
+</div>
+</div>
 </div>
 <?php $content = ob_get_clean();
 Template::render($content);

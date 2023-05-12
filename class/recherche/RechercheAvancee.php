@@ -10,9 +10,9 @@ class RechercheAvancee{
 
 
     public function Recherche_avancee_form(): void{?>
-        <div id = "input_recherche_avancée">
-            <form method='post' action = 'recherche_avancee.php' id="form-rech" >
-                <input type="text" id="recherche_avancee" name="recherche_avancee" placeholder="Cherchez une recette, un tag...">
+        <div id = "input_recherche_av">
+            <form method='post' action = 'recherche_avancee.php' id="form-rech1" >
+                <input type="text" id="recherche_avancee_h" name="recherche_avancee" placeholder="Cherchez une recette, un tag...">
             </form>
         </div>
         <?php
@@ -20,8 +20,9 @@ class RechercheAvancee{
     public function afficher_liste_checks(): void{?>
             <div id = "liste-avancee">
             <form class="input_recherche_avancee" action="recherche_avancee.php" method="post" autocomplete="off">
-                <button type = submit id = "button-avancee"> RECHERCHER </button>
+               <div id="pour-le-after"> <button type = submit id = "button-avancee">Rechercher  </button></div>
                 <div class = "titre_liste_avancee"> TAG :</div>
+                <div id="pour-le-after">
                 <div id = "liste_tag">
                     <?php
                     $tags = new Tag();
@@ -33,6 +34,7 @@ class RechercheAvancee{
                         <input id = "<?= $tag->num_tag ?>" value="<?= $tag->num_tag ?>" type = "checkbox" name = "selection_tag[]">
                         <?php echo $tag->name . "</br>";
                     } ?>
+                </div>
                 </div>
                 <div class = "titre_liste_avancee"> INGREDIENT :</div>
                 <div id = "liste_ing">
