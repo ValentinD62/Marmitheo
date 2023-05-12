@@ -46,7 +46,7 @@ class Edition_Form{
             <div class="should_center_this">
 
                 <label for="nom_ing" class="form-label2">Nom de l'ingrédient :</label>
-                <input type="text" class="form-control2" id="tag-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
+                <input type="text" class="form-control2" id="Ing-Edit" color="black" name="name" aria-describedby="name" list="list_ing">
 
 
                 <datalist id="list_ing">
@@ -56,7 +56,7 @@ class Edition_Form{
 
                     for ($i = 0; $i < sizeof($query); $i++) {
                         ?>
-                        <option value="<?php echo $query[$i]->nom_ing; ?>">
+                        <option value="<?php echo $query[$i]->pk_num_rec; ?>">
                             <?php echo $query[$i]->nom_ing; ?>
                         </option>
                     <?php } ?>

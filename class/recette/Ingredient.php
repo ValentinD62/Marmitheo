@@ -74,7 +74,7 @@ class Ingredient extends RecetteBD
             $edition_ing_img = "UPDATE ingrédient SET image  '" .$imgName. "' WHERE nom_ing ='" .$ancien_nom."'";
             $statement = $this->pdo->prepare($edition_ing_img);
             $statement->execute() or die(var_dump($statement->errorInfo()));
-            
+
         }
 
     }
