@@ -91,7 +91,7 @@ class Edition_Form{
         <form id="game-form" method="POST" enctype="multipart/form-data">
             <div class="should_center_this">
                 <label for="ancien_nom_tag" class="form-label">Nom du Tag :</label>
-                <input type="text" class="form-control2" id="tag_edit" color="black" name="ancien_nom_tag" aria-describedby="ancien_nom_tag" list="list_tag">
+                <input type="text" class="form-control2" id="ancien_nom_tag" color="black" name="ancien_nom_tag" aria-describedby="ancien_nom_tag" list="list_tag">
 
                 <datalist id="list_tag">
                     <?php
@@ -108,7 +108,7 @@ class Edition_Form{
             </div>
             <div class="should_center_this">
                 <label for="nouveau_nom_tag" class="form-label">Nouveau nom de Tag :</label>
-                <input type="text" class="form-control2" id="new-tag" color="black" name="nouveau_nom_tag" aria-describedby="nouveau_nom_tag">
+                <input type="text" class="form-control2" id="nouveau_nom_tag" color="black" name="nouveau_nom_tag" aria-describedby="nouveau_nom_tag">
             </div>
             <div class="sub-supp">
                 <button type="submit" style="border-radius: 20px">Submit</button>
