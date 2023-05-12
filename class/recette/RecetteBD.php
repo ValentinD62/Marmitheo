@@ -145,7 +145,6 @@ class RecetteBD
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "recette\RecetteRenderer");
             $results_final = array_merge($results_final, $results);
         }
-
         return $results_final;
     }
 
