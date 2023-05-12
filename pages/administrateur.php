@@ -102,22 +102,10 @@ if(empty($_POST['delete_name'])) {
     $des->generateDeleteRecetteForm();
 }
 else{
-    $all_recette = $n_recette->getAllRecette();
-    $bon = true;
-    foreach($all_recette as $recette){ //Vérification pour voir si le nom de la recette est déjà dans la base de données.
-        if ($recette->nom_rec != $_POST['delete_name']){
-            $bon = false;
-        }
-    }
-    if (!$bon){?>
-        <div id = "error_admin"><?= "La recette n'est pas présente dans la base de données." ?> </div><?php
-        $des->generateDeleteRecetteForm();
-        }
-    else{
-        $rec->deleteRecette($_POST['delete_name']);?>
-        <div id = "bravo" > Recette supprimer de la base de données </div><?php
-        $des->generateDeleteRecetteForm();
-    }
+
+    $rec->deleteRecette($_POST['delete_name']);
+    $des->generateDeleteRecetteForm();
+
 }
 ?>
 <img class="separateur" src="../img/separator.png">
