@@ -68,7 +68,7 @@ class Edition_Form{
                 <input type="text" class="form-control2" id="new_ing" color="black" name="nouveau_nom_ing" aria-describedby="nouveau_nom_ing">
             </div>
                 <div class = "new-img-ing">
-                <input type="file" class="form-2" id="new_img" color="black" name="nouveau_img_ing" aria-describedby="nouveau_img_ing">
+                <input type="file" class="form-2" id="new_img" color="black" name="nouveau_img_ing" aria-describedby="nouveau_img_ing" accept="image/png, image/gif, image/jpeg">
                 </div>
             </div>
 

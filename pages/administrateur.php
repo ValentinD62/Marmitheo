@@ -194,6 +194,8 @@ if(empty($_POST['nom_ing'])){
     $edition->generateEditionIngForm();
 }
 else{
+    $a_ing = $_POST['nom_ing'];
+    $a_ing = htmlspecialchars($a_ing);
     echo $_POST['nom_ing'];
     $all_ing = $n_recette->getAllIngredient();
     $bon1 = false;
@@ -207,16 +209,17 @@ else{
         $edition->generateEditionIngForm();
     }
     else{
+        $ing = new Ingredient();
         if(!empty($_POST['nouveau_nom_ing'])){
             var_dump( $_POST['nouveau_nom_ing']);
             $ing->editionNomIng($_POST['nom_ing'], $_POST['nouveau_nom_ing']); ?>
             <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
-            $edition->generateEditionTagForm();
+            $edition->generateEditionIngForm();
         }
         if(!empty($_FILES['nouveau_img_ing'])){
             $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>
             <div class = "bravo"> Image édité avec succès </div> <?php
-            $edition->generateEditionTagForm();
+            $edition->generateEditionIngForm();
         }
     }
 
