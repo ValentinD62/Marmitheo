@@ -274,6 +274,8 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
+    
+
 
 
 
