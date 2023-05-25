@@ -8,17 +8,28 @@ use recette\Tag;
 
 class RechercheAvancee{
 
-    public function getHTMLForSearch($recette): void { //Fonction pour pouvoir accéder au HTML sans passer par RecetteRenderer?>
+    public function getHTMLForSearch($recette,$i): void { //Fonction pour pouvoir accéder au HTML sans passer par RecetteRenderer?>
 
-        <div class="recette">
+        <div class="recette" id="recette<?php echo $i?>">
 
-            <div id="img-recherche">
-                <img src= "../img/<?= $recette->image ?>">
-            </div>
-            <div id="nom-recherche"><?= $recette->name ?></div>
-            <div id="id-recherche"><?= $recette->id ?></div>
+        <div id="img-recherche">
+            <img src= "../img/<?= $recette->image ?>">
         </div>
-
+        <div id="nom-recherche"><?= $recette->name ?></div>
+        <div id="id-recherche"><?= $recette->id ?></div>
+        <script>
+        elems1 = document.getElementById('Login');
+        if(elems1.innerText === 'Logout'){
+            var m = document.querySelector("#recette<?php echo $i?>");
+            var Item = document.createElement("div");
+            var elem = document.createElement("img");
+            elem.setAttribute("src", "../img/bouton-modifier.png");
+            elem.classList.add("img-edit");
+            Item.appendChild(elem);
+            Item.classList.add("modifie");
+            m.appendChild(Item);
+            </script>
+        }
     <?php }
     public function afficher_liste_checks(): void{ //Affiche tous les tags et les ingrédients dont on a besoin pour la recherche avancee?>
             <div id = "liste-avancee">
@@ -76,7 +87,7 @@ class RechercheAvancee{
             $i = 0;  ?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php foreach ($liste_recetteBD as $recette){
-                    echo $recette->getHTMLForSearch($liste_recette[$i]);
+                    echo $recette->getHTMLForSearch($liste_recette[$i],$i);
                     $i++;
                 }
                 ?>
@@ -120,7 +131,7 @@ class RechercheAvancee{
                         for ($i = 0; $i < sizeof($rec); $i++){
                             $est_dedans = array_search($rec[$i]->id, $liste_dans_page);
                             if (gettype($est_dedans) == "boolean"){
-                                $this->getHTMLForSearch($rec[$i]);
+                                $this->getHTMLForSearch($rec[$i],$i);
                                 $liste_dans_page[$i] = $rec[$i]->id;
                                 $bon = true;
                             }

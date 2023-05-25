@@ -1,4 +1,8 @@
-<?php ob_start()  ?>
+<?php require_once __DIR__ . "/../class/autoload.php";
+Autoloader::register();
+use Template\Template;
+
+ob_start()  ?>
 <?php session_start() ;
 session_destroy(); ?>
 

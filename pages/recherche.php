@@ -18,7 +18,6 @@ $recherche->getRechercheRecette();
 
 ?>
 
-<?php session_start() ;?>
 
 
 <?php

@@ -803,6 +803,14 @@
         border: 1px solid #8a8686;
     }
 
+    .nolog{
+        display: flex;
+        flex-direction: row;
+        transition: transform .1s;
+        height: 200px;
+        width: 100%;
+        }
+
 
 
     .recette img{
@@ -1074,8 +1082,26 @@
     }
 
 
+    /* ca fait bcp de css en tout cas. oui je sais c'est pas opti mais la prochaine je saurais comment mieux faire :) */
+
+    .modifie{
+        border-radius: 15px;
+        border: 1px black solid;
+        margin: 5px;
+        display: flex;
+        text-align: center;
+        width: 100px;
+        margin-top: 125px;
+    }
+
+    .img-edit{
+        max-height: 60px;
+        max-width: 80px;
+        display: flex;
+        margin: auto;
 
 
+    }
 
 
 

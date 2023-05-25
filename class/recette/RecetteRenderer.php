@@ -6,15 +6,34 @@ class RecetteRenderer{
 
     //Fonction pour afficher la fonction minimaliste des informations
     //d'une recette.
-    public function getHTMLForSearch($recette): void {?>
+    public function getHTMLForSearch($recette,$i): void {?>
 
-        <div class="recette">
-
+        <div class="recette" id="recette<?php echo $i?>">
+            <div class = "nolog">
                 <div id="img-recherche">
                 <img src= "../img/<?= $recette->image ?>">
                 </div>
                 <div id="nom-recherche"><?= $recette->name ?></div>
                 <div id="id-recherche"><?= $recette->id ?></div>
+            </div>
+            <script>
+                elems1 = document.getElementById('Login');
+                if(elems1.innerText === 'Logout'){
+                    var m = document.querySelector("#recette<?php echo $i?>");
+                    var Item = document.createElement("div");
+                    var elem = document.createElement("img");
+                    var elem1 = document.createElement("div");
+                    elem1.setAttribute("id","id-recherche");
+                    elem1.innerText = <?= $recette->id ?>;
+                    Item.appendChild(elem1);
+                    elem.setAttribute("src", "../img/bouton-modifier.png");
+                    elem.classList.add("img-edit");
+                    Item.appendChild(elem);
+                    Item.classList.add("modifie");
+                    m.appendChild(Item);
+                }
+
+            </script>
         </div>
 
     <?php }
