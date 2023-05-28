@@ -11,8 +11,7 @@ use Template\Template;
 
 
 <?php ob_start()  ?>
-<?php session_start() ;
-session_destroy(); ?>
+<?php session_start() ;?>
 
 <?php
 $id_recette = $_GET['id'];
