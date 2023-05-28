@@ -228,7 +228,7 @@ class RecetteBD
         return $results;
     }
 
-//----------------------------------- Fonctions d'ajout -----------------------------------------------
+//----------------------------------- Fonctions de recherches de tous les tags et ingrédients -----------------------------------------------
 
     //Fonction qui récupère tous les tags de la BDD.
     public function getAllTag(): array{
@@ -258,7 +258,7 @@ class RecetteBD
 
     }
 
-    //Fonction qui récupère les informations des tags ayant le nom $name.
+   /* //Fonction qui récupère les informations des tags ayant le nom $name.
     public function getTagbyName($name): array{
         // Préparation d'une requête simple
         $sql = "SELECT * FROM tag WHERE nom_tag = '" . $name . "'";
@@ -269,7 +269,7 @@ class RecetteBD
         // Récupération de la réponse sous forme d'un tableau d'instances de tag
         $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
-    }
+    }*/
 
     //----------------------------------- Fonctions de récupération des derniers éléments crées -----------------------------------------------
 
