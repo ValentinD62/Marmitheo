@@ -271,6 +271,8 @@ class RecetteBD
         return $results;
     }
 
+    //----------------------------------- Fonctions de récupération des derniers éléments crées -----------------------------------------------
+
     //récupère le numéro du dernier tag_recette créé.
     public function getMax_num_Tag_recette(): int{
         // Préparation d'une requête simple
