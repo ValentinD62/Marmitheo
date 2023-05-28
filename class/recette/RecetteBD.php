@@ -52,6 +52,8 @@ class RecetteBD
         return $data ;
     }
 
+    //----------------------------------- Fonctions d'ajout -----------------------------------------------
+
     //permet d'ajouter des tags dans la base de données
     public function addTagBD($name):void
     {
@@ -75,6 +77,7 @@ class RecetteBD
         $this->exec($query, $params);
     }
 
+    //----------------------------------- Fonctions de recherche de recettes -----------------------------------------------
     //Retourne toutes les recettes sous forme de tableau de recettes.
     public function getAllRecette(): array{
         // Préparation d'une requête simple
@@ -170,6 +173,9 @@ class RecetteBD
         return $results_final;
     }
 
+
+//----------------------------------- Fonctions de recherhce des 2 tables de "liaison"-----------------------------------------------
+
     //Fonction qui récupère le nom des tags liés à la recette avec l'id $num_recette
     public function getTagofRecette($num_recette): array{
         $sql = "SELECT nom_tag FROM tag INNER JOIN tag_recette on tag.pk_num_tag = tag_recette.fk_num_tag WHERE tag_recette.fk_num_rec = " . $num_recette;
@@ -191,6 +197,38 @@ class RecetteBD
         $results = $statement->fetchAll(PDO::FETCH_CLASS);
         return $results;
     }
+
+
+    //----------------------------------- Fonctions pour retourner tous les éléments des 2 tables de liaison -----------------------------------------------
+
+    //return tout les elements de la table ing_recette
+    public function getAllRecIng(): array
+    {
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM ing_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+    //return tout les elements de la table tag_recette
+    public function getAllRecTag(): array
+    {
+        // Préparation d'une requête simple
+        $sql = "SELECT* FROM tag_recette";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results;
+    }
+
+//----------------------------------- Fonctions d'ajout -----------------------------------------------
 
     //Fonction qui récupère tous les tags de la BDD.
     public function getAllTag(): array{
@@ -297,33 +335,4 @@ class RecetteBD
         $results = $statement->fetch(PDO::FETCH_UNIQUE);
         return $results[0];
     }
-
-    //return tout les elements de la table ing_recette
-    public function getAllRecIng(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM ing_recette";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
-
-    //return tout les elements de la table tag_recette
-    public function getAllRecTag(): array
-    {
-        // Préparation d'une requête simple
-        $sql = "SELECT* FROM tag_recette";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        // Récupération de la réponse sous forme d'un tableau d'instances de GameRenderer
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }
 }
-
-
