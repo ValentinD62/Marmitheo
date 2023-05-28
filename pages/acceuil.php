@@ -8,8 +8,7 @@ use Template\Template;
 
 
 <?php ob_start()  ?>
-<?php session_start() ;
-session_destroy(); ?>
+<?php session_start() ; ?>
 
 <div id="decouverte"> Les Découvertes du jour</div>
 

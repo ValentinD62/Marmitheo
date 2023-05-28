@@ -24,7 +24,7 @@
 
 
   <div id="marmitheo">
-      <a href = "logout.php">MarmiThéo</a>
+      <a href = "acceuil.php">MarmiThéo</a>
   </div>
   <div id="hand">
     <img src="../img/hand21.png">

@@ -4,12 +4,9 @@ Autoloader::register();
 
 
 use Template\Template;
-use recette\RecetteBD;
 use recherche\RechercheAvancee;
 
 session_start() ;
-
-session_destroy();
 
 ob_start() ?>
 

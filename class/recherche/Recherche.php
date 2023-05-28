@@ -16,7 +16,7 @@ class Recherche{
             $i = 0;  ?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php foreach ($liste_recetteBD as $recette){
-                    echo $recette->getHTMLForSearch($liste_recette[$i],$i);
+                    echo $recette->getHTMLForSearch($liste_recette[$i]);
                     $i++;
                 }
                 ?>

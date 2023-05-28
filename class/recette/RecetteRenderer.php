@@ -6,9 +6,9 @@ class RecetteRenderer{
 
     //Fonction pour afficher la fonction minimaliste des informations
     //d'une recette.
-    public function getHTMLForSearch($recette,$i): void {?>
+    public function getHTMLForSearch($recette): void {?>
 
-        <div class="recette" id="recette<?php echo $i?>">
+        <div class="recette" id="recette<?php echo $recette->id?>">
             <div class = "nolog">
                 <div id="img-recherche">
                 <img src= "../img/<?= $recette->image ?>">
@@ -16,10 +16,9 @@ class RecetteRenderer{
                 <div id="nom-recherche"><?= $recette->name ?></div>
                 <div id="id-recherche"><?= $recette->id ?></div>
             </div>
-            <script>
-                elems1 = document.getElementById('Login');
-                if(elems1.innerText === 'Logout'){
-                    var m = document.querySelector("#recette<?php echo $i?>");
+            <?php if (isset($_SESSION['name'])):?>
+                <script>
+                    var m = document.querySelector("#recette<?php echo $recette->id?>");
                     var Item = document.createElement("div");
                     var elem = document.createElement("img");
                     var elem1 = document.createElement("div");
@@ -31,9 +30,8 @@ class RecetteRenderer{
                     Item.appendChild(elem);
                     Item.classList.add("modifie");
                     m.appendChild(Item);
-                }
-
-            </script>
+                </script>
+            <?php endif ?>
         </div>
 
     <?php }
