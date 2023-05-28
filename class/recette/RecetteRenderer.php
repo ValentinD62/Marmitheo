@@ -88,12 +88,12 @@ class RecetteRenderer{
 
             <div id="detail">
                 <div id = "detail-description">
-                    <label for="nom_description"> Description</label>
-                    <textarea class = "input-modif" id = "nom_description" name = "nom_description"> <?= $recette->description?> </textarea>
+                    <label for="description_modif"> Description</label>
+                    <textarea class = "input-modif" id = "description_modif" name = "description_modif"> <?= $recette->description?> </textarea>
                 </div>
                 <div id="detail-img">
                     <label for="image_recette"> Image :</label>
-                    <input type="file" class = "input-modif" id = "image_recette" name = "image_recette" value="<?= "../img/" . $recette->image?>" accept="image/png, image/gif, image/jpeg">
+                    <input type="file" class = "input-modif" id = "image_recette_modif" name = "image_recette_modif" value="<?= "../img/" . $recette->image?>" accept="image/png, image/gif, image/jpeg">
                     <img src= "../img/<?= $recette->image?>" alt="image de la recette">
                 </div>
             </div>
@@ -119,7 +119,7 @@ class RecetteRenderer{
                                 <div class = "ing_recette">
                                     <input type="text" class = "input-modif" name = "nom_ing_modif[]" value="<?= $ing[0]?>">
                                 </div>
-                                <input type="file" class = "input-modif" id = "image_recette" name = "image_recette_modif[]" value="<?= "../img/img_ingredient/" . $ing[1]?>" accept="image/png, image/gif, image/jpeg">
+                                <input type="file" class = "input-modif" id = "image_recette" name = "image_ing_modif[]" value="<?= "../img/img_ingredient/" . $ing[1]?>" accept="image/png, image/gif, image/jpeg">
                                 <img src= "../img/img_ingredient/<?=$ing[1]?>" alt="image de <?= $ing[0]?>">
                             </div>
                         <?php endforeach; ?>

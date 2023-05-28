@@ -20,6 +20,18 @@ $liste_recette = $recette->Convertir_recette($recettesBD);
 
 $recette_R->getAllModifHTML($liste_recette[0]);
 
+$nom_modif = $_POST['nom_recette'];
+$nom_modif = htmlspecialchars($nom_modif);
+$description_modif = $_POST['description_modif'];
+$description_modif = htmlspecialchars($description_modif);
+$image_modif = $_FILES["image_recette_modif"];
+$all_name_tag = $_POST["tag_modif"];
+$all_name_tag = htmlspecialchars($all_name_tag);
+$all_name_ing = $_POST["nom_ing_modif"];
+$all_name_ing = htmlspecialchars($all_name_ing);
+$all_img_ing = $_FILES["image_ing_modif"];
+
+
 ?>
 
 
