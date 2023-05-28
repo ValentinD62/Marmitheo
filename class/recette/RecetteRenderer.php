@@ -97,34 +97,36 @@ class RecetteRenderer{
                     <img src= "../img/<?= $recette->image?>" alt="image de la recette">
                 </div>
             </div>
-        </form>
 
-        <div id = "detail-tag-ing">
-            <div class = "detail-tag">
-                <div class="txt-detail"> Tag : </div>
-                <?php
-                if ($recette->liste_tag != null){
-                    foreach ($recette->liste_tag as $tag){ ?>
-                        <div class = "tag_recette">
-                            <input type="text" class = "input-modif" id = "nom_recette" name = "nom_recette" value="<?= $recette->name?>">
-                        </div>
-                        <?php
-                    }
-                }?>
-            </div>
-            <?php if ($recette->liste_ing != null): ?>
+            <div id = "detail-tag-ing">
+                <div class = "detail-tag">
+                    <div class="txt-detail"> Tag : </div>
+                    <?php
+                    if ($recette->liste_tag != null){
+                        foreach ($recette->liste_tag as $tag){ ?>
+                            <div class = "tag_recette">
+                                <input type="text" class = "input-modif" name = "tag_modif[]" value="<?= $tag?>">
+                            </div>
+                            <?php
+                        }
+                    }?>
+                </div>
                 <div class="detail-ing">
                     <div class="txt-detail">Ingredients : </div>
-
-                    <?php foreach ($recette->liste_ing as $ing): ?>
-                        <div class = "sep-detail-ing">
-                            <img src= "../img/img_ingredient/<?=$ing[1]?>">
-                            <div class = "ing_recette"><?= $ing[0]?></div>
-                        </div>
-                    <?php endforeach; ?>
-
+                    <?php if ($recette->liste_ing != null): ?>
+                        <?php foreach ($recette->liste_ing as $ing): ?>
+                            <div class = "sep-detail-ing">
+                                <div class = "ing_recette">
+                                    <input type="text" class = "input-modif" name = "nom_ing_modif[]" value="<?= $ing[0]?>">
+                                </div>
+                                <input type="file" class = "input-modif" id = "image_recette" name = "image_recette_modif[]" value="<?= "../img/img_ingredient/" . $ing[1]?>" accept="image/png, image/gif, image/jpeg">
+                                <img src= "../img/img_ingredient/<?=$ing[1]?>" alt="image de <?= $ing[0]?>">
+                            </div>
+                        <?php endforeach; ?>
+                <?php endif ?>
                 </div>
-            <?php endif ?>
-        </div>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
     <?php }
 }
