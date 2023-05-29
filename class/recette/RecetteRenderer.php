@@ -4,6 +4,8 @@ namespace recette;
 
 class RecetteRenderer{
 
+    public const UPLOAD_DIR = "../img/";
+
     //Fonction pour afficher la fonction minimaliste des informations
     //d'une recette.
     public function getHTMLForSearch($recette): void {?>
@@ -84,6 +86,7 @@ class RecetteRenderer{
             <div id="detail-Title" class="centeragain">
                 <label for="nom_recette" > Nom de la Recette</label>
                 <input type="text" class = "input-modif1" id = "nom_recette" name = "nom_recette" value="<?= $recette->name?>">
+                <?= $recette->image ?>
             </div>
 
             <div id="detail">
@@ -93,8 +96,8 @@ class RecetteRenderer{
                 </div>
                 <div id="detail-img">
                     <label for="image_recette"> Image :</label>
-                    <input type="file" class = "input-modif-img" id = "image_recette_modif" name = "image_recette_modif" value="<?= "../img/" . $recette->image?>" accept="image/png, image/gif, image/jpeg">
-                    <img  id = "img-modif" src= "../img/<?= $recette->image?>" alt="image de la recette">
+                    <input type="file" class = "input-modif-img" id = "image_recette_modif" name = "image_recette_modif" value="<?= self::UPLOAD_DIR . $recette->image?>" accept="image/png, image/gif, image/jpeg">
+                    <img  id = "img-modif" src= "<?= self::UPLOAD_DIR . $recette->image?>" alt="image de la recette">
                 </div>
             </div>
 

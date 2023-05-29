@@ -64,7 +64,7 @@ class Recette extends RecetteBD
     }
 
     //permet de creer une recette et de l'ajouter dans la base de données.
-    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing, $all_img_ing = null):void
+    public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void
     {
         $name = htmlspecialchars($name);
         $description = htmlspecialchars($description);
@@ -274,9 +274,18 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
-    
 
 
+    public function editRecette($id, $name, $description, $img, $alltag, $all_name_ing, $all_img_ing):void{
+        $edition_rec_nom = "UPDATE recette SET nom_rec ='". $name . "' WHERE pk_num_rec = '". $id . "'";
+        $statement = $this->pdo->prepare($edition_rec_nom);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+        $edition_rec_desc = "UPDATE recette SET description = '" . $description ."' WHERE pk_num_rec = '" . $id ."'";
+        $statement = $this->pdo->prepare($edition_rec_desc);
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+
+    }
 
 
 

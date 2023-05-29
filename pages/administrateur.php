@@ -196,7 +196,6 @@ if(empty($_POST['nom_ing'])){
 else{
     $a_ing = $_POST['nom_ing'];
     $a_ing = htmlspecialchars($a_ing);
-    echo $_POST['nom_ing'];
     $all_ing = $n_recette->getAllIngredient();
     $bon1 = false;
     foreach($all_ing as $ing){ //Vérification pour voir si le nom de l'ingredient est déjà dans la base de données.
@@ -223,10 +222,10 @@ else{
                 <div class = "error_admin"><?= "Le nouveau nom est déjà dans la base de données." ?> </div><?php
                 $edition->generateEditionIngForm();
             }
-            else{
-                $edition->generateEditionIngForm();
-                $ing->editionNomIng($a_ing, $n_ing); ?>
+            else{ ?>
                 <div class = "bravo"> Nom de l'ingredient édité avec succès </div> <?php
+                $edition->generateEditionIngForm();
+                $ing->editionNomIng($a_ing, $n_ing);
             }
 
         }
@@ -234,10 +233,9 @@ else{
             <div class = "error_admin"><?= "Le nouveau nom est déjà dans la base de données." ?> </div><?php
                 $edition->generateEditionIngForm();
         }
-        if(!empty($_FILES['nouveau_img_ing'])){
-            $ing->editionImgIng($_POST['nom_ing'], $_FILES['nouveau_img_ing']); ?>
+        if(!empty($_FILES['nouveau_img_ing']['name'])){
+            $ing->editionImgIng($_POST['nouveau_nom_ing'], $_FILES['nouveau_img_ing']); ?>
             <div class = "bravo"> Image édité avec succès </div> <?php
-            $edition->generateEditionIngForm();
         }
     }
 
@@ -306,4 +304,3 @@ else{
 
 <!-- Utilisation du contenu bufferisé -->
 <?php Template::render($content) ?>
-

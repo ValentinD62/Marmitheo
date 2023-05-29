@@ -30,35 +30,13 @@ class Ingredient extends RecetteBD
         $this->image = $img;
     }
 
-    /*public function createIng($name, $img = null):void
-    {
-        $name = htmlspecialchars($name);
-        $imgName = null;
-        if ($img != null) {
-            $tmpName = $img['tmp_name'];
-            $imgName = $img['name'];
-            $imgName = urlencode(htmlspecialchars($imgName));
-            $dirname = self::UPLOAD_DIR;
-            if (!is_dir($dirname)) mkdir($dirname);
-            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
-            if (!$uploaded) die("FILE NOT UPLOADED");
-        } else echo "NO IMAGE !!!!";
-        $query = 'INSERT INTO ingrédient(nom_ing, image) VALUES (:name, :img)';
-        $params = [
-            'name' => htmlspecialchars($name),
-            'img' => $imgName,
-        ];
-        $this->exec($query, $params);
-
-    }*/
-
     public function editionImgIng($ancien_nom, $img_ing):void
     {
         $ancien_nom = htmlspecialchars($ancien_nom);
         $tmpName = $img_ing['tmp_name'];
         $imgName = $img_ing['name'];
         $imgName = urlencode(htmlspecialchars($imgName));
-        $dirname = self::UPLOAD_DIR;
+        $dirname = self::UPLOAD_DIR_ING;
         if (!is_dir($dirname)) mkdir($dirname);
         $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
         if (!$uploaded) die("FILE NOT UPLOADED");
