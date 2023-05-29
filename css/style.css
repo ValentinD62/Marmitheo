@@ -900,6 +900,7 @@
 
     #detail-img{
         display: flex;
+        flex-direction: column;
         text-align: center;
         border-radius: 20px;
         width: 40%;
@@ -1104,8 +1105,62 @@
     }
 
 
+    .centeragain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .centeragain input{
+        display: flex;
+        border-radius: 10px;
+
+    }
 
 
+    #description_modif{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    #labelmod{
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        text-decoration: underline;
+    }
+
+    .input-modif{
+        margin-left: 2.5%;
+        min-width: 90%;
+        min-height: 80% ;
+        border-radius: 5px;
+    }
+
+    .taging-mod{
+        min-width: 50%;
+    }
+
+    .input-modif-img{
+        display: flex;
+        margin: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+
+    #img-modif{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 20px;
+        width: 80%;
+        height: 80%;
+        margin: auto;
+        margin-right: 5%;
+        position: relative;
+        overflow: hidden;
+    }
 
 

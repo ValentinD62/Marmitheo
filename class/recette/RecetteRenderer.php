@@ -81,24 +81,24 @@ class RecetteRenderer{
     //Fonction pour pouvoir modifier les différentes recettes.
     public function getAllModifHTML($recette): void{ ?>
         <form id="edit-form" method="POST" enctype="multipart/form-data">
-            <div id="detail-Title">
-                <label for="nom_recette"> Nom de la Recette</label>
-                <input type="text" class = "input-modif" id = "nom_recette" name = "nom_recette" value="<?= $recette->name?>">
+            <div id="detail-Title" class="centeragain">
+                <label for="nom_recette" > Nom de la Recette</label>
+                <input type="text" class = "input-modif1" id = "nom_recette" name = "nom_recette" value="<?= $recette->name?>">
             </div>
 
             <div id="detail">
                 <div id = "detail-description">
-                    <label for="description_modif"> Description</label>
+                    <label for="description_modif" id="labelmod"> Description</label>
                     <textarea class = "input-modif" id = "description_modif" name = "description_modif"> <?= $recette->description?> </textarea>
                 </div>
                 <div id="detail-img">
                     <label for="image_recette"> Image :</label>
-                    <input type="file" class = "input-modif" id = "image_recette_modif" name = "image_recette_modif" value="<?= "../img/" . $recette->image?>" accept="image/png, image/gif, image/jpeg">
-                    <img src= "../img/<?= $recette->image?>" alt="image de la recette">
+                    <input type="file" class = "input-modif-img" id = "image_recette_modif" name = "image_recette_modif" value="<?= "../img/" . $recette->image?>" accept="image/png, image/gif, image/jpeg">
+                    <img  id = "img-modif" src= "../img/<?= $recette->image?>" alt="image de la recette">
                 </div>
             </div>
 
-            <div id = "detail-tag-ing">
+            <div id = "detail-tag-ing" class="taging-mod">
                 <div class = "detail-tag">
                     <div class="txt-detail"> Tag : </div>
                     <?php
