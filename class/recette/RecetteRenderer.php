@@ -132,7 +132,7 @@ class RecetteRenderer{
                             </div>
                         <?php endforeach; ?>
                 <?php endif ?>
-                    <button class = "btn">Ajouter un tag</button>
+                    <button class = "btn">Ajouter un ingrédient</button>
                 </div>
             </div>
             <button type="submit" class="btn">Submit</button>
