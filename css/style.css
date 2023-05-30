@@ -1164,3 +1164,13 @@
     }
 
 
+    #btn-ajt-ing,#btn-ajt-tag{
+        border: black solid 1px;
+        border-radius: 20px;
+        width: 60%;
+        height: 50px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

@@ -15,7 +15,7 @@ $id_recette = $_GET['id'];
 $recette_R = new RecetteRenderer();
 $recettesBD = new RecetteBD();
 $recette = new Recette();
-$recettesBD = $recettesBD->getRecetteById($id_recette);
+    $recettesBD = $recettesBD->getRecetteById($id_recette);
 $liste_recette = $recette->Convertir_recette($recettesBD);
 
 $recette_R->getAllModifHTML($liste_recette[0]);
@@ -38,7 +38,7 @@ if (isset($_POST['nom_recette'])){
             if ($image_modif["name"] == ""){
                 $image_modif = $liste_recette[0]->image;
             }
-            echo $image_modif["name"];
+            /*echo $image_modif["name"];
             $all_name_tag = $_POST["tag_modif"];
             for ($i = 0; $i < count($all_name_tag); $i++){
                 $all_name_tag[$i] = htmlspecialchars($all_name_tag[$i]);
@@ -49,7 +49,7 @@ if (isset($_POST['nom_recette'])){
             }
             $all_img_ing = $_FILES["image_ing_modif"];
             $recette->editRecette($id_recette,$nom_modif, $description_modif, $image_modif, $all_name_tag, $all_name_ing, $all_img_ing);
-        }
+        */}
     }
 }
 

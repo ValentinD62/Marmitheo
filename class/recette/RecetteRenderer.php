@@ -101,6 +101,7 @@ class RecetteRenderer{
             </div>
             <div id = "detail-tag-ing" class="taging-mod">
                 <div class = "detail-tag">
+                    <div id = "tag-edit">
                     <div class="txt-detail"> Tag : </div>
                     <?php
                     if ($recette->liste_tag != null){
@@ -114,10 +115,12 @@ class RecetteRenderer{
                             <?php
                         }
                     }?>
+                    </div>
                     <!-- <input type="text" class = "input-modif1" name = "nom_tag[]"> -->
-                    <button class = "btn">Ajouter un tag</button>
+                    <div id = "btn-ajt-tag">Ajouter un tag</div>
                 </div>
                 <div class="detail-ing">
+                    <div id = "ing-edit">
                     <div class="txt-detail">Ingredients : </div>
                     <?php if ($recette->liste_ing != null): ?>
                         <?php foreach ($recette->liste_ing as $ing): ?>
@@ -132,10 +135,13 @@ class RecetteRenderer{
                             </div>
                         <?php endforeach; ?>
                 <?php endif ?>
-                    <button class = "btn">Ajouter un ingrédient</button>
+                    </div>
+                    <div id = "btn-ajt-ing">Ajouter un ingrédient</div>
                 </div>
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
+
+        <
     <?php }
 }
