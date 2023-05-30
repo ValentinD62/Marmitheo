@@ -114,6 +114,7 @@ class RecetteRenderer{
                             <?php
                         }
                     }?>
+                    <!-- <input type="text" class = "input-modif1" name = "nom_tag[]"> -->
                     <button class = "btn">Ajouter un tag</button>
                 </div>
                 <div class="detail-ing">
