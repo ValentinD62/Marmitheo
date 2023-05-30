@@ -260,7 +260,7 @@ class Recette extends RecetteBD
 
 
 
-    public function editRecette($id, $name, $description, $img, $alltag, $all_name_ing, $all_img_ing):void{
+    public function editRecette($id, $name, $description, $img, $alltag = null, $all_name_ing = null, $all_img_ing = null):void{
         $edition_rec_nom = "UPDATE recette SET nom_rec ='". $name . "' WHERE pk_num_rec = '". $id . "'";
         $statement = $this->pdo->prepare($edition_rec_nom);
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer le nom
@@ -270,7 +270,88 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
 
         if($alltag != null){
+            $tag_base = $this->getAllTag(); // récupère tous les tags sous formes de classes données par le PDO.
+            $i = 0;
+            foreach($tag_base as $res){ // Récupération de tous les noms des tags.
+                $tab_name[$i] = $res->nom_tag;
+                $i++;
+            }
 
+            foreach ($alltag as $tag){
+                $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
+                $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
+                if (gettype($exists) != "boolean"){
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                    $params = [
+                        'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
+                        'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
+                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
+                }
+
+                else{
+                    $this->addTagBD($tag); // ajoute le nouveau tag dans la base de données.
+                    $nb_rec = $this->getMax_num_Tag(); // donne le numéro du tag que l'on vient de créer.
+                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec, fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                    $params = [
+                        'tag_rec' => $nb_tag_rec + 1, // la Primary Key du nouveau tag_recette.
+                        'num_tag' => $nb_rec, // le numéro du tag que l'on vient de mettre dans la BDD.
+                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer
+                    ];
+                    $this->exec($ajouter_tag_rec, $params);
+                }
+            }
+        }
+
+        // ----------- Partie pour ajouter les ingrédients à la recette. -----------------------
+
+        if($all_name_ing != null && $all_img_ing != null){
+            $ing_base = $this->getAllIngredient(); // récupère tous les ingrédients sous formes de classes données par le PDO.
+            $i = 0;
+            foreach($ing_base as $ing){ // Récupération de tous les noms des ingrédients.
+                $tab_ing_name[$i] = $ing->nom_ing;
+                $i++;
+            }
+            $i = 0;
+            foreach ($all_name_ing as $ing) {
+                $exists = array_search($ing, $tab_ing_name); //Vérifie si l'ingrédient est dans la BDD.
+                $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
+
+                if (gettype($exists) != "boolean") {
+                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
+                    $params = [
+                        'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
+                        'num_rec' => $id, //le numéro de la recette que l'on vient de créer.
+                        'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
+                    ];
+                    $this->exec($ajouter_ing_rec, $params);
+                }
+
+                else{
+                    $img_Ing_Name = null;
+                    if ($all_img_ing[$i] != null) {
+                        $tmpName = $all_img_ing[$i]['tmp_name'];
+                        $img_Ing_Name = $all_img_ing[$i]['name'];
+                        $img_Ing_Name = urlencode(htmlspecialchars($img_Ing_Name));
+                        $dirname = self::UPLOAD_DIR_ING;
+                        if (!is_dir($dirname)) mkdir($dirname);
+                        $uploaded = move_uploaded_file($tmpName, $dirname . $img_Ing_Name);
+                        if (!$uploaded) die("FILE NOT UPLOADED");
+                    } else echo "NO IMAGE !!!!";
+                    $this->addIngBD($ing, $img_Ing_Name); // ajoute le nouvel ingrédient dans la BDD.
+                    $nb_rec = $this->getMax_num_Ing(); // donne le numéro de l'ingrédient que l'on vient de créer.
+                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
+                    $params = [
+                        'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
+                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
+                        'num_ing' => $nb_rec, //le numéro de l'ingrédient que l'on vient de mettre dans la BDD.
+                    ];
+                    $this->exec($ajouter_ing_rec, $params);
+
+                }
+                $i++;
+            }
         }
     }
 

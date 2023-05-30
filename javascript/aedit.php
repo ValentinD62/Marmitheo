@@ -22,7 +22,15 @@ $recette = new RecetteBD();
         inp.type = "text";
         inp.classList.add("form-ingredient-input");
         inp.color = "black";
+        inp.name = "nom_ing[]";
+        let inp_img = document.createElement("input");
+        inp_img.type = "file";
+        inp_img.classList.add("input-modif-img");
+        inp_img.color = "black";
+        inp_img.accept = "image/png, image/gif, image/jpeg";
+        inp_img.name = "img_ing[]";
         x.appendChild(inp);
+        x.appendChild(inp_img);
     }
 
     function edittagadd(){
@@ -32,6 +40,7 @@ $recette = new RecetteBD();
         inp.type = "text";
         inp.classList.add("form-tag-input");
         inp.color = "black";
+        inp.name = "nom_tag[]";
         x.appendChild(inp);
 
     }
