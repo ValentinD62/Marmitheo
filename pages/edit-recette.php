@@ -21,27 +21,34 @@ $liste_recette = $recette->Convertir_recette($recettesBD);
 $recette_R->getAllModifHTML($liste_recette[0]);
 if (isset($_POST['nom_recette'])){
     $nom_modif = $_POST['nom_recette'];
-    if ($nom_modif == ""){
-        echo "bah il faut un nom en fait";
+    if ($nom_modif == ""){?>
+        <div class = "error_admin"><?= "Veuillez mettre le nom de la recette." ?> </div> <?php
         $recette_R->getAllModifHTML($liste_recette[0]);
     }
     else{
         $nom_modif = htmlspecialchars($nom_modif);
         $description_modif = $_POST['description_modif'];
-        if ($description_modif == ""){
-            echo "Il faut une description";
+        if ($description_modif == ""){?>
+            <div class = "error_admin"><?= "Veuillez mettre la description de la recette." ?> </div> <?php
             $recette_R->getAllModifHTML($liste_recette[0]);
         }
         else{
             $description_modif = htmlspecialchars($description_modif);
             $image_modif = $_FILES["image_recette_modif"];
-            echo $image_modif->name;
+            if ($image_modif["name"] == ""){
+                $image_modif = $liste_recette[0]->image;
+            }
+            echo $image_modif["name"];
             $all_name_tag = $_POST["tag_modif"];
-            $all_name_tag = htmlspecialchars($all_name_tag);
+            for ($i = 0; $i < count($all_name_tag); $i++){
+                $all_name_tag[$i] = htmlspecialchars($all_name_tag[$i]);
+            }
             $all_name_ing = $_POST["nom_ing_modif"];
-            $all_name_ing = htmlspecialchars($all_name_ing);
+            for ($i = 0; $i < count($all_name_ing); $i++){
+                $all_name_ing[$i] = htmlspecialchars($all_name_ing[$i]);
+            }
             $all_img_ing = $_FILES["image_ing_modif"];
-            $recette->editRecette($id_recette,$nom_modif, $description_modif);
+            $recette->editRecette($id_recette,$nom_modif, $description_modif, $image_modif, $all_name_tag, $all_name_ing, $all_img_ing);
         }
     }
 }

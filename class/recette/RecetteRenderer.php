@@ -86,7 +86,6 @@ class RecetteRenderer{
             <div id="detail-Title" class="centeragain">
                 <label for="nom_recette" > Nom de la Recette</label>
                 <input type="text" class = "input-modif1" id = "nom_recette" name = "nom_recette" value="<?= $recette->name?>">
-                <?= $recette->image ?>
             </div>
 
             <div id="detail">
@@ -100,7 +99,6 @@ class RecetteRenderer{
                     <img  id = "img-modif" src= "<?= self::UPLOAD_DIR . $recette->image?>" alt="image de la recette">
                 </div>
             </div>
-
             <div id = "detail-tag-ing" class="taging-mod">
                 <div class = "detail-tag">
                     <div class="txt-detail"> Tag : </div>
@@ -108,22 +106,28 @@ class RecetteRenderer{
                     if ($recette->liste_tag != null){
                         foreach ($recette->liste_tag as $tag){ ?>
                             <div class = "tag_recette">
-                                <input type="text" class = "input-modif" name = "tag_modif[]" value="<?= $tag?>">
+                                <div class = "tag_recette"><?= $tag?></div>
+                                <label for="suppr_tag"> Supprimer le tag
+                                    <input type="checkbox" name = "suppr_tag[]">
+                                </label>
                             </div>
                             <?php
                         }
                     }?>
+                    <button class = "btn">Ajouter un tag</button>
                 </div>
                 <div class="detail-ing">
                     <div class="txt-detail">Ingredients : </div>
                     <?php if ($recette->liste_ing != null): ?>
                         <?php foreach ($recette->liste_ing as $ing): ?>
                             <div class = "sep-detail-ing">
-                                <div class = "ing_recette">
-                                    <input type="text" class = "input-modif" name = "nom_ing_modif[]" value="<?= $ing[0]?>">
+                                <div class = "sep-detail-ing">
+                                    <img src= "../img/img_ingredient/<?=$ing[1]?>" alt="Image de <?= $ing[0]?>">
+                                    <div class = "ing_recette"><?= $ing[0]?></div>
                                 </div>
-                                <input type="file" class = "input-modif" id = "image_recette" name = "image_ing_modif[]" value="<?= "../img/img_ingredient/" . $ing[1]?>" accept="image/png, image/gif, image/jpeg">
-                                <img src= "../img/img_ingredient/<?=$ing[1]?>" alt="image de <?= $ing[0]?>">
+                                <label for="suppr_ing"> Supprimer l'ingrédient
+                                    <input type="checkbox" name = "suppr_ing[]">
+                                </label>
                             </div>
                         <?php endforeach; ?>
                 <?php endif ?>

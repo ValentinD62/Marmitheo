@@ -45,23 +45,7 @@ class Recette extends RecetteBD
         return $this->name . " avec comme image : " . $this->image . "et comme description :" . $this->description;
     }
 
-    public function init_ing(): void
-    {
-        $tab_ingRec = $this->getAllRecIng();
-        $i = 0;
-        foreach($tab_ingRec as $ingRec){
-            if($this->num_rec == $ingRec->fk_num_rec){
-                $this->ing[$i] = new Ingredient();
-                $this->ing[$i]->num_ing = $ingRec->fk_num_ing;
-                $name = 'SELECT nom_ing FROM ingrédient WHERE pk_num_ing =:num ';
-                $img = 'SELECT image_ing FROM ingrédient WHERE pk_num_ing = :num';
-                $params=['num' => $ingRec->fk_num_ing];
-                $this->ing[$i]->name = $this->exec($name, $params);
-                $this->ing[$i]->image = $this->exec($img, $params);
-                $i = $i + 1;
-            }
-        }
-    }
+
 
     //permet de creer une recette et de l'ajouter dans la base de données.
     public function createRecette($name, $description = null, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void
@@ -98,7 +82,7 @@ class Recette extends RecetteBD
 
             foreach ($alltag as $tag){
                 $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
-                $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_rectte enregistré.
+                $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
                 if (gettype($exists) != "boolean"){
                     $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                     $params = [
@@ -279,16 +263,15 @@ class Recette extends RecetteBD
     public function editRecette($id, $name, $description, $img, $alltag, $all_name_ing, $all_img_ing):void{
         $edition_rec_nom = "UPDATE recette SET nom_rec ='". $name . "' WHERE pk_num_rec = '". $id . "'";
         $statement = $this->pdo->prepare($edition_rec_nom);
-        $statement->execute() or die(var_dump($statement->errorInfo()));
+        $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer le nom
 
         $edition_rec_desc = "UPDATE recette SET description = '" . $description ."' WHERE pk_num_rec = '" . $id ."'";
         $statement = $this->pdo->prepare($edition_rec_desc);
-        $statement->execute() or die(var_dump($statement->errorInfo()));
+        $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
 
+        if($alltag != null){
+
+        }
     }
-
-
-
-
 
 }
