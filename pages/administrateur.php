@@ -161,7 +161,7 @@ else{
         }
     }
     if (!$bon){ ?>
-        <div class = "error_admin"><?= "Le tag n'est pas présent dans la base de données." ?> </div><?php
+        <div class = "error_admin"><?= "L'ingrédient n'est pas présent dans la base de données." ?> </div><?php
         $des->generateDeleteIngredientForm();
     }
     else{
