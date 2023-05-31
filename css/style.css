@@ -1131,6 +1131,7 @@
         text-decoration: underline;
     }
 
+
     .input-modif{
         margin-left: 2.5%;
         min-width: 90%;
@@ -1138,9 +1139,12 @@
         border-radius: 5px;
     }
 
+
+
     .taging-mod{
         min-width: 50%;
     }
+
 
     .input-modif-img{
         display: flex;
@@ -1148,6 +1152,7 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+
 
 
     #img-modif{
@@ -1187,6 +1192,7 @@
 
     }
 
+    
     #container-but{
         display: flex;
         justify-content: center;
