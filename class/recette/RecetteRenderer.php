@@ -109,7 +109,7 @@ class RecetteRenderer{
                             <div class = "tag_recette">
                                 <div class = "tag_recette"><?= $tag?></div>
                                 <label for="suppr_tag"> Supprimer le tag
-                                    <input type="checkbox" name = "suppr_tag[]">
+                                    <input type="checkbox" name = "suppr_tag[]" value="<?= $tag ?>">
                                 </label>
                             </div>
                             <?php
@@ -130,7 +130,7 @@ class RecetteRenderer{
                                     <div class = "ing_recette"><?= $ing[0]?></div>
                                 </div>
                                 <label for="suppr_ing"> Supprimer l'ingrédient
-                                    <input type="checkbox" name = "suppr_ing[]">
+                                    <input type="checkbox" name = "suppr_ing[]" value = "<?= $ing[0]?>">
                                 </label>
                             </div>
                         <?php endforeach; ?>

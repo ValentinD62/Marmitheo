@@ -39,8 +39,20 @@ if (isset($_POST['nom_recette'])){
                 $image_modif = $recette_actu->image;
             }
 
-            //if (isset($_POST["suppr_tag"])){}
+            //------------------------------ SUPPRESSION DES TAGS CHOISIS ----------------------------------------------
+            if (isset($_POST["suppr_tag"])){
+                $all_suppr_tag = $_POST["suppr_tag"]; //On récupère le nom des tags que l'on veut supprimer
+                foreach ($all_suppr_tag as $tag){
+                    $recette->deleteTagRecbyNameTag($id_recette, $tag);
+                }
+            }
 
+            if (isset($_POST["suppr_ing"])){
+                $all_suppr_ing = $_POST["suppr_ing"];//On récupère le nom des ingrédients que l'on veut supprimer
+                foreach ($all_suppr_ing as $ing){
+                    $recette->deleteIngRecbyNameIng($id_recette, $ing);
+                }
+            }
 
 
             //------------------------------ NOUVEAUX TAGS ----------------------------------------------

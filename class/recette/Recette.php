@@ -84,13 +84,16 @@ class Recette extends RecetteBD
                 $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
                 if (gettype($exists) != "boolean"){
-                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
-                    $params = [
-                        'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
-                        'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
-                        'num_rec' => $nb_recette_base, // le numéro de la recette que l'on vient de créer.
-                    ];
-                    $this->exec($ajouter_tag_rec, $params);
+                    $in_recette = $this->TaginRecette($tag_base[$exists]->pk_num_tag, $nb_recette_base);
+                    if (!$in_recette){
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                        $params = [
+                            'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
+                            'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
+                            'num_rec' => $nb_recette_base, // le numéro de la recette que l'on vient de créer.
+                        ];
+                        $this->exec($ajouter_tag_rec, $params);
+                    }
                 }
 
                 else{
@@ -126,13 +129,16 @@ class Recette extends RecetteBD
                 $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
 
                 if (gettype($exists) != "boolean") {
-                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
-                    $params = [
-                        'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
-                        'num_rec' => $nb_recette_base, //le numéro de la recette que l'on vient de créer.
-                        'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
-                    ];
-                    $this->exec($ajouter_ing_rec, $params);
+                    $in_recette = $this->InginRecette($ing_base[$exists]->pk_num_ing, $nb_recette_base);
+                    if (!$in_recette){
+                        $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
+                        $params = [
+                            'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
+                            'num_rec' => $nb_recette_base, //le numéro de la recette que l'on vient de créer.
+                            'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
+                        ];
+                        $this->exec($ajouter_ing_rec, $params);
+                    }
                 }
 
                 else{
@@ -269,6 +275,8 @@ class Recette extends RecetteBD
         $statement = $this->pdo->prepare($edition_rec_desc);
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
 
+        // ----------- Partie pour ajouter les tags à la recette. -----------------------
+
         if($alltag != null){
             $tag_base = $this->getAllTag(); // récupère tous les tags sous formes de classes données par le PDO.
             $i = 0;
@@ -287,7 +295,7 @@ class Recette extends RecetteBD
                         $params = [
                             'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
                             'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
-                            'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
+                            'num_rec' => $id, // le numéro de la recette que l'on veut modifier.
                         ];
                         $this->exec($ajouter_tag_rec, $params);
                     }
@@ -300,7 +308,7 @@ class Recette extends RecetteBD
                     $params = [
                         'tag_rec' => $nb_tag_rec + 1, // la Primary Key du nouveau tag_recette.
                         'num_tag' => $nb_rec, // le numéro du tag que l'on vient de mettre dans la BDD.
-                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer
+                        'num_rec' => $id, // le numéro de la recette que l'on veut modifier.
                     ];
                     $this->exec($ajouter_tag_rec, $params);
                 }
@@ -327,7 +335,7 @@ class Recette extends RecetteBD
                         $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                         $params = [
                             'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
-                            'num_rec' => $id, //le numéro de la recette que l'on vient de créer.
+                            'num_rec' => $id, // le numéro de la recette que l'on veut modifier.
                             'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
                         ];
                         $this->exec($ajouter_ing_rec, $params);
@@ -350,7 +358,7 @@ class Recette extends RecetteBD
                     $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id, :num_rec, :num_ing)';
                     $params = [
                         'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
-                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
+                        'num_rec' => $id, // le numéro de la recette que l'on veut modifier.
                         'num_ing' => $nb_rec, //le numéro de l'ingrédient que l'on vient de mettre dans la BDD.
                     ];
                     $this->exec($ajouter_ing_rec, $params);
@@ -361,4 +369,19 @@ class Recette extends RecetteBD
         }
     }
 
+    public function deleteTagRecbyNameTag($id_rec, $tag_name): void{
+        $name = htmlspecialchars($tag_name);
+        $del_tag_rec = "DELETE FROM tag_recette WHERE fk_num_tag = (SELECT pk_num_tag FROM tag WHERE nom_tag = '" . $name. "' LIMIT 1 ) AND fk_num_rec = '" . $id_rec ."'";
+        $statement = $this->pdo->prepare($del_tag_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+    }
+
+    public function deleteIngRecbyNameIng($id_rec, $ing_name): void{
+        $name = htmlspecialchars($ing_name);
+        $del_tag_rec = "DELETE FROM ing_recette WHERE fk_num_ing = (SELECT pk_num_ing FROM ingrédient WHERE nom_ing = '" . $name. "' LIMIT 1 ) AND fk_num_rec = '" . $id_rec ."'";
+        $statement = $this->pdo->prepare($del_tag_rec);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump($statement->errorInfo()));
+    }
 }
