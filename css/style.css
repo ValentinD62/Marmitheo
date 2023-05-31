@@ -1173,4 +1173,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background: linear-gradient(to bottom right, white 20%,#FFD4CB 80%);
+
     }
+
+    .btn-sub-edit{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 50px;
+        background: linear-gradient(to bottom right, white 20%,#FFD4CB 80%);
+
+    }
+
+    #container-but{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 75px;
+    }
+
+
+

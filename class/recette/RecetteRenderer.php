@@ -139,7 +139,9 @@ class RecetteRenderer{
                     <div id = "btn-ajt-ing">Ajouter un ingrédient</div>
                 </div>
             </div>
-            <button type="submit" class="btn">Submit</button>
+            <div id="container-but">
+            <button type="submit" class="btn-sub-edit">Submit</button>
+            </div>
         </form>
 
     <?php }
