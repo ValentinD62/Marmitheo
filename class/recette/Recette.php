@@ -236,35 +236,6 @@ class Recette extends RecetteBD
         $statement->execute() or die(var_dump($statement->errorInfo()));
     }
 
-    //edition de recette
-    public function editionNomRec($ancien_nom, $nouveau_nom):void
-    {
-        $nouveau_nom = htmlspecialchars($nouveau_nom);
-        $ancien_nom = htmlspecialchars($ancien_nom);
-        $edition_rec_nom = "UPDATE recette SET nom_rec ='". $nouveau_nom. "' WHERE nom_rec = '". $ancien_nom . "'";
-        $statement = $this->pdo->prepare($edition_rec_nom);
-        $statement->execute() or die(var_dump($statement->errorInfo()));
-    }
-
-    public function editionDesRec($ancien_nom, $nouv_des):void
-    {
-        $nouv_des = htmlspecialchars($nouv_des);
-        $ancien_nom = htmlspecialchars($ancien_nom);
-        $edition_rec_des = "UPDATE recette SET nom_rec ='". $nouv_des. "' WHERE nom_rec = '". $ancien_nom . "'";
-        $statement = $this->pdo->prepare($edition_rec_des);
-        $statement->execute() or die(var_dump($statement->errorInfo()));
-    }
-
-    public function editionImgRec($ancien_nom, $nouv_img):void
-    {
-        $nouv_img = htmlspecialchars($nouv_img);
-        $ancien_nom = htmlspecialchars($ancien_nom);
-        $edition_rec_img = "UPDATE recette SET image_rec ='". $nouv_img. "' WHERE nom_rec = '". $ancien_nom . "'";
-        $statement = $this->pdo->prepare($edition_rec_img);
-        $statement->execute() or die(var_dump($statement->errorInfo()));
-    }
-
-
 
     public function editRecette($id, $name, $description, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void{
         $edition_rec_nom = "UPDATE recette SET nom_rec ='". $name . "' WHERE pk_num_rec = '". $id . "'";
@@ -275,8 +246,6 @@ class Recette extends RecetteBD
         $statement = $this->pdo->prepare($edition_rec_desc);
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
 
-        var_dump($img);
-        echo gettype($img);
         if (gettype($img) ==  "array"){
             //Partie pour uploader l'image.
             $tmpName = $img['tmp_name'];

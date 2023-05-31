@@ -12,13 +12,13 @@ $recette = new RecetteBD();
 
         elems = this.querySelector("#id-recherche").innerText
         location.href="../pages/detail.php?id=" + elems  ;
-    };
+    }
 
     function modi() {
 
         elems = this.querySelector("#id-recherche").innerText
         location.href="../pages/edit-recette.php?id=" + elems  ;
-    };
+    }
 
 
     for (var i = 0;i<button.length;i++) {

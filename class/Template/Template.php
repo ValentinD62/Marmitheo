@@ -12,7 +12,6 @@ class Template {
         <html lang="en">
         <head>
             <link rel="stylesheet" href="../css/style.css">
-            <script defer src="../javascript/script.js"></script>
 
             <?php include "..\javascript\creation.php";?>
 
@@ -30,6 +29,7 @@ class Template {
             </div>
             <?php include "..\javascript\adetail.php";?>
             <?php include "..\javascript\aedit.php";?>
+            <?php include "..\javascript\script.php";?>
         </body>
         <?php include "footer.php" ?>
         </html>
