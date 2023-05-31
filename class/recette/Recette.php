@@ -281,13 +281,16 @@ class Recette extends RecetteBD
                 $exists = array_search($tag, $tab_name); // Recherche si le nom du tag est déjà dans la base de données.
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
                 if (gettype($exists) != "boolean"){
-                    $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
-                    $params = [
-                        'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
-                        'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
-                        'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
-                    ];
-                    $this->exec($ajouter_tag_rec, $params);
+                    $in_recette = $this->TaginRecette($tag_base[$exists]->pk_num_tag, $id);
+                    if (!$in_recette){
+                        $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
+                        $params = [
+                            'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
+                            'num_tag' =>$tag_base[$exists]->pk_num_tag, // le numéro du tag que l'on veut lier.
+                            'num_rec' => $id, // le numéro de la recette que l'on vient de créer.
+                        ];
+                        $this->exec($ajouter_tag_rec, $params);
+                    }
                 }
 
                 else{
@@ -319,13 +322,16 @@ class Recette extends RecetteBD
                 $nb_ing_rec = $this->getMax_num_Ing_recette(); //donne le numéro du dernier ing_recette créé.
 
                 if (gettype($exists) != "boolean") {
-                    $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
-                    $params = [
-                        'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
-                        'num_rec' => $id, //le numéro de la recette que l'on vient de créer.
-                        'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
-                    ];
-                    $this->exec($ajouter_ing_rec, $params);
+                    $in_recette = $this->InginRecette($ing_base[$exists]->pk_num_ing, $id);
+                    if (!$in_recette){
+                        $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
+                        $params = [
+                            'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
+                            'num_rec' => $id, //le numéro de la recette que l'on vient de créer.
+                            'num_ing' => $ing_base[$exists]->pk_num_ing, // le numéro de l'ingrédient que l'on veut lier.
+                        ];
+                        $this->exec($ajouter_ing_rec, $params);
+                    }
                 }
 
                 else{

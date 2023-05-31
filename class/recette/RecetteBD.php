@@ -337,4 +337,28 @@ class RecetteBD
         $results = $statement->fetch(PDO::FETCH_UNIQUE);
         return $results[0];
     }
+
+    //---------------------------Vérification des tags et ingrédients dans la recette -----------------------------------------------
+
+    public function TaginRecette($id_tag, $id_rec): bool{
+        $sql = "SELECT * FROM tag_recette WHERE fk_num_tag = '" . $id_tag . "' AND fk_num_rec = '" . $id_rec . "'";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse.
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results != null; //Return true si le tag est dans la recette sinon false;
+    }
+
+    public function InginRecette($id_ing, $id_rec): bool{
+        $sql = "SELECT * FROM ing_recette WHERE fk_num_ing = '" . $id_ing . "' AND fk_num_rec = '" . $id_rec . "'";
+        $statement = $this->pdo->prepare($sql);
+        // Exécution de la requête
+        $statement->execute() or die(var_dump(statement->errorInfo()));
+
+        // Récupération de la réponse.
+        $results = $statement->fetchAll(PDO::FETCH_CLASS);
+        return $results != null; //Return true si le tag est dans la recette sinon false;
+    }
 }

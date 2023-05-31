@@ -10,34 +10,40 @@ ob_start()  ?>
 
 <?php session_start();?>
 
-<?php
+<?php //FICHIER QUI GERE LA PAGE EDIT DE LA RECETTE
 $id_recette = $_GET['id'];
 $recette_R = new RecetteRenderer();
 $recettesBD = new RecetteBD();
 $recette = new Recette();
     $recettesBD = $recettesBD->getRecetteById($id_recette);
-$liste_recette = $recette->Convertir_recette($recettesBD);
+$liste_recette = $recette->Convertir_recette($recettesBD); // Cela renvoie un array de recettes(ici d'une seule recette).
+$recette_actu = $liste_recette[0]; //Recette sur laquelle la page edit va travailler
 
 if (isset($_POST['nom_recette'])){
     $nom_modif = $_POST['nom_recette'];
     if ($nom_modif == ""){?>
         <div class = "error_admin"><?= "Veuillez mettre le nom de la recette." ?> </div> <?php
-        $recette_R->getAllModifHTML($liste_recette[0]);
+        $recette_R->getAllModifHTML($recette_actu);
     }
     else{
         $nom_modif = htmlspecialchars($nom_modif);
         $description_modif = $_POST['description_modif'];
         if ($description_modif == ""){?>
             <div class = "error_admin"><?= "Veuillez mettre la description de la recette." ?> </div> <?php
-            $recette_R->getAllModifHTML($liste_recette[0]);
+            $recette_R->getAllModifHTML($recette_actu);
         }
         else{
             $description_modif = htmlspecialchars($description_modif);
             $image_modif = $_FILES["image_recette_modif"];
             if ($image_modif["name"] == ""){
-                $image_modif = $liste_recette[0]->image;
+                $image_modif = $recette_actu->image;
             }
 
+            //if (isset($_POST["suppr_tag"])){}
+
+
+
+            //------------------------------ NOUVEAUX TAGS ----------------------------------------------
             if (isset($_POST["nom_tag"])){
                 $all_tag = $_POST["nom_tag"];
                 $all_name_tag = array();
@@ -52,6 +58,8 @@ if (isset($_POST['nom_recette'])){
             else{
                 $all_name_tag = null;
             }
+
+            //------------------------------- NOUVEAUX INGREDIENTS ----------------------------------------------
             if (isset($_POST["nom_ing"])){
                 $all_name_ing = $_POST["nom_ing"];
                 $all_img_ing = $_FILES["img_ing"];
@@ -70,23 +78,23 @@ if (isset($_POST['nom_recette'])){
                 }
                 if (count($true_all_img_ing) != count($true_all_name_ing)){?>
                     <div class = "error_admin"><?= "Veuillez mettre une image à l'ingrédient svp." ?> </div> <?php
-                    $recette_R->getAllModifHTML($liste_recette[0]);
+                    $recette_R->getAllModifHTML($recette_actu);
                 }
                 else{
                     $recette->editRecette($id_recette,$nom_modif, $description_modif, $image_modif, $all_name_tag, $true_all_name_ing, $true_all_img_ing);
-                    $recette_R->getAllModifHTML($liste_recette[0]);
+                    $recette_R->getAllModifHTML($recette_actu);
                 }
             }
             else{
                 $recette->editRecette($id_recette,$nom_modif, $description_modif, $image_modif, $all_name_tag);
-                $recette_R->getAllModifHTML($liste_recette[0]);
+                $recette_R->getAllModifHTML($recette_actu);
             }
 
         }
     }
 }
 else{
-    $recette_R->getAllModifHTML($liste_recette[0]);
+    $recette_R->getAllModifHTML($recette_actu);
 }
 
 ?>
