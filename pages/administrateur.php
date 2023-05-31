@@ -172,19 +172,7 @@ else{
 }
     ?>
     <img class="separateur" src="../img/separator.png">
-    <?php
 
-    //edition recette
-
-if(empty($_POST['edit_recette'])){
-    $edition->generateEditionRecetteForm();
-}
-else{
-    $edition->generateEditionRecetteForm();
-}
-
-?>
-    <img class="separateur" src="../img/separator.png">
     <?php
 
     //edition ingredient
