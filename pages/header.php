@@ -10,6 +10,7 @@
           <ul>
             <li><a href="acceuil.php">Accueil</a></li>
             <li><a href="recherche_avancee.php">Recherche avancée</a></li>
+            <li><a href="login.php">Mode Admin</a></li>
           </ul>
         </li>
       </ul>
