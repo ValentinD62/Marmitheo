@@ -10,11 +10,6 @@
           <ul>
             <li><a href="acceuil.php">Accueil</a></li>
             <li><a href="recherche_avancee.php">Recherche avancée</a></li>
-            <li><a href="#">??</a></li>
-            <li><a href="#">??</a>
-
-
-            <li><a href="#">??</a></li>
           </ul>
         </li>
       </ul>
