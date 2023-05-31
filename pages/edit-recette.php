@@ -37,6 +37,7 @@ if (isset($_POST['nom_recette'])){
             $image_modif = $_FILES["image_recette_modif"];
             if ($image_modif["name"] == ""){
                 $image_modif = $recette_actu->image;
+                var_dump($image_modif);
             }
 
             //------------------------------ SUPPRESSION DES TAGS CHOISIS ----------------------------------------------

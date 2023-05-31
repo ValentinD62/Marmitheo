@@ -85,7 +85,7 @@ class Recette extends RecetteBD
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
                 if (gettype($exists) != "boolean"){
                     $in_recette = $this->TaginRecette($tag_base[$exists]->pk_num_tag, $nb_recette_base);
-                    if (!$in_recette){
+                    if (!$in_recette){ //si il n'est pas dans la recette
                         $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                         $params = [
                             'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
@@ -130,7 +130,7 @@ class Recette extends RecetteBD
 
                 if (gettype($exists) != "boolean") {
                     $in_recette = $this->InginRecette($ing_base[$exists]->pk_num_ing, $nb_recette_base);
-                    if (!$in_recette){
+                    if (!$in_recette){//si il n'est pas dans la recette
                         $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                         $params = [
                             'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
@@ -266,7 +266,7 @@ class Recette extends RecetteBD
 
 
 
-    public function editRecette($id, $name, $description, $img, $alltag = null, $all_name_ing = null, $all_img_ing = null):void{
+    public function editRecette($id, $name, $description, $img = null, $alltag = null, $all_name_ing = null, $all_img_ing = null):void{
         $edition_rec_nom = "UPDATE recette SET nom_rec ='". $name . "' WHERE pk_num_rec = '". $id . "'";
         $statement = $this->pdo->prepare($edition_rec_nom);
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer le nom
@@ -274,6 +274,24 @@ class Recette extends RecetteBD
         $edition_rec_desc = "UPDATE recette SET description = '" . $description ."' WHERE pk_num_rec = '" . $id ."'";
         $statement = $this->pdo->prepare($edition_rec_desc);
         $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
+
+        var_dump($img);
+        echo gettype($img);
+        if (gettype($img) ==  "array"){
+            //Partie pour uploader l'image.
+            $tmpName = $img['tmp_name'];
+            $imgName = $img['name'];
+            $imgName = urlencode(htmlspecialchars($imgName));
+            $dirname = self::UPLOAD_DIR;
+            if (!is_dir($dirname)) mkdir($dirname);
+            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
+            if (!$uploaded) die("FILE NOT UPLOADED");
+
+            //Partie pour modifier l'image de la base de données.
+            $edition_rec_img = "UPDATE recette SET image_rec = '" . $imgName ."' WHERE pk_num_rec = '" . $id ."'";
+            $statement = $this->pdo->prepare($edition_rec_img);
+            $statement->execute() or die(var_dump($statement->errorInfo())); //Permet de changer la description
+        }
 
         // ----------- Partie pour ajouter les tags à la recette. -----------------------
 
@@ -290,7 +308,7 @@ class Recette extends RecetteBD
                 $nb_tag_rec = $this->getMax_num_Tag_recette(); // le numéro du dernier tag_recette enregistré.
                 if (gettype($exists) != "boolean"){
                     $in_recette = $this->TaginRecette($tag_base[$exists]->pk_num_tag, $id);
-                    if (!$in_recette){
+                    if (!$in_recette){//si il n'est pas dans la recette
                         $ajouter_tag_rec = 'INSERT INTO tag_recette(pk_tag_rec,fk_num_tag, fk_num_rec) VALUES (:tag_rec, :num_tag, :num_rec)';
                         $params = [
                             'tag_rec' => $nb_tag_rec + 1, //la Primary key du nouveau tag_recette
@@ -331,7 +349,7 @@ class Recette extends RecetteBD
 
                 if (gettype($exists) != "boolean") {
                     $in_recette = $this->InginRecette($ing_base[$exists]->pk_num_ing, $id);
-                    if (!$in_recette){
+                    if (!$in_recette){//si il n'est pas dans la recette
                         $ajouter_ing_rec = 'INSERT INTO ing_recette(pk_id, fk_num_rec, fk_num_ing) VALUES (:id,:num_rec, :num_ing)';
                         $params = [
                             'id' => $nb_ing_rec + 1, //la primary key du nouveau ing_recette.
