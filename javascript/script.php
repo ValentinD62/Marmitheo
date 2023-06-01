@@ -11,17 +11,21 @@ $recette = new Recette();
 
     <?php
         $tab_rec = $recette->Convertir_recette($recette_BD->getAllRecette());
-        $nb_1_image = rand(0, count($tab_rec));
-        $nb_2_image = rand(0, count($tab_rec));
-        $nb_3_image = rand(0, count($tab_rec));
+        $nb_recettes = count($tab_rec) - 1;
+        $nb_1_image = rand(0, $nb_recettes);
+        $nb_2_image = rand(0, $nb_recettes);
+        $nb_3_image = rand(0, $nb_recettes);
         while ($nb_1_image == $nb_2_image){
-            $nb_2_image = rand(0,count($tab_rec));
+            $nb_2_image = rand(0,$nb_recettes);
         }
         while ($nb_3_image === $nb_1_image || $nb_3_image == $nb_2_image){
-            $nb_3_image = rand(0, count($tab_rec));
+            $nb_3_image = rand(0, $nb_recettes);
         }
     ?>
 
+    let recette1 = "<?= $tab_rec[$nb_1_image]->name?>"
+    let recette2 = "<?= $tab_rec[$nb_2_image]->name?>"
+    let recette3 = "<?= $tab_rec[$nb_3_image]->name?>"
     let images = []
     images.push("../img/<?= $tab_rec[$nb_1_image]->image?>")
     images.push("../img/<?= $tab_rec[$nb_2_image]->image?>")
@@ -31,7 +35,7 @@ $recette = new Recette();
     let thumbs = []
     let currentThumb = 0
 
-    let nb_image = [<?= $nb_1_image?>,<?= $nb_2_image?>,<?= $nb_3_image?>]
+    let nb_image = [<?= $tab_rec[$nb_1_image]->id?>,<?= $tab_rec[$nb_2_image]->id?>,<?= $tab_rec[$nb_3_image]->id?>]
     let displayImage = undefined
 
     let timer = undefined
