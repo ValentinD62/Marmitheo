@@ -82,7 +82,6 @@ $recette = new Recette();
         * Fais passer l'affichage au thumb suivant dans thumbs
         */
     function displayNextThumb(){
-        console.log("next");
         currentThumb = (currentThumb+1) % thumbs.length
         displayThumb(thumbs[currentThumb])
     }
@@ -92,7 +91,6 @@ $recette = new Recette();
      */
 
     function displayPreviousThumb(){
-        console.log("previous");
         if (currentThumb === 0){
             currentThumb = thumbs.length -1;
         }
