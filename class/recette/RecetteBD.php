@@ -257,20 +257,6 @@ class RecetteBD
         return $results;
 
     }
-
-   /* //Fonction qui récupère les informations des tags ayant le nom $name.
-    public function getTagbyName($name): array{
-        // Préparation d'une requête simple
-        $sql = "SELECT * FROM tag WHERE nom_tag = '" . $name . "'";
-        $statement = $this->pdo->prepare($sql);
-        // Exécution de la requête
-        $statement->execute() or die(var_dump(statement->errorInfo()));
-
-        // Récupération de la réponse sous forme d'un tableau d'instances de tag
-        $results = $statement->fetchAll(PDO::FETCH_CLASS);
-        return $results;
-    }*/
-
     //----------------------------------- Fonctions de récupération des derniers éléments crées -----------------------------------------------
 
     //récupère le numéro du dernier tag_recette créé.

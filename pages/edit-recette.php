@@ -37,10 +37,9 @@ if (isset($_POST['nom_recette'])){
             $image_modif = $_FILES["image_recette_modif"];
             if ($image_modif["name"] == ""){
                 $image_modif = $recette_actu->image;
-                var_dump($image_modif);
             }
 
-            //------------------------------ SUPPRESSION DES TAGS CHOISIS ----------------------------------------------
+            //------------------------------ SUPPRESSION DES TAGS ET INGREDIENTS CHOISIS ----------------------------------------------
             if (isset($_POST["suppr_tag"])){
                 $all_suppr_tag = $_POST["suppr_tag"]; //On récupère le nom des tags que l'on veut supprimer
                 foreach ($all_suppr_tag as $tag){
