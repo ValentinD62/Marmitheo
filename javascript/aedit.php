@@ -49,8 +49,12 @@ $recette = new RecetteBD();
             button[i].addEventListener('click', m);
         }
     }
-    button_add_ing.addEventListener('click', editingadd);
-    button_add_tag.addEventListener('click', edittagadd);
+    if(button_add_ing!=null) {
+        button_add_ing.addEventListener('click', editingadd);
+    }
+    if(button_add_tag!=null) {
+        button_add_tag.addEventListener('click', edittagadd);
+    }
 </script>
 
 <?php ?>
