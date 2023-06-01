@@ -12,30 +12,34 @@ $recette = new Recette();
     <?php
         $tab_rec = $recette->Convertir_recette($recette_BD->getAllRecette());
         $nb_recettes = count($tab_rec) - 1;
-        $nb_1_image = rand(0, $nb_recettes);
-        $nb_2_image = rand(0, $nb_recettes);
-        $nb_3_image = rand(0, $nb_recettes);
-        while ($nb_1_image == $nb_2_image){
-            $nb_2_image = rand(0,$nb_recettes);
-        }
-        while ($nb_3_image === $nb_1_image || $nb_3_image == $nb_2_image){
+        if ($nb_recettes >= 2):
+            $nb_1_image = rand(0, $nb_recettes);
+            $nb_2_image = rand(0, $nb_recettes);
             $nb_3_image = rand(0, $nb_recettes);
-        }
-    ?>
+            while ($nb_1_image == $nb_2_image){
+                $nb_2_image = rand(0,$nb_recettes);
+            }
+            while ($nb_3_image === $nb_1_image || $nb_3_image == $nb_2_image){
+                $nb_3_image = rand(0, $nb_recettes);
+            }
+        endif;?>
 
-    let recette1 = "<?= $tab_rec[$nb_1_image]->name?>"
-    let recette2 = "<?= $tab_rec[$nb_2_image]->name?>"
-    let recette3 = "<?= $tab_rec[$nb_3_image]->name?>"
     let images = []
-    images.push("../img/<?= $tab_rec[$nb_1_image]->image?>")
-    images.push("../img/<?= $tab_rec[$nb_2_image]->image?>")
-    images.push("../img/<?= $tab_rec[$nb_3_image]->image?>")
-
+    <?php if ($nb_recettes >=2): ?>
+        images.push("../img/<?= $tab_rec[$nb_1_image]->image?>")
+        images.push("../img/<?= $tab_rec[$nb_2_image]->image?>")
+        images.push("../img/<?= $tab_rec[$nb_3_image]->image?>")
+        let nb_image = [<?= $tab_rec[$nb_1_image]->id?>,<?= $tab_rec[$nb_2_image]->id?>,<?= $tab_rec[$nb_3_image]->id?>]
+    <?php
+    else:?>
+        images.push("../img/defaut_image.png")
+        images.push("../img/defaut_image.png")
+        images.push("../img/defaut_image.png")
+    <?php endif;?>
 
     let thumbs = []
     let currentThumb = 0
 
-    let nb_image = [<?= $tab_rec[$nb_1_image]->id?>,<?= $tab_rec[$nb_2_image]->id?>,<?= $tab_rec[$nb_3_image]->id?>]
     let displayImage = undefined
 
     let timer = undefined
@@ -78,6 +82,7 @@ $recette = new Recette();
         * Fais passer l'affichage au thumb suivant dans thumbs
         */
     function displayNextThumb(){
+        console.log("next");
         currentThumb = (currentThumb+1) % thumbs.length
         displayThumb(thumbs[currentThumb])
     }
@@ -87,6 +92,7 @@ $recette = new Recette();
      */
 
     function displayPreviousThumb(){
+        console.log("previous");
         if (currentThumb === 0){
             currentThumb = thumbs.length -1;
         }
@@ -143,9 +149,11 @@ $recette = new Recette();
             gaucheIcon = document.getElementById("icone_gauche")
             droiteIcon = document.getElementById("icone_droite")
 
+            <?php if ($nb_recettes >= 2):?>
             displayImage.addEventListener('click', function(){
               m(currentThumb);
             })
+            <?php endif ;?>
             gaucheIcon.addEventListener('click', function (){
                 displayPreviousThumb();
                 stop();
