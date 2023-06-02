@@ -11,12 +11,13 @@ class RechercheAvancee{
     public function getHTMLForSearch($recette): void { //Fonction pour pouvoir accéder au HTML sans passer par RecetteRenderer?>
 
         <div class="recette" id="recette<?= $recette->id?>">
-
+        <div class = "nolog">
         <div id="img-recherche">
             <img src= "../img/<?= $recette->image ?>">
         </div>
         <div id="nom-recherche"><?= $recette->name ?></div>
         <div id="id-recherche"><?= $recette->id ?></div>
+        </div>
         <?php if (isset($_SESSION['name'])):?>
             <script>
                 var m = document.querySelector("#recette<?php echo $recette->id?>");
