@@ -31,10 +31,15 @@ class Recherche{
             <?php
             else :
                 $liste_recette = $recettes->Convertir_recette($liste_recette_finale);
+                $liste_dans_page = array();
                 $i = 0;?>
             <section class = "recettes-list"><!--Affichage du champ 'name' des objets récupérés -->
                 <?php foreach ($liste_recette_finale as $recette){
-                    echo $recette->getHTMLForSearch($liste_recette[$i]);
+                    $est_dedans = array_search($liste_recette[$i]->id, $liste_dans_page);
+                    if (gettype($est_dedans) == "boolean"){
+                        echo $recette->getHTMLForSearch($liste_recette[$i]);
+                        $liste_dans_page[$i] = $liste_recette[$i]->id;
+                    }
                     $i++;
                 } ?>
             </section>
